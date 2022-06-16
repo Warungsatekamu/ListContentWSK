@@ -29,18 +29,18 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Add New Contributions</a></li>
-              <li><a class="dropdown-item" href="#">Add New Contact</a></li>
+              <li><a class="dropdown-item" href="add_new_contribution.php">Add New Contributions</a></li>
+              <li><a class="dropdown-item" href="add_new_contact.php">Add New Contact</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">Contact</a>
+            <a class="nav-link" href="contact_list.php">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#projects">Contributions</a>
+            <a class="nav-link" href="contribution_list.php">Contributions</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact mb-3">Remarks</a>
+            <a class="nav-link" href="remark_list.php">Remarks</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
