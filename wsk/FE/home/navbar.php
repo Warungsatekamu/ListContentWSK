@@ -20,7 +20,7 @@
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">YMIDB</a>
+      <a class="navbar-brand fw-bold" href="contribution_list.php">YMIDB</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,8 +45,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Contact</a></li>
-              <li><a class="dropdown-item" href="#">Contributions</a></li>
+              <li><a class="dropdown-item" href="contact_atribute_list.php">Contact</a></li>
+              <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">

@@ -19,7 +19,7 @@
   </head>
 </html>
 
-<body>
+<body class="jumbotron" style="padding: 5rem 0">
   <form class="mx-auto mb-3" style="width: 800px">
     <h2 class="mb-4">Add New Contact</h2>
 
