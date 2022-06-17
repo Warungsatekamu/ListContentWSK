@@ -27,7 +27,7 @@
 
 <body class="jumbotron" style="padding: 5rem 0">
   <section class="section">
-  <form class="mx-auto mb-3" style="width: 800px">
+  <div class = "container">
     <div class="row itembox">
       <div class="col-12 col-md-8 col-lg-8"><h2>Contribution List</h2></div>
       <button id="add" class="btn btn-primary col-3" type="button">Add New Contribution</button>
@@ -40,7 +40,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <div class="dataTables_length bs-select" id="dtBasicExample_length">
-          <label>Show <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm form-control form-control-sm">
+          <label>Show <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm">
             <option value="10">10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -50,7 +50,7 @@
       </div>
       <div class="col-sm-12 col-md-6">
         <div id="dtBasicExample_filter" class="dataTables_filter">
-          <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dtBasicExample">
+          <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
           </label>
         </div>
       </div>
@@ -174,5 +174,5 @@
       </div>
     </div>
   </section>
-  </form>
+  </div>
 </body>
