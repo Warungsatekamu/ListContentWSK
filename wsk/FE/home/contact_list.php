@@ -31,7 +31,7 @@
 
   <body>
     <section class="section">
-    <!-- <form class="mx-auto mb-3" style="width: 800px"> -->
+    <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contact List</h2></div>
         <button id="add" class="btn-primary col-3" type="button">Add New Contact</button>
@@ -52,16 +52,17 @@
             </select> entries</label>
           </div>
         </div>
-        <div class="col-lg-2 offset-md-4">
-          <div id="dtBasicExample_filter" class="dataTables_filter">
-          <label id="search">Search: </label> <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
-          </div>
+        <div class="col-sm-12 col-md-6">
+        <div id="dtBasicExample_filter" class="dataTables_filter">
+          <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
+          </label>
         </div>
       </div>
+      
 
       <div class="row">
         <div class="col-lg-12">
-          <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+          <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%"  style="height:5%">
             <thead>
               <tr>
                 <th class="th-sm">Full Name
@@ -176,6 +177,6 @@
         </div>
       </div>
     </section>
-    <!-- </form> -->
+    </div>
   </body>
 </html>

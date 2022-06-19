@@ -31,7 +31,7 @@
           <div class="dataTables_length bs-select" id="dtBasicExample_length">
             <label class
               >Show
-              <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm form-control form-control-sm">
+              <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm ">
                 <option value="10">10</option>
                 <option value="25">25</option>
                 <option value="50">50</option>
@@ -43,7 +43,7 @@
         </div>
         <div class="col-sm-12 col-md-6">
           <div id="dtBasicExample_filter" class="dataTables_filter">
-            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dtBasicExample" /> </label>
+            <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample" /> </label>
           </div>
         </div>
       </div>
