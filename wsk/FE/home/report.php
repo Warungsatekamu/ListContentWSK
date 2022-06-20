@@ -46,7 +46,7 @@
     <br><br>
     <div class = "container">
         <div class="row itembox">
-            <div class="col-12 col-md-8 col-lg-8"><h2>RECEVIED CONTRIBUTION</h2></div>
+            <div class="col-12 col-md-8 col-lg-8"><h2>RECEVIED CONTRIBUTIONS</h2></div>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -87,7 +87,7 @@
         </div>
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
         <br><br >  
-        <h2>REQUESTED CONTRIBUTION</h2>  
+        <h2>REQUESTED CONTRIBUTIONS</h2>  
           <thead>
               <tr>
                 <th class="th-sm">Type</th>
@@ -114,5 +114,64 @@
               </tr>
 
             </tbody>
+            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <br><br >  
+        <h2>TRANSLATED FROM OTHER LANGUAGE SITES CONTRIBUTIONS</h2>  
+          <thead>
+              <tr>
+                <th class="th-sm">Type</th>
+                <th class="th-sm">Send to YMI</th>
+                <th class="th-sm">Rejected</th>
+                <th class="th-sm">Pending</th>
+                <th class="th-sm">Post to YMI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>TOTAL</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th>Article</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <br><br >  
+        <h2>TOTAL CONTRIBUTIONS</h2>  
+          <thead>
+              <tr>
+                <th class="th-sm">Type</th>
+                <th class="th-sm">Send to YMI</th>
+                <th class="th-sm">Rejected</th>
+                <th class="th-sm">Pending</th>
+                <th class="th-sm">Post to YMI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>TOTAL</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th>Article</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+
+            </tbody>
+
+            </tbody>
+            
     </div>          
 </body>
