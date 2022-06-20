@@ -49,14 +49,17 @@
               <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item">
+            <a class="nav-link" href="report.php">Reports</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Reports </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="#">YMI Report</a></li>
               <li><a class="dropdown-item" href="#">Old Report</a></li>
               <li><a class="dropdown-item" href="#">Costumized Report</a></li>
             </ul>
-          </li>
+          </li> -->
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
