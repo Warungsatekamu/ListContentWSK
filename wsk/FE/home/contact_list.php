@@ -11,7 +11,7 @@
 <html lang="en">
  
   <body>
-    <section class="section">
+    <section class="section" style = "margin-top: 50px;">
     <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contact List</h2></div>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-6">
-        <div id="dtBasicExample_filter" class="dataTables_filter">
+        <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
           <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
           </label>
         </div>

@@ -14,6 +14,11 @@
         </div>
         <hr />
         <!-- kode per-page -->
+        <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
+            <button type="button" class="btn btn-primary">Remark</button>
+            <button type="button" class="btn btn-light">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#data" type="button" role="tab" aria-controls="home" aria-selected="true">Data</button>
@@ -83,7 +88,7 @@
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab"><section class="section">
               <div class="row itembox">
                 <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
-                <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">+ attributes</button>
+                <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">add attributes</button>
               </div>
               
               <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -102,8 +107,8 @@
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                  <div id="dtBasicExample_filter" class="dataTables_filter">
-                    <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
+                  <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
+                    <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample" >
                     </label>
                   </div>
                 </div>
@@ -159,7 +164,7 @@
           <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Contributions</h2></div>
-              <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">+ Contributions</button>
+              <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">add Contributions</button>
             </div>
             
             <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -178,7 +183,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
-                <div id="dtBasicExample_filter" class="dataTables_filter">
+                <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
                   <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
                   </label>
                 </div>
@@ -237,7 +242,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
+                <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate" style = "margin-left: 280px; margin-bottom: 20px;">
                   <ul class="pagination">
                     <li class="paginate_button page-item previous disabled" id="dtBasicExample_previous">
                       <a href="#" aria-controls="dtBasicExample" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>

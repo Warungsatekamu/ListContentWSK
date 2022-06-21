@@ -13,7 +13,16 @@
           <!-- nama data bakal di get dari db -->
         </div>
         <hr />
-        <!-- ada button remark edit sm delete -->
+        <!-- ada button remark edit sm delete --> 
+        
+        <!-- <div class="col-sm-12 col-md-6"> -->
+          <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
+            <button type="button" class="btn btn-primary">Remark</button>
+            <button type="button" class="btn btn-light">Edit</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+          </div>
+        <!-- </div>   -->
+        <br>
         <!-- kode per-page -->
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -108,7 +117,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
-                <div id="dtBasicExample_filter" class="dataTables_filter">
+                <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
                   <label id="search">Search: </label> <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
                 </div>
               </div>
@@ -159,7 +168,7 @@
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">  
             <div class="row itembox">
               <div class="col-sm-12 col-md-6"><h2>Attributes</h2></div>
-              <button id="add" class="btn btn-primary col-2" style="height:5%" type="button">+ attributes</button>
+              <button id="add" class="btn btn-primary col-2" style="margin-left: 320px; margin-bottom: 20px;" type="button" >add attributes</button>
             </div>
                   
             <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -178,7 +187,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-6">
-                <div id="dtBasicExample_filter" class="dataTables_filter">
+                <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
                   <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
                   </label>
                 </div>
@@ -237,7 +246,7 @@
                 </div>
               </div>
               <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
+                <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate" style = "margin-left: 280px">
                   <ul class="pagination">
                     <li class="paginate_button page-item previous disabled" id="dtBasicExample_previous">
                       <a href="#" aria-controls="dtBasicExample" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
@@ -255,13 +264,14 @@
           <div class="tab-pane fade" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Attachment</h2></div>
-              <button id="add" class="btn btn-primary col-3" type="button">+ attachment</button>
+              <button type="button" class="btn btn-primary col-2" style = "margin-left: 100px;">add attachment</button>
             </div>
           </div>
           <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
             <div class="row">
-              <div class="col-5"><h2>Edit</h2></div>
-              <div class="col-7"><a class="btn btn-primary" href="#" role="button">Edit</a></div>
+              <!-- <div class="col-5"><h2>Edit</h2></div> -->
+              <div class="col-5"><a class="btn btn-primary" style = "margin-top: 20px; margin-bottom: 20px;" href="#" role="button">Start Edit</a></div>
+              <br>
             </div>
             <div class="row justify-content-center">
               <div class="col-12">

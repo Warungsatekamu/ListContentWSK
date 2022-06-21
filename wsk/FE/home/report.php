@@ -33,7 +33,39 @@
       <!-- <button id="add" class="btn btn-primary col-3" type="button">Add New Contribution</button> -->
     </div>
     <hr />
-    <div class = "">
+    <div id="dtBasicExample_filter" class="dataTables_filter" style = "">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Month
+      </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">January</a></li>
+          <li><a class="dropdown-item" href="#">February</a></li>
+          <li><a class="dropdown-item" href="#">March</a></li>
+          <li><a class="dropdown-item" href="#">April</a></li>
+          <li><a class="dropdown-item" href="#">May</a></li>
+          <li><a class="dropdown-item" href="#">June</a></li>
+          <li><a class="dropdown-item" href="#">July</a></li>
+          <li><a class="dropdown-item" href="#">August</a></li>
+          <li><a class="dropdown-item" href="#">September</a></li>
+          <li><a class="dropdown-item" href="#">October</a></li>
+          <li><a class="dropdown-item" href="#">November</a></li>
+          <li><a class="dropdown-item" href="#">Desember</a></li>
+        </ul>
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Year
+      </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" href="#">2015</a></li>
+          <li><a class="dropdown-item" href="#">2016</a></li>
+          <li><a class="dropdown-item" href="#">2017</a></li>
+          <li><a class="dropdown-item" href="#">2018</a></li>
+          <li><a class="dropdown-item" href="#">2019</a></li>
+          <li><a class="dropdown-item" href="#">2020</a></li>
+          <li><a class="dropdown-item" href="#">2021</a></li>
+          <li><a class="dropdown-item" href="#">2022</a></li>
+        </ul>
+    </div>
+    <!-- <div class = "">
         <a href ="">April 2015</a> | <a href ="">May 2015</a> | <a href ="">Jun 2015</a> | <a href ="">Jul 2015</a> | <a href ="">Aug 2015</a> | <a href ="">Sep 2015</a> | <a href ="">Oct 2015</a> | <a href ="">Nov 2015</a> | <a href ="">Des 2015</a> |
         <a href ="">April 2016</a> | <a href ="">May 2016</a> | <a href ="">Jun 2016</a> | <a href ="">Jul 2016</a> | <a href ="">Aug 2016</a> | <a href ="">Sep 2016</a> | <a href ="">Oct 2016</a> | <a href ="">Nov 2016</a> | <a href ="">Des 2016</a> |
         <a href ="">April 2017</a> | <a href ="">May 2017</a> | <a href ="">Jun 2017</a> | <a href ="">Jul 2017</a> | <a href ="">Aug 2017</a> | <a href ="">Sep 2017</a> | <a href ="">Oct 2017</a> | <a href ="">Nov 2017</a> | <a href ="">Des 2017</a> |
@@ -42,7 +74,7 @@
         <a href ="">April 2020</a> | <a href ="">May 2020</a> | <a href ="">Jun 2020</a> | <a href ="">Jul 2020</a> | <a href ="">Aug 2020</a> | <a href ="">Sep 2020</a> | <a href ="">Oct 2020</a> | <a href ="">Nov 2020</a> | <a href ="">Des 2020</a> |
         <a href ="">April 2021</a> | <a href ="">May 2021</a> | <a href ="">Jun 2021</a> | <a href ="">Jul 2021</a> | <a href ="">Aug 2021</a> | <a href ="">Sep 2021</a> | <a href ="">Oct 2021</a> | <a href ="">Nov 2021</a> | <a href ="">Des 2021</a> |
         <a href ="">April 2022</a> | <a href ="">May 2022</a> | <a href ="">Jun 2022</a> | <a href ="">Jul 2022</a> | <a href ="">Aug 2022</a> | <a href ="">Sep 2022</a> | <a href ="">Oct 2022</a> | <a href ="">Nov 2022</a> | <a href ="">Des 2022</a> |
-    </div>
+    </div> -->
     <br><br>
     <div class = "container">
         <div class="row itembox">

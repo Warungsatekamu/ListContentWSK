@@ -35,7 +35,7 @@
             </div>
           </div>
           <div class="col-6 align-self-end">
-            <div id="dtBasicExample_filter" class="dataTables_filter">
+            <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
               <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
               </label>
             </div>

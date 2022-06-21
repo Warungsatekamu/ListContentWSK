@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-6">
-          <div id="dtBasicExample_filter" class="dataTables_filter">
+          <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 280px; margin-bottom: 20px;">
             <label>Search: <input type="search" class="" placeholder="" aria-controls="dtBasicExample">
             </label>
           </div>
@@ -132,7 +132,7 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-7">
-          <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
+          <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate " style = "margin-left: 280px; margin-bottom: 20px;">
             <ul class="pagination">
               <li class="paginate_button page-item previous disabled" id="dtBasicExample_previous">
                 <a href="#" aria-controls="dtBasicExample" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>

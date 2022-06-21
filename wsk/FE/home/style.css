@@ -9,6 +9,7 @@
 
 section {
   padding: 30px 0px;
+  /* margin-top: 20px; */
 }
 
 #add {
@@ -44,10 +45,13 @@ table.dataTable thead .sorting_desc_disabled:before {
   bottom: 0.5em;
 }
 
-.embed-responsive-item{
+.embed-responsive-item {
   width: 1000px;
   height: 2000px;
 }
 /* .row {
   height: 5%;
 } */
+#button_remark {
+  margin-left: auto;
+}
