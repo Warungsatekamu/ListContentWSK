@@ -12,5 +12,11 @@
             $query = $db->query($sql) or die($db->error);
             return $query;
         }
+
+        // public function AddContact($full_name, $nick_name, $gender, $email, $birthdate, $bio, $phone, $address, $city){
+        //     $db=$this->mysqli->con;
+        //     $sql_city = "INSERT into cities values ('$city') or die ($db->error)"
+        //     $sql = "INSERT into "
+        // }
     }
 ?>

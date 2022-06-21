@@ -65,9 +65,9 @@
                   while($data = $show->fetch_object()){
                 ?>
                   <tr>
-                    <td><?php echo $data->contribution ?></td>
+                    <td><?php echo $data->title ?></td>
                     <td><?php echo $data->action_time ?></td>
-                    <td><?php echo $data->remark_type ?></td>
+                    <td><?php echo $data->remark_type_name ?></td>
                     <td><?php echo $data->remark ?></td>
                     <td><?php echo $data->created_by ?></td>
                   </tr>

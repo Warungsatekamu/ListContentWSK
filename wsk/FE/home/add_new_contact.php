@@ -1,5 +1,11 @@
 <?php
   include('navbar.php');
+  require_once('../../BE/configuration/db_connection.php');
+  require_once('../../BE/model/database.php');
+  include('../../BE/model/contact.php');
+
+  $connection = new Database($host,$user,$pass,$dbName);
+  $contacts = new Contact($connection);
 ?>
 
 <!DOCTYPE html>
@@ -7,50 +13,64 @@
 
 
   <body class="jumbotron" style="padding: 5rem 0">
-    <form class="mx-auto mb-3" style="width: 800px">
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <h2 class="mb-4">Add New Contact</h2>
 
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Full Name</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="fullName" class="form-label">Full Name</label>
+        <input type="text" name="fullName" class="form-control" id="fullName" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Nickname</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="nickname" class="form-label">Nickname</label>
+        <input type="text" name="nickname" class="form-control" id="nickname" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Gender</label>
-        <select id="disabledSelect" class="form-select">
-          <option>Male</option>
-          <option>Female</option>
+        <label for="gender" class="form-label">Gender</label>
+        <select id="gender" class="form-select">
+          <option>M</option>
+          <option>F</option>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlTextarea1" class="form-label">Biodata</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="bio" class="form-label">Biodata</label>
+        <textarea class="form-control" name="bio" id="bio" rows="3"></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Birthdate</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1" />
+        <label for="birthdate" class="form-label">Birthdate</label>
+        <input type="date" class="form-control" id="birthdate" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Phone</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="phoneNum" class="form-label">Phone</label>
+        <input type="text" name="phoneNum" class="form-control" id="phoneNum" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Address</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="address" class="form-label">Address</label>
+        <input type="text" name="" class="form-control" id="address" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">City</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="city" class="form-label">City</label>
+        <input type="text" name="name" class="form-control" id="city" />
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <input type="submit" name="submit" class="btn btn-primary">
     </form>
+
+    <?php
+      if(@$_POST['submit']){
+        $full_name=$connection->con->real_escape_string($_POST['fullName']);
+        $nick_name=$connection->con->real_escape_string($_POST['nickname']);
+        $gender=$connection->con->real_escape_string($_POST['gender']);
+        $email=$connection->con->real_escape_string($_POST['email']);
+        $bio=$connection->con->real_escape_string($_POST['bio']);
+        $birthdate=$connection->con->real_escape_string($_POST['birthdate']);
+        $phone=$connection->con->real_escape_string($_POST['phone']);
+        $address=$connection->con->real_escape_string($_POST['address']);
+        $city=$connection->con->real_escape_string($_POST['city']);
+      }
+    ?>
   </body>
 
 </html>
