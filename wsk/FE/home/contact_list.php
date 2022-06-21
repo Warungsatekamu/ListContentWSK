@@ -54,8 +54,8 @@
                 </th>
                 <th class="th-sm">City
                 </th>
-                <!-- <th class="th-sm">Email
-                </th> -->
+                <th class="th-sm">Email
+                </th>
                 <th class="th-sm">Bio
                 </th>
                 <th class="th-sm">Created Time
@@ -73,6 +73,7 @@
                   <td><?php echo $data->nick_name ?></td>
                   <td><?php echo $data->gender ?></td>
                   <td><?php echo $data->city_name ?></td>
+                  <td><?php echo $data->email ?></td>
                   <td><?php echo $data->bio ?></td>
                   <td><?php echo $data->created_time ?></td>
                 </tr>

@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
 
   <body class="jumbotron" style="padding: 5rem 0">
@@ -72,11 +72,11 @@
                 <tr>
                   <td><?php echo $data->title ?></td>
                   <td><?php echo $data->received_date ?></td>
-                  <td><?php echo $data->type ?></td>
-                  <td><?php echo $data->contributor ?></td>
-                  <td><?php echo $data->contribution_status ?></td>
+                  <td><?php echo $data->contribution_type_name ?></td>
+                  <td><?php echo $data->full_name ?></td>
+                  <td><?php echo $data->contribution_status_name ?></td>
                   <td align="center">
-                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>edit</button>
+                    <button type="button" class="btn btn-primary"><i class='far fa-edit'></i>edit</button>
                   </td>
                 </tr>
               <?php
