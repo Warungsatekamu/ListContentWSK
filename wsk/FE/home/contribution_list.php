@@ -14,12 +14,12 @@
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   </head>
 
-  <body class="jumbotron" style="padding: 5rem 0">
+  <body>
     <section class="section">
     <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contribution List</h2></div>
-        <button id="add" class="btn btn-primary col-3" type="button">Add New Contribution</button>
+        <a class="btn btn-primary col-3" href="add_new_contribution.php">Add New Contribution</a>
       </div>
       <hr />
       <!-- <h2 class="align-baseline">Contribution List</h2>
