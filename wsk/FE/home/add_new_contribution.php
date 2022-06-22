@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <body class="jumbotron" style="padding: 5rem 0">
+  <body class="jumbotron">
 
     <!-- Form pengisian  -->
     <form class="mx-auto mb-3" style="width: 800px">
@@ -14,7 +14,7 @@
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="exampleFormControlInput1" class="form-label">Contributor</label>
         <input type="text" class="form-control" id="exampleFormControlInput1" />
-        <a href="#add">Add new contributor</a>
+        <a href="add_new_contact.php">Add new contributor</a>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="exampleFormControlInput1" class="form-label">Title</label>

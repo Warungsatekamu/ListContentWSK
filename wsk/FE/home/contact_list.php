@@ -11,11 +11,11 @@
 <html lang="en">
  
   <body>
-    <section class="section" style = "margin-top: 50px;">
+    <section class="section">
     <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contact List</h2></div>
-        <button id="add" class="btn-primary col-3" type="button">Add New Contact</button>
+        <a class="btn btn-primary col-3" href="add_new_contact.php">Add New Contact</a>
       </div>
       <hr />
       <!-- <h2 class="align-baseline">Contribution List</h2>

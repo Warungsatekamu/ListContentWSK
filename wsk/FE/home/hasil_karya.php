@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <body class="jumbotron" style="padding: 5rem 0">
+  <body>
     <section class="section">
       <div class="container">
         <div class="row itembox">

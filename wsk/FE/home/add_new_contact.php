@@ -12,7 +12,7 @@
 <html lang="en">
 
 
-  <body class="jumbotron" style="padding: 5rem 0">
+  <body class="jumbotron">
     <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <h2 class="mb-4">Add New Contact</h2>
 
@@ -54,7 +54,9 @@
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="city" class="form-label">City</label>
         <input type="text" name="name" class="form-control" id="city" />
+        <a href="#">Add New City</a>
       </div>
+      
       <input type="submit" name="submit" class="btn btn-primary">
     </form>
 
