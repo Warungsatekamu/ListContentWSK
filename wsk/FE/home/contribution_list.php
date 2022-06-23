@@ -65,7 +65,7 @@
             </thead>
             <tbody>
               <?php
-                $no=1;
+                $no=0;
                 $show = $contributions->ShowAllContributions();
                 while($data = $show->fetch_object()){
               ?>
@@ -80,6 +80,7 @@
                   </td>
                 </tr>
               <?php
+                  $no++;
                 }
               ?>
             </tbody>
@@ -128,7 +129,8 @@
       <div class="row">
         <div class="col-sm-12 col-md-5">
           <div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">
-            Showing 1 to 10 of 57 entries
+            Showing 1 to 10 of
+            <?php echo $no; ?> entries
           </div>
         </div>
         <div class="col-sm-12 col-md-7">
