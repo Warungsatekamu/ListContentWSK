@@ -17,7 +17,41 @@
         
         <!-- <div class="col-sm-12 col-md-6"> -->
           <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
-            <button type="button" class="btn btn-primary">Remark</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Remark</button>
+            <!-- modal remark -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Remark</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mx-auto mb-3" style="width: 460px">
+                      <label for="exampleFormControlInput1" class="form-label">Time</label>
+                      <input type="datetime-local" class="form-control" id="exampleFormControlInput1" />
+                    </div>
+                    <div class="mx-auto mb-3" style="width: 460px">
+                      <label for="disabledSelect" class="form-label">Remark Type</label>
+                      <select id="disabledSelect" class="form-select">
+                        <option>Receive New Contribution</option>
+                        <option>Send Holding Reply</option>
+                        <option>Reject</option>
+                        <option>Publish</option>
+                      </select>
+                    </div>
+                    <div class="mx-auto mb-3" style="width: 460px">
+                      <label for="exampleFormControlTextarea1" class="form-label">Remark</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add New Remark</button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <button type="button" class="btn btn-light">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
           </div>

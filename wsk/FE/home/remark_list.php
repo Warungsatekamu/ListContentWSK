@@ -16,7 +16,7 @@
       <div class="container">
         <div class="row itembox">
           <div class="col-12 col-md-8 col-lg-8"><h2>Remark List</h2></div>
-          <!-- <button id="add" class="btn btn-primary col-3" type="button">Add New Contribution</button> -->
+          <a class="btn btn-primary col-2" style = "margin-left: 160px;" href="remark_type.php">Remark Type</a>
         </div>
         <hr />
         <!-- <h2 class="align-baseline">Contribution List</h2>

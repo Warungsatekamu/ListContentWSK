@@ -52,11 +52,43 @@
         <input type="text" name="" class="form-control" id="address" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="city" class="form-label">City</label>
-        <input type="text" name="name" class="form-control" id="city" />
-        <a href="#">Add New City</a>
+        <label for="disabledSelect" class="form-label">City</label>
+          <select id="disabledSelect" class="form-select">
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
+          <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add New City
+          </a> 
+          <!-- modal add new city -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add New City</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mx-auto mb-3" style="width: 460px">
+                      <label for="cityName" class="form-label">City Name</label>
+                      <input type="text" name="cityName" class="form-control" id="cityName" />
+                  </div>
+                  <div class="mx-auto mb-3" style="width: 460px">
+                      <label for="province" class="form-label">Province</label>
+                      <input type="text" name="province" class="form-control" id="province" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Add New City</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
+
       <input type="submit" name="submit" class="btn btn-primary">
     </form>
 
