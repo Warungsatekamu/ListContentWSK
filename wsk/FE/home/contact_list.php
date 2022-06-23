@@ -64,7 +64,6 @@
             </thead>
             <tbody>
               <?php
-                $no=1;
                 $show = $contacts->ShowAllContact();
                 while($data = $show->fetch_object()){
               ?>
