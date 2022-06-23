@@ -3,9 +3,12 @@
   require_once('../../BE/configuration/db_connection.php');
   require_once('../../BE/model/database.php');
   include('../../BE/model/contact.php');
+  include('../../BE/model/city.php');
+
 
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
+  $citydb = new City($connection);
 ?>
 
 <!DOCTYPE html>
@@ -18,22 +21,22 @@
 
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="fullName" class="form-label">Full Name</label>
-        <input type="text" name="fullName" class="form-control" id="fullName" required/>
+        <input type="text" name="fullName" class="form-control" id="fullName"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="nickname" class="form-label">Nickname</label>
-        <input type="text" name="nickname" class="form-control" id="nickname" required/>
+        <input type="text" name="nickname" class="form-control" id="nickname"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="gender" class="form-label">Gender</label>
-        <select id="gender" class="form-select">
-          <option>M</option>
-          <option>F</option>
+        <select id="gender" class="form-select" name="gender">
+          <option>Male</option>
+          <option>Female</option>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" required/>
+        <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="bio" class="form-label">Biodata</label>
@@ -41,22 +44,27 @@
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="birthdate" class="form-label">Birthdate</label>
-        <input type="date" class="form-control" id="birthdate" required/>
+        <input type="date" name="birthdate" class="form-control" id="birthdate"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="phoneNum" class="form-label">Phone</label>
-        <input type="text" name="phoneNum" class="form-control" id="phoneNum" />
+        <label for="phone" class="form-label">Phone</label>
+        <input type="number" name="phone" class="form-control" id="phone" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="address" class="form-label">Address</label>
-        <input type="text" name="" class="form-control" id="address" required/>
+        <input type="text" name="address" class="form-control" id="address"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="disabledSelect" class="form-label">City</label>
-          <select id="disabledSelect" class="form-select">
-            <option></option>
-            <option></option>
-            <option></option>
+          <select id="disabledSelect" name="city" class="form-select">
+            <?php
+              $show = $citydb->ShowAllCityName();
+              while($data = $show->fetch_object()){
+            ?>
+            <option><?php echo $data->city_name ?></option>
+            <?php
+              }
+            ?>
           </select>
           <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add New City
@@ -80,8 +88,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Add New City</button>
+                  <input type="submit" name="submitNewCity" class="btn btn-primary"></input>
                 </div>
               </div>
             </div>
@@ -89,21 +96,70 @@
         </div>
       </div>
 
-      <input type="submit" name="submit" class="btn btn-primary">
+      <input type="submit" name="submitNewContact" class="btn btn-primary">
     </form>
 
     <?php
-      if(@$_POST['submit']){
+      //get data from form
+      if(@$_POST['submitNewContact']){ //if button triggered
         $full_name=$connection->con->real_escape_string($_POST['fullName']);
         $nick_name=$connection->con->real_escape_string($_POST['nickname']);
         $gender=$connection->con->real_escape_string($_POST['gender']);
+        if ($gender == "Female"){
+          $gender = "F";
+        } else {
+          $gender = "M";
+        }
         $email=$connection->con->real_escape_string($_POST['email']);
         $bio=$connection->con->real_escape_string($_POST['bio']);
         $birthdate=$connection->con->real_escape_string($_POST['birthdate']);
         $phone=$connection->con->real_escape_string($_POST['phone']);
         $address=$connection->con->real_escape_string($_POST['address']);
-        $city=$connection->con->real_escape_string($_POST['city']);
+        $city = $connection->con->real_escape_string($_POST['city']);
+        $cityid = $citydb->selectCityId($city);
+        $city = $cityid['id'];
+
+        //insert to db 
+        $contacts->InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
+        
       }
+      
+
+      if(@$_POST['submitNewCity']){
+        $cityName = $connection->con->real_escape_string($_POST['cityName']);
+        $province = $connection->con->real_escape_string($_POST['province']);
+
+        $sameData=0;
+        $show = $citydb->ShowAllCityName();
+        while($data = $show->fetch_object()){
+          //print $data->city_name; 
+          if ($cityName == $data->city_name){
+            $sameData = 1;
+          }
+        }
+        if($sameData == 1){
+          //trying using bootstrap modal alert
+          // echo'<div class="row">';
+          // echo'<div class="col">';
+          // echo'<div class="alert alert-success alert-dismissable fade show" role="alert">';
+          // echo'<button type="button" class="close" data-dismiss="alert">';
+          // echo'<span aria-hidden="true">&times;</span>';
+          // echo'</button>';
+          // echo'<h2 class="alert-heading">This is an alert!</h2>';
+          // echo'</div>';
+          // echo'</div>';
+          // echo'</div>';
+
+          echo "<script>alert('Kota yang anda masukkan sudah ada dalam list')</script>";
+          
+          //trying alert with js
+          // echo '<script type="text/javascript" src="alert.js"><div id="liveAlertPlaceholder"></div></script>';
+          // echo '<div id="liveAlertPlaceholder"></div>';
+        } else {
+          $citydb->InsertNewCity($cityName, $province);
+        } 
+      }
+
     ?>
   </body>
 
