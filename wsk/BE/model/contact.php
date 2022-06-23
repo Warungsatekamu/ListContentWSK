@@ -8,7 +8,7 @@
 
         public function ShowAllContact(){
             $db = $this->mysqli->con;
-            $sql = "SELECT * FROM contacts JOIN cities ON contacts.city = cities.id ORDER BY contacts.id DESC";
+            $sql = "SELECT * FROM contacts LEFT JOIN cities ON contacts.city = cities.id ORDER BY contacts.id DESC";
             $query = $db->query($sql) or die($db->error);
             return $query;
         }
