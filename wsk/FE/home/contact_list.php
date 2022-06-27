@@ -65,11 +65,11 @@
             <tbody>
               <?php
                 $no=0;
-                $show = $contacts->ShowAllContact();
+                $show = $contacts->ShowContact();
                 while($data = $show->fetch_object()){
               ?>
                 <tr>
-                  <td><?php echo $data->full_name ?></td>
+                  <td><a href="detail_contact.php?id=<?php echo $data->id?>"><?php echo $data->full_name ?></a></td>
                   <td><?php echo $data->nick_name ?></td>
                   <td><?php echo $data->gender ?></td>
                   <td><?php echo $data->city_name ?></td>
