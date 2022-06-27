@@ -1,5 +1,12 @@
 <?php
+  require_once('../../BE/configuration/db_connection.php');
+  require_once('../../BE/model/database.php');
   include('navbar.php');
+  include('../../BE/model/contact.php');
+
+  $id = $_GET['id'];
+  $connection = new Database($host,$user,$pass,$dbName);
+  $contacts = new Contact($connection);
 ?>
 
 <!DOCTYPE html>
@@ -8,14 +15,18 @@
   <body>
     <section class="section">
       <div class="container">
+        <?php
+          $show = $contacts->ShowContact($id);
+          $data = $show->fetch_object()
+        ?>
         <div class="row itembox">
-          <div class="col-12 col-md-8 col-lg-8"><h2>Abby Phinney</h2></div>
+          <div class="col-12 col-md-8 col-lg-8"><h2><?php echo $data->full_name?></h2></div>
           <!-- nama data bakal di get dari db -->
         </div>
         <hr />
         <!-- kode per-page -->
         <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
-            <button type="button" class="btn btn-primary">Remark</button>
+            <a href="mailto:<?php echo $data->email ?>" type="button" class="btn btn-primary">Email</a>
             <button type="button" class="btn btn-light">Edit</button>
             <button type="button" class="btn btn-danger">Delete</button>
         </div>
@@ -42,43 +53,43 @@
                       <th class="th-sm">Abby Phinney</th>
                     </tr>
                   </thead> -->
-
+                  
                   <tbody>
                     <tr>
                       <th class="th-sm">Full Name</th>
-                      <th class="th-sm">Abby Phinney</th>
+                      <th class="th-sm"><?php echo $data->full_name ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Nick Name</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->nick_name ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Gender</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->gender ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Email</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->email ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Birthdate</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->birthdate ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Bio</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->bio ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Phone</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->phone ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Address</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->address ?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">City</th>
-                      <th class="th-sm">Nick Name</th>
+                      <th class="th-sm"><?php echo $data->city_name ?></th>
                     </tr>
                   </tbody>
                 </table>
