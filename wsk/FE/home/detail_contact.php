@@ -4,6 +4,7 @@
   include('navbar.php');
   include('../../BE/model/contact.php');
 
+  //get id contact that we want to see
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
@@ -11,17 +12,17 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
   <body>
     <section class="section">
       <div class="container">
+        <!-- get data from db where id=$id -->
         <?php
           $show = $contacts->ShowContact($id);
-          $data = $show->fetch_object()
+          $data = $show->fetch_object();
         ?>
         <div class="row itembox">
+          <!-- name from db -->
           <div class="col-12 col-md-8 col-lg-8"><h2><?php echo $data->full_name?></h2></div>
-          <!-- nama data bakal di get dari db -->
         </div>
         <hr />
         <!-- kode per-page -->
@@ -271,6 +272,5 @@
       </div>
     </section>
   </body>
-
 </html>
 
