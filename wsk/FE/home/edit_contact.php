@@ -1,7 +1,5 @@
 <?php
   include('navbar.php');
-  session_start();
-
   require_once('../../BE/configuration/db_connection.php');
   require_once('../../BE/model/database.php');
   include('../../BE/model/contact.php');
@@ -132,6 +130,7 @@
         $full_name=$connection->con->real_escape_string($_POST['fullName']);
         $nick_name=$connection->con->real_escape_string($_POST['nickname']);
         $gender=$connection->con->real_escape_string($_POST['gender']);
+        //change content of gender because on db is just M or F
         if ($gender == "Female"){
           $gender = "F";
         } else {
@@ -148,6 +147,7 @@
 
         //insert to db 
         $contacts->UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
+        //redirect to contact list
         echo '<meta content="0; url=contact_list.php" http-equiv="refresh">';
         
       } else if(@$_POST['submitNewCity']){

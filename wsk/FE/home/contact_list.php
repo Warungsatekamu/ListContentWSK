@@ -7,6 +7,7 @@
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
 
+  //if get delete command, delete record where id = $idContact
   if(isset($_GET['delete'])){
     $idContact = $_GET['delete'];
     $contacts->DeleteContact($idContact);
