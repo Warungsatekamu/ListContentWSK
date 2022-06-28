@@ -6,6 +6,11 @@
 
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
+
+  if(isset($_GET['delete'])){
+    $idContact = $_GET['delete'];
+    $contacts->DeleteContact($idContact);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
