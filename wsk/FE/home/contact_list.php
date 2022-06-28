@@ -21,7 +21,7 @@
     <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contact List</h2></div>
-        <a class="btn btn-primary col-3" href="add_new_contact.php">Add New Contact</a>
+        <a class="btn btn-primary col-3" href="add_new_contact.php" style = "margin-left: 70px; margin-bottom: 20px;">Add New Contact</a>
       </div>
       <hr />
       <!-- <h2 class="align-baseline">Contribution List</h2>

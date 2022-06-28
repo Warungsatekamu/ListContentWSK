@@ -201,8 +201,8 @@
           </div>
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">  
             <div class="row itembox">
-              <div class="col-sm-12 col-md-6"><h2>Attributes</h2></div>
-              <button id="add" class="btn btn-primary col-2" style="margin-left: 320px; margin-bottom: 20px;" type="button" >add attributes</button>
+              <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
+              <button id="add" class="btn btn-primary col-2" style="margin-left: 70px; margin-bottom: 20px;" type="button" >add attributes</button>
             </div>
                   
             <!-- <h2 class="align-baseline">Contribution List</h2>
