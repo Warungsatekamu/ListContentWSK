@@ -25,10 +25,21 @@
             $query = $db->query($sql) or die($db->error);
         }
 
-        public function UpdateContact(){
+        public function UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "UPDATE contacts SET ";
+            $sql = "UPDATE contacts 
+            SET full_name = '$full_name',
+            nick_name = '$nick_name', 
+            gender = '$gender',
+            email = '$email',
+            birthdate = '$birthdate',
+            bio = '$bio',
+            phone = '$phone',
+            address = '$address',
+            last_modified_time = '$date',
+            city = '$city'
+            WHERE id = $id";
             $query = $db->query($sql) or die($db->error);
         }
 

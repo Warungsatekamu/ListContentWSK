@@ -1,5 +1,7 @@
 <?php
   include('navbar.php');
+  session_start();
+
   require_once('../../BE/configuration/db_connection.php');
   require_once('../../BE/model/database.php');
   include('../../BE/model/contact.php');
@@ -13,15 +15,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-
   <body class="jumbotron">
     <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <h2 class="mb-4">Add New Contact</h2>
 
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="fullName" class="form-label">Full Name</label>
-        <input type="text" name="fullName" class="form-control" id="fullName"/>
+        <input type="text" name="fullName" class="form-control" id="fullName" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="nickname" class="form-label">Nickname</label>
@@ -69,34 +69,38 @@
           <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add New City
           </a> 
-          <!-- modal add new city -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add New City</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="mx-auto mb-3" style="width: 460px">
-                      <label for="cityName" class="form-label">City Name</label>
-                      <input type="text" name="cityName" class="form-control" id="cityName" />
-                  </div>
-                  <div class="mx-auto mb-3" style="width: 460px">
-                      <label for="province" class="form-label">Province</label>
-                      <input type="text" name="province" class="form-control" id="province" />
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <input type="submit" name="submitNewCity" class="btn btn-primary"></input>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 
       <input type="submit" name="submitNewContact" class="btn btn-primary">
+    </form>
+
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add new city -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add New City</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3" style="width: 460px">
+                  <label for="cityName" class="form-label">City Name</label>
+                  <input type="text" name="cityName" class="form-control" id="cityName" />
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="province" class="form-label">Province</label>
+                <input type="text" name="province" class="form-control" id="province" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="submit" name="submitNewCity" class="btn btn-primary"></input>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
 
     <?php
@@ -121,11 +125,9 @@
 
         //insert to db 
         $contacts->InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
+        echo '<meta content="0, url=contact_list.php" http-equiv="refresh">';
         
-      }
-      
-
-      if(@$_POST['submitNewCity']){
+      } else if(@$_POST['submitNewCity']){
         $cityName = $connection->con->real_escape_string($_POST['cityName']);
         $province = $connection->con->real_escape_string($_POST['province']);
 
@@ -137,27 +139,18 @@
             $sameData = 1;
           }
         }
-        if($sameData == 1){
-          //trying using bootstrap modal alert
-          // echo'<div class="row">';
-          // echo'<div class="col">';
-          // echo'<div class="alert alert-success alert-dismissable fade show" role="alert">';
-          // echo'<button type="button" class="close" data-dismiss="alert">';
-          // echo'<span aria-hidden="true">&times;</span>';
-          // echo'</button>';
-          // echo'<h2 class="alert-heading">This is an alert!</h2>';
-          // echo'</div>';
-          // echo'</div>';
-          // echo'</div>';
 
-          echo "<script>alert('Kota yang anda masukkan sudah ada dalam list')</script>";
-          
-          //trying alert with js
-          // echo '<script type="text/javascript" src="alert.js"><div id="liveAlertPlaceholder"></div></script>';
-          // echo '<div id="liveAlertPlaceholder"></div>';
-        } else {
-          $citydb->InsertNewCity($cityName, $province);
-        } 
+        switch ($sameData) {
+          case "1":
+            echo "<script>alert('Kota yang anda masukkan sudah ada dalam list')</script>";
+            $sameData=0;
+            echo '<meta content="0" http-equiv="refresh">';
+            break;
+          case "0":
+            $citydb->InsertNewCity($cityName, $province);
+            echo '<meta content="0" http-equiv="refresh">';
+            break;
+        }
       }
 
     ?>

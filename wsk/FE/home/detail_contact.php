@@ -27,8 +27,8 @@
         <!-- kode per-page -->
         <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
             <a href="mailto:<?php echo $data->email ?>" type="button" class="btn btn-primary">Email</a>
-            <button type="button" class="btn btn-light">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <a href="edit_contact.php?id=<?php echo $id ?>" type="button" class="btn btn-light">Edit</a>
+            <a href="contact_list.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">

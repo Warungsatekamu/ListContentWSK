@@ -7,7 +7,7 @@
 
         public function ShowAllCityName(){
             $db = $this->mysqli->con;
-            $sql = "SELECT city_name FROM cities ORDER BY city_name ASC";
+            $sql = "SELECT id, city_name FROM cities ORDER BY city_name ASC";
             $query = $db->query($sql) or die($db->error);
             return $query;
         }
