@@ -70,7 +70,7 @@
                 while($data = $show->fetch_object()){
               ?>
                 <tr>
-                  <td><?php echo $data->title ?></td>
+                <td><a href="hasil_karya.php?id=<?php echo $data->id?>"><?php echo $data->title ?></a></td>
                   <td><?php echo $data->received_date ?></td>
                   <td><?php echo $data->contribution_type_name ?></td>
                   <td><?php echo $data->full_name ?></td>
