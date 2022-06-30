@@ -3,11 +3,13 @@
   require_once('../../BE/model/database.php');
   include('navbar.php');
   include('../../BE/model/contact.php');
+  include('../../BE/model/contribution.php');
 
   //get id contact that we want to see
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
+  $contributions = new Contribution($connection);
 ?>
 
 <!DOCTYPE html>
@@ -217,16 +219,25 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                    $noOfContribution=0;
+                    $showContributionList = $contributions->ShowAllContributions(null,$id);
+                    while($dataContributionList = $showContributionList->fetch_object()){
+                  ?>
                     <tr>
-                      <th>Date
+                      <th><?php echo $dataContributionList->received_date ?>
                       </th>
-                      <th>article
+                      <th><?php echo $dataContributionList->contribution_type_name ?>
                       </th>
-                      <th>terangnya
+                      <th><?php echo $dataContributionList->title ?>
                       </th>
-                      <th>published
+                      <th><?php echo $dataContributionList->contribution_status_name ?>
                       </th>
                     </tr>
+                    <?php 
+                        $noOfContribution++;
+                      } 
+                    ?>
                   </tbody>
                   <!-- <tfoot>
                     <tr>
@@ -250,7 +261,7 @@
             <div class="row">
               <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">
-                  Showing 1 to 1 of 1 entries
+                  Showing 1 to 1 of <?php echo $noOfContribution ?> entries
                 </div>
               </div>
               <div class="col-sm-12 col-md-7">

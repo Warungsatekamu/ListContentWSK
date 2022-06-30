@@ -3,6 +3,7 @@
   require_once('../../BE/model/database.php');
   include('navbar.php');
   include('../../BE/model/contribution.php'); 
+  
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
@@ -18,7 +19,7 @@
       <div class="container">
         <!-- get data from db -->
         <?php
-          $show = $contributions->ShowAllContributions($id);
+          $show = $contributions->ShowAllContributions($id,null);
           $data = $show->fetch_object();
         ?>
 
@@ -105,7 +106,7 @@
                   <tbody>
                     <tr>
                       <th class="th-sm">Contributor</th>
-                      <th class="th-sm"><?php echo $data->contributor?></th>
+                      <th class="th-sm"><?php echo $data->full_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Title</th>
@@ -113,7 +114,7 @@
                     </tr>
                     <tr>
                       <th class="th-sm">Type</th>
-                      <th class="th-sm"><?php echo $data->type?></th>
+                      <th class="th-sm"><?php echo $data->contribution_type_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Message</th>
@@ -133,11 +134,11 @@
                     </tr>
                     <tr>
                       <th class="th-sm">Received Via</th>
-                      <th class="th-sm"><?php echo $data->received_via?></th>
+                      <th class="th-sm"><?php echo $data->channel_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Contributions Source Type</th>
-                      <th class="th-sm"><?php echo $data->contribution_source_type?></th>
+                      <th class="th-sm"><?php echo $data->contribution_source_type_name?></th>
                     </tr>
                   </tbody>
                 </table>
