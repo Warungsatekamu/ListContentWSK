@@ -7,12 +7,17 @@
         }
         
         //get contact data for contact list
-        public function ShowContact($id=null){
+        public function ShowContact($id=null, $fullname=null){
             $db = $this->mysqli->con;
             $sql = "SELECT contacts.id, contacts.full_name, contacts.nick_name, contacts.birthdate, contacts.phone, contacts.address, contacts.gender, cities.city_name, contacts.email, contacts.bio, contacts.created_time FROM contacts 
             LEFT JOIN cities ON contacts.city = cities.id";
             if($id != null){
                 $sql .= " WHERE contacts.id = $id";
+            } else if($fullname != null){
+                $sql .= " WHERE contacts.full_name = '$fullname'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
             }
             $sql .= " ORDER BY contacts.id DESC";
             $query = $db->query($sql) or die($db->error);

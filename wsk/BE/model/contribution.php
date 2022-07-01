@@ -28,7 +28,10 @@
             $db = $this->mysqli->con;
             $sql ="SELECT id, contribution_type_name from contribution_types";
             if($type != null){
-                $sql .= " WHERE contribution_type_name = $type";
+                $sql .= " WHERE contribution_type_name = '$type'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
@@ -38,7 +41,10 @@
             $db = $this->mysqli->con;
             $sql ="SELECT id, channel_name from contribution_receive_channels";
             if($type != null){
-                $sql .= " WHERE channel_name = $type";
+                $sql .= " WHERE channel_name = '$type'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
@@ -48,7 +54,10 @@
             $db = $this->mysqli->con;
             $sql ="SELECT id, contribution_source_type_name from contribution_source_types";
             if($type != null){
-                $sql .= " WHERE contribution_source_type_name = $type";
+                $sql .= " WHERE contribution_source_type_name = '$type'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
@@ -58,10 +67,21 @@
             $db = $this->mysqli->con;
             $sql ="SELECT id, contribution_status_name from contribution_statuses";
             if($status != null){
-                $sql .= " WHERE contribution_status_name = $status";
+                $sql .= " WHERE contribution_status_name = '$status'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
             }
             $query = $db->query($sql) or die($db->error);
             return $query;
+        }
+
+        //insert new contribution to db
+        public function InsertNewContribution($contributor, $title, $type, $message, $content, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+            $date = date('Y-m-d H:i:s');
+            $db = $this->mysqli->con;
+            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$language', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
+            $query = $db->query($sql) or die($db->error);
         }
     }
 ?>

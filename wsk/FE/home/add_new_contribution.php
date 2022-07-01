@@ -18,12 +18,12 @@
   <body class="jumbotron">
 
     <!-- Form pengisian  -->
-    <form class="mx-auto mb-3" style="width: 800px">
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <h2 class="mb-4">Add New Contribution</h2>
 
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Contributor</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="contributor" class="form-label">Contributor</label>
+        <select id="contributor" name="contributor" class="form-select">
           <?php
             $showContactList = $contacts->ShowContact();
             while($dataContactList = $showContactList->fetch_object()){
@@ -40,12 +40,12 @@
         
         <br><br>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" id="title" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Type</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="type" class="form-label">Type</label>
+        <select id="type" name="type" class="form-select">
           <?php
             $showContributionTypeLists = $contribution->ShowAllContributionType();
             while($dataContributionTypeLists = $showContributionTypeLists->fetch_object()){
@@ -55,28 +55,26 @@
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="message" class="form-label">Message</label>
+        <textarea class="form-control" name="message" id="message" rows="3"></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <label for="content" class="form-label">Content</label>
+        <textarea class="form-control" name="content" id="content" rows="3"></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Language</label>
-        <select id="disabledSelect" class="form-select">
-          <option>Language1</option>
-          <option>Language1</option>
-          <option>Language1</option>
+        <label for="language" class="form-label">Language</label>
+        <select id="language" name="language" class="form-select">
+          <option>1</option>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Received Date</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1" />
+        <label for="receivedDate" class="form-label">Received Date</label>
+        <input type="date" name="receivedDate" class="form-control" id="receivedDate" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Received Type</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="receivedType" class="form-label">Received Type</label>
+        <select id="receivedType" name="receivedType" class="form-select">
           <?php
             $showReceivedType = $contribution->ShowAllReceiveType();
             while($dataReceivedType = $showReceivedType->fetch_object()){
@@ -86,8 +84,8 @@
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Contribution Source Type</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="sourceType" class="form-label">Contribution Source Type</label>
+        <select id="sourceType" name="sourceType" class="form-select">
           <?php
             $showSourceType = $contribution->ShowAllContributionSourceType();
             while($dataSourceType = $showSourceType->fetch_object()){
@@ -97,8 +95,8 @@
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">Contribution Status</label>
-        <select id="disabledSelect" class="form-select">
+        <label for="contributionStatus" class="form-label">Contribution Status</label>
+        <select id="contributionStatus" name="contributionStatus" class="form-select">
           <?php
             $showContributionStatus = $contribution->ShowAllContributionStatus();
             while($dataContributionStatus = $showContributionStatus->fetch_object()){
@@ -108,17 +106,17 @@
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Edit Link URL</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="editLink" class="form-label">Edit Link URL</label>
+        <input type="text" class="form-control" name="editLink" id="editLink" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="exampleFormControlInput1" class="form-label">Published Link URL</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" />
+        <label for="publishedLink" class="form-label">Published Link URL</label>
+        <input type="text" class="form-control" name="publishedLink" id="publishedLink" />
       </div>
-      <button type="submit" name="submitNewContribution" class="btn btn-primary">Submit</button>
+      <input type="submit" name="submitNewContribution" class="btn btn-primary" value="submit new contribution"></input>
     </form>
     
-    <form class="mx-auto mb-3" style="width: 800px">
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
     <!-- model add contributor -->
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -129,8 +127,8 @@
             </div>
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
-                  <label for="fullname" class="form-label">Fullname</label>
-                  <input type="text" name="fullname" class="form-control" id="fullname" />
+                  <label for="fullName" class="form-label">Fullname</label>
+                  <input type="text" name="fullName" class="form-control" id="fullName" />
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                   <label for="nickname" class="form-label">Nickname</label>
@@ -171,14 +169,14 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" name="addNewContributor"class="btn btn-primary">Add New Contributor</button>
+              <input type="submit" name="addNewContributor" class="btn btn-primary" value="Insert New Contributor"></input>
             </div>
           </div>
         </div>
       </div>
     </form>
 
-    <form class="mx-auto mb-3" style="width: 800px">
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <!-- modal add new city -->
       <div class="modal fade" id="addNewCity" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -199,7 +197,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="submit" name="submitNewCity" class="btn btn-primary">Add New City</button>
+              <input type="submit" name="submitNewCity" class="btn btn-primary" value="Add New City"></input>
             </div>
           </div>
         </div>
@@ -210,8 +208,37 @@
   <?php
       //get data from form
       if(@$_POST['submitNewContribution']){
-
+        $contributor = $connection->con->real_escape_string($_POST['contributor']);
+        $contributorId = $contacts->ShowContact(null,$contributor);
+        echo $contributorId['id'];
+        $contributor = $contributorId['id'];
+        $title = $connection->con->real_escape_string($_POST['title']);
+        $type = $connection->con->real_escape_string($_POST['type']);
+        $typeId = $contribution->ShowAllContributionType($type);
+        $type = $typeId['id'];
+        $message = $connection->con->real_escape_string($_POST['message']);
+        $content = $connection->con->real_escape_string($_POST['content']);
+        $language = $connection->con->real_escape_string($_POST['language']);
+        $receivedDate = $connection->con->real_escape_string($_POST['receivedDate']);
+        $receivedType = $connection->con->real_escape_string($_POST['receivedType']);
+        $receivedTypeId = $contribution->ShowAllReceiveType($receivedType);
+        $receivedType = $receivedTypeId['id'];
+        $sourceType = $connection->con->real_escape_string($_POST['sourceType']);
+        $sourceTypeId = $contribution->ShowAllContributionSourceType($sourceType);
+        $sourceType = $sourceTypeId['id'];
+        $contributionStatus = $connection->con->real_escape_string($_POST['contributionStatus']);
+        $contributionStatusId = $contribution->ShowAllContributionStatus($contributionStatus);
+        $contributionStatus = $contributionStatusId['id'];
+        $editLink = $connection->con->real_escape_string($_POST['editLink']);
+        $publishedLink = $connection->con->real_escape_string($_POST['publishedLink']);
         
+        //insert to db 
+        $contribution->InsertNewContribution($contributor, $title, $type, $message, $content, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
+
+        //redirect to contact_list.php
+        echo '<meta content="0, url=contribution_list.php" http-equiv="refresh">';
+        
+
       } else if(@$_POST['addNewContributor']){ //if button triggered
         $full_name=$connection->con->real_escape_string($_POST['fullName']);
         $nick_name=$connection->con->real_escape_string($_POST['nickname']);
@@ -232,7 +259,7 @@
         $contacts->InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
 
         //redirect to contact_list.php
-        echo '<meta content="0, url=contact_list.php" http-equiv="refresh">';
+        echo '<meta content="0" http-equiv="refresh">';
         
       } else if(@$_POST['submitNewCity']){ //if button add new city triggered
         $cityName = $connection->con->real_escape_string($_POST['cityName']);
