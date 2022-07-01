@@ -19,7 +19,7 @@
       <div class="container">
         <!-- get data from db where id=$id -->
         <?php
-          $show = $contacts->ShowContact($id);
+          $show = $contacts->ShowContact($id,null);
           $data = $show->fetch_object();
         ?>
         <div class="row itembox">

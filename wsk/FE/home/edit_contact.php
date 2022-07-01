@@ -17,7 +17,7 @@
     <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
       <h2 class="mb-4">Edit Contact</h2>
       <?php
-          $show = $contacts->ShowContact($id);
+          $show = $contacts->ShowContact($id,null);
           $dataSelected = $show->fetch_object();
       ?>
       <div class="mx-auto mb-3" style="width: 800px">
