@@ -6,6 +6,12 @@
 
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
+  
+  //if get delete command, delete record where id = $idContribution
+  if(isset($_GET['delete'])){
+    $idContribution = $_GET['delete'];
+    $contributions->DeleteContribution($idContribution);
+  }
 ?>
 
 <!DOCTYPE html>
