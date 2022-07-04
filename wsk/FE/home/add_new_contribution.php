@@ -63,6 +63,10 @@
         <textarea class="form-control" name="content" id="content" rows="3"></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
+        <label for="contentLink" class="form-label">Content Link URL</label>
+        <input type="text" class="form-control" name="contentLink" id="contentLink" />
+      </div>
+      <div class="mx-auto mb-3" style="width: 800px">
         <label for="language" class="form-label">Language</label>
         <select id="language" name="language" class="form-select">
           <option>1</option>
@@ -218,6 +222,7 @@
         $type = $typeId['id'];
         $message = $connection->con->real_escape_string($_POST['message']);
         $content = $connection->con->real_escape_string($_POST['content']);
+        $contentLink = $connection->con->real_escape_string($_POST['contentLink']);
         $language = $connection->con->real_escape_string($_POST['language']);
         $receivedDate = $connection->con->real_escape_string($_POST['receivedDate']);
         $receivedType = $connection->con->real_escape_string($_POST['receivedType']);
@@ -233,7 +238,7 @@
         $publishedLink = $connection->con->real_escape_string($_POST['publishedLink']);
         
         //insert to db 
-        $contribution->InsertNewContribution($contributor, $title, $type, $message, $content, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
+        $contribution->InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
 
         //redirect to contact_list.php
         echo '<meta content="0, url=contribution_list.php" http-equiv="refresh">';
