@@ -74,7 +74,7 @@
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedDate" class="form-label">Received Date</label>
-        <input type="date" name="receivedDate" class="form-control" id="receivedDate" />
+        <input type="datetime-local" name="receivedDate" class="form-control" id="receivedDate" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedType" class="form-label">Received Type</label>
@@ -214,7 +214,6 @@
       if(@$_POST['submitNewContribution']){
         $contributor = $connection->con->real_escape_string($_POST['contributor']);
         $contributorId = $contacts->ShowContact(null,$contributor);
-        echo $contributorId['id'];
         $contributor = $contributorId['id'];
         $title = $connection->con->real_escape_string($_POST['title']);
         $type = $connection->con->real_escape_string($_POST['type']);

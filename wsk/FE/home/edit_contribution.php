@@ -28,15 +28,16 @@
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="contributor" class="form-label">Contributor</label>
         <select id="contributor" name="contributor" class="form-select">
-        <?php
-          $contributorPicked = $dataSelected->contributor;
-        ?>
           <?php
             $showContactList = $contacts->ShowContact();
             while($dataContactList = $showContactList->fetch_object()){
+              if($dataContactList->full_name == $dataSelected->full_name){
           ?>
-          <option><?php echo $dataContactList->full_name ?></option>
+            <option selected><?php echo $dataContactList->full_name ?></option>
+          <?php } else {?>
+            <option ><?php echo $dataContactList->full_name ?></option>
           <?php
+              }
             }
           ?>
         </select>
@@ -56,18 +57,23 @@
           <?php
             $showContributionTypeLists = $contribution->ShowAllContributionType();
             while($dataContributionTypeLists = $showContributionTypeLists->fetch_object()){
+              if($dataContributionTypeLists->contribution_type_name == $dataSelected->contribution_type_name){
           ?>
+          <option selected><?php echo $dataContributionTypeLists->contribution_type_name ?></option>
+          <?php } else {?>
           <option><?php echo $dataContributionTypeLists->contribution_type_name ?></option>
-          <?php } ?>
+          <?php } 
+            }
+          ?>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="message" class="form-label">Message</label>
-        <textarea class="form-control" name="message" id="message" rows="3" value="<?php echo $dataSelected->message?>"></textarea>
+        <textarea class="form-control" name="message" id="message" rows="3"> <?php echo $dataSelected->message?> </textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="content" class="form-label">Content</label>
-        <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+        <textarea class="form-control" name="content" id="content" rows="3" ><?php echo $dataSelected->content?></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="contentLink" class="form-label">Content Link URL</label>
@@ -81,7 +87,7 @@
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedDate" class="form-label">Received Date</label>
-        <input type="date" name="receivedDate" class="form-control" id="receivedDate" value="<?php echo $dataSelected->received_date?>"/>
+        <input type="datetime-local" name="receivedDate" class="form-control" id="receivedDate" value="<?php echo $dataSelected->received_date?>"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedType" class="form-label">Received Type</label>
@@ -89,9 +95,12 @@
           <?php
             $showReceivedType = $contribution->ShowAllReceiveType();
             while($dataReceivedType = $showReceivedType->fetch_object()){
+              if($dataReceivedType->channel_name == $dataSelected->channel_name){
           ?>
-          <option><?php echo $dataReceivedType->channel_name ?></option>
-          <?php } ?>
+                <option selected><?php echo $dataReceivedType->channel_name ?></option>
+          <?php } else {?>
+                <option><?php echo $dataReceivedType->channel_name ?></option>
+          <?php } } ?>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
@@ -100,9 +109,12 @@
           <?php
             $showSourceType = $contribution->ShowAllContributionSourceType();
             while($dataSourceType = $showSourceType->fetch_object()){
+              if($dataSourceType->contribution_source_type_name == $dataSelected->contribution_source_type_name){
           ?>
-          <option><?php echo $dataSourceType->contribution_source_type_name ?></option>
-          <?php } ?>
+                <option selected><?php echo $dataSourceType->contribution_source_type_name ?></option>
+          <?php } else {?>
+                <option><?php echo $dataSourceType->contribution_source_type_name ?></option>
+          <?php } }?>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
@@ -111,9 +123,12 @@
           <?php
             $showContributionStatus = $contribution->ShowAllContributionStatus();
             while($dataContributionStatus = $showContributionStatus->fetch_object()){
+              if($dataContributionStatus->contribution_status_name == $dataSelected->contribution_status_name){
           ?>
-          <option><?php echo $dataContributionStatus->contribution_status_name ?></option>
-          <?php } ?>
+              <option selected><?php echo $dataContributionStatus->contribution_status_name ?></option>
+          <?php } else {?>
+              <option><?php echo $dataContributionStatus->contribution_status_name ?></option>
+          <?php } }?>
         </select>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
@@ -221,7 +236,6 @@
       if(@$_POST['submitEditContribution']){
         $contributor = $connection->con->real_escape_string($_POST['contributor']);
         $contributorId = $contacts->ShowContact(null,$contributor);
-        echo $contributorId['id'];
         $contributor = $contributorId['id'];
         $title = $connection->con->real_escape_string($_POST['title']);
         $type = $connection->con->real_escape_string($_POST['type']);
@@ -245,7 +259,7 @@
         $publishedLink = $connection->con->real_escape_string($_POST['publishedLink']);
         
         //insert to db 
-        $contribution->InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
+        $contribution->UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
 
         //redirect to contact_list.php
         echo '<meta content="0, url=contribution_list.php" http-equiv="refresh">';
