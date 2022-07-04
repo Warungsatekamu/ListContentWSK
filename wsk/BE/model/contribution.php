@@ -84,6 +84,29 @@
             $query = $db->query($sql) or die($db->error);
         }
 
+        //update contact data to db
+        public function UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+            $date = date('Y-m-d H:i:s');
+            $db = $this->mysqli->con;
+            $sql = "UPDATE contributions 
+            SET contributor = '$contributor',
+            title = '$title', 
+            type = '$type',
+            message = '$message',
+            content = '$content',
+            content_link = '$contentLink',
+            language = '$language',
+            received_date = '$receivedDate',
+            received_via = '$receivedVia',
+            contribution_source_type = '$contributionSourceType',
+            contribution_status = '$contributionStatus',
+            edit_link_url = '$editLink',
+            published_link_url = '$publishedLink',
+            last_modified_time = '$date'
+            WHERE id = $id";
+            $query = $db->query($sql) or die($db->error);
+        }
+
         //Delete contribution by id from hasil karya page
         public function DeleteContribution($id){
             $db = $this->mysqli->con;
