@@ -3,32 +3,35 @@
   require_once('../../BE/model/database.php');
   include('navbar.php');
   include('../../BE/model/contact.php');
+  include('../../BE/model/contribution.php');
 
+  //get id contact that we want to see
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
+  $contributions = new Contribution($connection);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
   <body>
     <section class="section">
       <div class="container">
+        <!-- get data from db where id=$id -->
         <?php
-          $show = $contacts->ShowContact($id);
-          $data = $show->fetch_object()
+          $show = $contacts->ShowContact($id,null);
+          $data = $show->fetch_object();
         ?>
         <div class="row itembox">
+          <!-- name from db -->
           <div class="col-12 col-md-8 col-lg-8"><h2><?php echo $data->full_name?></h2></div>
-          <!-- nama data bakal di get dari db -->
         </div>
         <hr />
         <!-- kode per-page -->
         <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 900px;">
             <a href="mailto:<?php echo $data->email ?>" type="button" class="btn btn-primary">Email</a>
-            <button type="button" class="btn btn-light">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <a href="edit_contact.php?id=<?php echo $id ?>" type="button" class="btn btn-light">Edit</a>
+            <a href="contact_list.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
@@ -216,16 +219,25 @@
                     </tr>
                   </thead>
                   <tbody>
+                  <?php
+                    $noOfContribution=0;
+                    $showContributionList = $contributions->ShowAllContributions(null,$id);
+                    while($dataContributionList = $showContributionList->fetch_object()){
+                  ?>
                     <tr>
-                      <th>Date
+                      <th><?php echo $dataContributionList->received_date ?>
                       </th>
-                      <th>article
+                      <th><?php echo $dataContributionList->contribution_type_name ?>
                       </th>
-                      <th>terangnya
+                      <th><?php echo $dataContributionList->title ?>
                       </th>
-                      <th>published
+                      <th><?php echo $dataContributionList->contribution_status_name ?>
                       </th>
                     </tr>
+                    <?php 
+                        $noOfContribution++;
+                      } 
+                    ?>
                   </tbody>
                   <!-- <tfoot>
                     <tr>
@@ -249,7 +261,7 @@
             <div class="row">
               <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">
-                  Showing 1 to 1 of 1 entries
+                  Showing 1 to 1 of <?php echo $noOfContribution ?> entries
                 </div>
               </div>
               <div class="col-sm-12 col-md-7">
@@ -271,6 +283,5 @@
       </div>
     </section>
   </body>
-
 </html>
 

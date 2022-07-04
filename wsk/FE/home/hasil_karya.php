@@ -1,6 +1,15 @@
 <?php
+  require_once('../../BE/configuration/db_connection.php');
+  require_once('../../BE/model/database.php');
   include('navbar.php');
+  include('../../BE/model/contribution.php'); 
+  
+  $id = $_GET['id'];
+  $connection = new Database($host,$user,$pass,$dbName);
+  $contributions = new Contribution($connection);
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +17,14 @@
   <body>
     <section class="section">
       <div class="container">
+        <!-- get data from db -->
+        <?php
+          $show = $contributions->ShowAllContributions($id,null);
+          $data = $show->fetch_object();
+        ?>
+
         <div class="row itembox">
-          <div class="col-12 col-md-8 col-lg-8"><h2>Judul Hasil Karya</h2></div>
+        <div class="col-12 col-md-8 col-lg-8"><h2><?php echo $data->title?></h2></div>
           <!-- nama data bakal di get dari db -->
         </div>
         <hr />
@@ -52,8 +67,8 @@
                 </div>
               </div>
             </div>
-            <button type="button" class="btn btn-light">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
+            <a href="edit_contribution.php?id=<?php echo $id ?>" type="button" class="btn btn-light">Edit</a>
+            <a href="contribution_list.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
           </div>
         <!-- </div>   -->
         <br>
@@ -68,9 +83,9 @@
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="attributes-tab" data-bs-toggle="tab" data-bs-target="#attributes" type="button" role="tab" aria-controls="attributes" aria-selected="true">Attributes</button>
           </li>
-          <li class="nav-item" role="presentation">
+          <!-- <li class="nav-item" role="presentation">
             <button class="nav-link" id="attachments-tab" data-bs-toggle="tab" data-bs-target="#attachments" type="button" role="tab" aria-controls="attachments" aria-selected="true">Attachments</button>
-          </li>
+          </li> -->
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab" aria-controls="edit" aria-selected="true">Edit</button>
           </li>
@@ -82,48 +97,48 @@
               <div class="col-lg-12">
                 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                   <!-- <thead>
-                    <tr>
-                      <th class="th-sm">Full Name</th>
-                      <th class="th-sm">Abby Phinney</th>
-                    </tr>
+                    <th>
+                      <tr class="th-sm">Full Name</th>
+                      <tr class="th-sm">Abby Phinney</th>
+                    </th>
                   </thead> -->
 
                   <tbody>
                     <tr>
                       <th class="th-sm">Contributor</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->full_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Title</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->title?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Type</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->contribution_type_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Message</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->message?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Content</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->content?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Language</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->language?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Received Date</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->received_date?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Received Via</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->channel_name?></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Contributions Source Type</th>
-                      <th class="th-sm">nanti datanya ada kok</th>
+                      <th class="th-sm"><?php echo $data->contribution_source_type_name?></th>
                     </tr>
                   </tbody>
                 </table>
@@ -201,8 +216,8 @@
           </div>
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">  
             <div class="row itembox">
-              <div class="col-sm-12 col-md-6"><h2>Attributes</h2></div>
-              <button id="add" class="btn btn-primary col-2" style="margin-left: 320px; margin-bottom: 20px;" type="button" >add attributes</button>
+              <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
+              <button id="add" class="btn btn-primary col-2" style="margin-left: 70px; margin-bottom: 20px;" type="button" >add attributes</button>
             </div>
                   
             <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -295,12 +310,12 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
+          <!-- <div class="tab-pane fade" id="attachments" role="tabpanel" aria-labelledby="attachments-tab">
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Attachment</h2></div>
               <button type="button" class="btn btn-primary col-2" style = "margin-left: 100px;">add attachment</button>
             </div>
-          </div>
+          </div> -->
           <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
             <div class="row">
               <!-- <div class="col-5"><h2>Edit</h2></div> -->
@@ -309,7 +324,7 @@
             </div>
             <div class="row justify-content-center">
               <div class="col-12">
-                <iframe class="embed-responsive-item" src="https://docs.google.com/document/d/1QOHMm1eeaVlcAjwuBEODbJ1d5g27nXvxPcygGuaDTaM/edit"></iframe>
+                <iframe class="embed-responsive-item" src="<?php echo $data->edit_link_url?>"></iframe>
               </div>
             </div>
           </div>

@@ -6,6 +6,12 @@
 
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
+  
+  //if get delete command, delete record where id = $idContribution
+  if(isset($_GET['delete'])){
+    $idContribution = $_GET['delete'];
+    $contributions->DeleteContribution($idContribution);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +25,7 @@
     <div class = "container">
       <div class="row itembox">
         <div class="col-12 col-md-8 col-lg-8"><h2>Contribution List</h2></div>
-        <a class="btn btn-primary col-3" href="add_new_contribution.php">Add New Contribution</a>
+        <a class="btn btn-primary col-3" href="add_new_contribution.php" style = "margin-left: 70px; margin-bottom: 20px;">Add New Contribution</a>
       </div>
       <hr />
       <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -70,13 +76,13 @@
                 while($data = $show->fetch_object()){
               ?>
                 <tr>
-                  <td><?php echo $data->title ?></td>
+                <td><a href="hasil_karya.php?id=<?php echo $data->id?>"><?php echo $data->title ?></a></td>
                   <td><?php echo $data->received_date ?></td>
                   <td><?php echo $data->contribution_type_name ?></td>
                   <td><?php echo $data->full_name ?></td>
                   <td><?php echo $data->contribution_status_name ?></td>
                   <td align="center">
-                    <button type="button" class="btn btn-primary"><i class='far fa-edit'></i>edit</button>
+                    <a type="button" class="btn btn-primary" href="edit_contribution.php?id=<?php echo $data->id?>"><i class='far fa-edit'></i>edit</button>
                   </td>
                 </tr>
               <?php
