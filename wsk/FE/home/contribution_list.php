@@ -82,7 +82,7 @@
                   <td><?php echo $data->full_name ?></td>
                   <td><?php echo $data->contribution_status_name ?></td>
                   <td align="center">
-                    <a type="button" class="btn btn-primary" href="edit_contribution.php"><i class='far fa-edit'></i>edit</button>
+                    <a type="button" class="btn btn-primary" href="edit_contribution.php?id=<?php echo $data->id?>"><i class='far fa-edit'></i>edit</button>
                   </td>
                 </tr>
               <?php
