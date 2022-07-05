@@ -1,4 +1,5 @@
 <?php
+    
     class Contribution{
         private $mysqli;
 
@@ -71,9 +72,10 @@
                 $query = $db->query($sql) or die($db->error);
                 $singleRow = mysqli_fetch_assoc($query);
                 return $singleRow;
+            } else{
+                $query = $db->query($sql) or die($db->error);
+                return $query;
             }
-            $query = $db->query($sql) or die($db->error);
-            return $query;
         }
 
         //insert new contribution to db
@@ -102,6 +104,17 @@
             contribution_status = '$contributionStatus',
             edit_link_url = '$editLink',
             published_link_url = '$publishedLink',
+            last_modified_time = '$date'
+            WHERE id = $id";
+            $query = $db->query($sql) or die($db->error);
+        }
+
+        //update contribution status after get remarked
+        public function UpdateStatusContribution($id, $contributionStatus){
+            $date = date('Y-m-d H:i:s');
+            $db = $this->mysqli->con;
+            $sql = "UPDATE contributions 
+            SET contribution_status = '$contributionStatus',
             last_modified_time = '$date'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);
