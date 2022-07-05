@@ -90,6 +90,7 @@
             <button class="nav-link" id="edit-tab" data-bs-toggle="tab" data-bs-target="#edit" type="button" role="tab" aria-controls="edit" aria-selected="true">Edit</button>
           </li>
         </ul>
+        <br>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="data" role="tabpanel" aria-labelledby="data-tab">
             <div class="col-12 col-md-8 col-lg-8"><h2>Data</h2></div>
@@ -123,6 +124,10 @@
                     <tr>
                       <th class="th-sm">Content</th>
                       <th class="th-sm"><?php echo $data->content?></th>
+                    </tr>
+                    <tr>
+                      <th class="th-sm">Content Link</th>
+                      <th class="th-sm"><a href = "<?php echo $data->content_link?>" target = "_blank">Link</a></th>
                     </tr>
                     <tr>
                       <th class="th-sm">Language</th>

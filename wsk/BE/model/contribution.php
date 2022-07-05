@@ -8,7 +8,7 @@
 
         public function ShowAllContributions($id=null, $contributor=null){
             $db = $this->mysqli->con;
-            $sql = "SELECT contributions.id, contributions.title, contributions.received_date, contributions.message, contributions.content, contributions.language, contribution_receive_channels.channel_name, contribution_types.contribution_type_name, contacts.full_name, contributions.edit_link_url, contribution_source_types.contribution_source_type_name, contribution_statuses.contribution_status_name, contributions.published_link_url FROM contributions 
+            $sql = "SELECT contributions.id, contributions.title, contributions.received_date, contributions.message, contributions.content, contributions.language, contribution_receive_channels.channel_name, contribution_types.contribution_type_name, contacts.full_name, contributions.edit_link_url, contribution_source_types.contribution_source_type_name, contribution_statuses.contribution_status_name, contributions.published_link_url, contributions.content_link FROM contributions 
             LEFT JOIN contribution_types on contributions.type = contribution_types.id 
             LEFT JOIN contacts ON contributions.contributor=contacts.id 
             LEFT JOIN contribution_receive_channels ON contributions.received_via=contribution_receive_channels.id
