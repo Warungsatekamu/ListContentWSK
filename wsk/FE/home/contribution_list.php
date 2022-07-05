@@ -52,7 +52,7 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+          <table id="dtBasicExample" class="table table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
               <tr>
                 <th class="th-sm">Title
@@ -76,11 +76,34 @@
                 while($data = $show->fetch_object()){
               ?>
                 <tr>
-                <td><a href="hasil_karya.php?id=<?php echo $data->id?>"><?php echo $data->title ?></a></td>
+                  <td><a href="hasil_karya.php?id=<?php echo $data->id?>"><?php echo $data->title ?></a></td>
                   <td><?php echo $data->received_date ?></td>
                   <td><?php echo $data->contribution_type_name ?></td>
                   <td><?php echo $data->full_name ?></td>
-                  <td><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    if($data->contribution_status_name == "received - new"){
+                  ?>
+                      <td class="table-primary"><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    } else if($data->contribution_status_name == "holding replied"){
+                  ?>
+                      <td class="table-warning"><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    } else if($data->contribution_status_name == "published"){
+                  ?>
+                      <td class="table-success"><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    } else if($data->contribution_status_name == "rejected"){
+                  ?>
+                      <td class="table-danger"><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    } else {
+                  ?>
+                      <td><?php echo $data->contribution_status_name ?></td>
+                  <?php
+                    }
+                  ?>
+                  
                   <td align="center">
                     <a type="button" class="btn btn-primary" href="edit_contribution.php?id=<?php echo $data->id?>"><i class='far fa-edit'></i>edit</button>
                   </td>

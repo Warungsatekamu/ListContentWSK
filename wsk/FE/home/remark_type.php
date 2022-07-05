@@ -1,5 +1,18 @@
 <?php
+    require_once('../../BE/configuration/db_connection.php');
+    require_once('../../BE/model/database.php');
     include('navbar.php');
+    include('../../BE/model/remark.php');
+    include('../../BE/model/contribution.php');
+  
+    $connection = new Database($host,$user,$pass,$dbName);
+    $remarks = new ContributionRemark($connection);
+    $contribution = new Contribution($connection);
+    
+    if(isset($_GET['delete'])){
+        $idRemark = $_GET['delete'];
+        $remarks->DeleteRemarkType($idRemark);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -14,34 +27,7 @@
                 <hr />
                 <!-- <div class="col-sm-12 col-md-6"> -->
                 <div id="dtBasicExample_filter" class="dataTables_filter" style = "margin-left: 800px;">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Remark</button>
-                    <!-- modal remark -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add New Remark</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="mx-auto mb-3" style="width: 460px">
-                                        <label for="exampleFormControlInput1" class="form-label">Time</label>
-                                        <input type="datetime-local" class="form-control" id="exampleFormControlInput1" />
-                                    </div>
-                                    <div class="mx-auto mb-3" style="width: 460px">
-                                        <label for="disabledSelect" class="form-label">Remark Type</label>
-                                        <input type="text" name="remarkType" class="form-control" id="remarkType" />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Add New Remark</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-light">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#remarkModal">Add New Remark</button>
                 </div>
                 <!-- </div>   -->
                 <br>
@@ -81,12 +67,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    $no=1;
+                                    $show = $remarks->ShowAllRemarkType();
+                                    while($data = $show->fetch_object()){
+                                ?>
                                     <tr>
-                                        <th>nanti ada datanya
+                                        <th><?php echo $data->remark_type_name ?>
                                         </th>
-                                        <th>nanti ada datanya
-                                        </th>
+                                        <th><a href="remark_type.php?delete=<?php echo $data->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a></th>
                                     </tr>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -94,5 +85,53 @@
                 </div>
             </div>
         </section>
+
+        <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+            <!-- modal remark -->
+            <div class="modal fade" id="remarkModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add New Remark</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mx-auto mb-3" style="width: 460px">
+                                <label for="remarkType" class="form-label">Remark Type</label>
+                                <input type="text" name="remarkType" class="form-control" id="remarkType" />
+                            </div>
+                        </div>
+                        <div class="mx-auto mb-3" style="width: 460px">
+                            <label for="linkedStatus" class="form-label">Status For This Remark</label>
+                            <select id="linkedStatus" class="form-select" name="linkedStatus">
+                            <!-- get all status for list -->
+                            <?php
+                                $showStatus = $contribution->ShowAllContributionStatus();
+                                while($dataStatus = $showStatus->fetch_object()){
+                            ?>
+                                    <option><?php echo $dataStatus->contribution_status_name ?></option>
+                            <?php
+                                }
+                            ?>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" name="submitNewRemarkType" class="btn btn-primary" value="Add New Remark Type"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </body>
+    <?php
+        if(@$_POST['submitNewRemarkType']){ //if button add new remark type triggered
+            $remarkType = $connection->con->real_escape_string($_POST['remarkType']);
+            $linkedStatus = $connection->con->real_escape_string($_POST['linkedStatus']);
+            $linkedStatusid = $contribution->ShowAllContributionStatus($linkedStatus);
+            $linkedStatus = $linkedStatusid['id'];
+            $remarks->InsertNewRemarkType($remarkType, $linkedStatus); //insert to db remark_types
+            echo '<meta content="0" http-equiv="refresh">'; //refresh page
+        }
+    ?>
 </html>
