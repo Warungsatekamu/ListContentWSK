@@ -79,10 +79,10 @@
         }
 
         //insert new contribution to db
-        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '$language', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '1', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
             $query = $db->query($sql) or die($db->error);
         }
 
