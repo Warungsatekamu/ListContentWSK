@@ -75,7 +75,7 @@
                                     <tr>
                                         <th><?php echo $data->remark_type_name ?>
                                         </th>
-                                        <th><a href="remark_type.php?delete=<?php echo $data->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a></th>
+                                        <th><a href="remark_type.php?delete=<?php echo $data->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus remark type ini \n remark type = <?php echo $data->remark_type_name ?>?')">Delete</a></th>
                                     </tr>
                                 <?php } ?>
                                 </tbody>
@@ -98,7 +98,7 @@
                         <div class="modal-body">
                             <div class="mx-auto mb-3" style="width: 460px">
                                 <label for="remarkType" class="form-label">Remark Type</label>
-                                <input type="text" name="remarkType" class="form-control" id="remarkType" />
+                                <input type="text" name="remarkType" class="form-control" id="remarkType" required/>
                             </div>
                         </div>
                         <div class="mx-auto mb-3" style="width: 460px">

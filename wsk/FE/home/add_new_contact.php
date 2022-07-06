@@ -27,7 +27,7 @@
       <!-- nickname -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="nickname" class="form-label">Nickname</label>
-        <input type="text" name="nickname" class="form-control" id="nickname" required/>
+        <input type="text" name="nickname" class="form-control" id="nickname"/>
       </div>
 
       <!-- gender (dropdown)-->
@@ -51,23 +51,24 @@
       <!-- birthdate -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="birthdate" class="form-label">Birthdate</label>
-        <input type="date" name="birthdate" class="form-control" id="birthdate" required/>
+        <input type="date" name="birthdate" class="form-control" id="birthdate"/>
       </div>
       <!-- phone -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="phone" class="form-label">Phone</label>
-        <input type="number" name="phone" class="form-control" id="phone" required/>
+        <input type="number" name="phone" class="form-control" id="phone"/>
       </div>
       <!-- address -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="address" class="form-label">Address</label>
-        <input type="text" name="address" class="form-control" id="address" required/>
+        <input type="text" name="address" class="form-control" id="address"/>
       </div>
       <!-- city (data from database) -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="disabledSelect" class="form-label">City</label>
-          <select id="disabledSelect" name="city" class="form-select" required>
+          <select id="disabledSelect" name="city" class="form-select">
             <!-- get all city name for list -->
+              <option></option>
             <?php
               $show = $citydb->ShowAllCityName();
               while($data = $show->fetch_object()){

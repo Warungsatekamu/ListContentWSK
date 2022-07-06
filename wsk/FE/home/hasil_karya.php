@@ -9,6 +9,12 @@
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
   $remarks = new ContributionRemark($connection);
+  
+  //if get delete command, delete record where id = $idContributionRemark
+  if(isset($_GET['deleteRemark'])){
+    $idContributionRemark = $_GET['deleteRemark'];
+    $remarks->DeleteContributionRemark($idContributionRemark);
+  }
 ?>
 
 
@@ -165,7 +171,10 @@
                       <th><?php echo $dataContributionRemarkList->remark_type_name ?></th>
                       <th><?php echo $dataContributionRemarkList->action_time ?></th>
                       <th><?php echo $dataContributionRemarkList->remark ?></th>
-                      <th><a type="button" class="btn btn-light" href="">Edit</a><a type="button" class="btn btn-danger" href="">Delete</a></th>
+                      <th>
+                        <a type="button" class="btn btn-light" href="">Edit</a>
+                        <a href="hasil_karya.php?id=<?php echo $id ?>&deleteRemark=<?php echo $dataContributionRemarkList->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus remark ini?')">Delete</a>
+                      </th>
                     </tr>
                     <?php } ?>
                   </tbody>
@@ -319,7 +328,7 @@
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="actionTime" class="form-label">Time</label>
-                <input type="datetime-local" name="actionTime" class="form-control" id="actionTime" />
+                <input type="datetime-local" name="actionTime" class="form-control" id="actionTime" required/>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remarkType" class="form-label">Remark Type</label>
