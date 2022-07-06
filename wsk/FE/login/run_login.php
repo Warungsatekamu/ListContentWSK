@@ -28,5 +28,6 @@
 			}else{
 				echo "<script>alert('Invalid Username or Password');document.location = 'javascript:history.back(0);'</script>";
             }
+		}
 	}
 ?>
