@@ -106,8 +106,8 @@
                             <select id="linkedStatus" class="form-select" name="linkedStatus">
                             <!-- get all status for list -->
                             <?php
-                                $showStatus = $contribution->ShowAllContributionStatus();
-                                while($dataStatus = $showStatus->fetch_object()){
+                                $showStatusList = $contribution->ShowAllContributionStatus();
+                                while($dataStatus = $showStatusList->fetch_object()){
                             ?>
                                     <option><?php echo $dataStatus->contribution_status_name ?></option>
                             <?php
