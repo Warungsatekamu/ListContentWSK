@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -60,7 +61,7 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#contact mb-3">Log Out</a>
+            <a href = 'logout/logout.php' class="nav-link" href="#contact mb-3">Log Out</a>
           </li>
         </ul>
       </div>

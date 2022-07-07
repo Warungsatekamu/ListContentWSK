@@ -1,28 +1,33 @@
 <?php
     class User{
         private $mysqli;
+		private $id;
+		private $username;
+		private $name;
+		private $password;
+		private $level;
         
-        function __construct($con){
-            $this->mysqli = $con;
-        }
         
         //get contact data for contact list
-        public function ShowUser($id=null, $username=null){
-            $db = $this->mysqli->con;
-            $sql = "SELECT user.id, user.username, user.nama, user.password, user.level FROM user";
-            if($id != null){
-                $sql .= " WHERE user.id = $id";
-            } else if($username != null){
-                $sql .= " WHERE user.username= '$username'";
-                $query = $db->query($sql) or die($db->error);
-                $singleRow = mysqli_fetch_assoc($query);
-                return $singleRow;
-            }
-            $sql .= " ORDER BY user.id DESC";
-            $query = $db->query($sql) or die($db->error);
-            return $query;
+        public function ShowUser($username){
+            $db = new mysqli("localhost", "root", "", "db_wsk");
+            $sql = "SELECT * FROM user WHERE username = '$username'";
+			$query = $db->query($sql) or die($db->error);
+			$cek = false;
+			while($row = mysqli_fetch_array($query)){
+				$cek = true;
+				$this->id = $row['id'];
+				$this->username = $row['username'];
+				$this->name = $row['nama'];
+				$this->password = $row['password'];
+				$this->level = $row['level'];
+			}
+			if($cek){
+				echo "<script>alert('Login Success!');document.location = '../../FE/home/contribution_list.php';</script>";
+			}else{
+				echo "<script>alert('Wrong username / password');document.location = '../../FE/login/login.php';</script>";
+			}
         }
-
-        
     }
+	//TAMBAHAN VARIABLE (4-8), PERUBAHAN KODINGAN MENGAMBIL DATA DARI DATABASE (17-23), PENAMBAHAN LOGIKA IF UNTUK MELEMPAR KE NEXT PAGE (25-28)
 ?>
