@@ -8,6 +8,7 @@
             $this->mysqli = $con;
         }
 
+        //Get data from DB to show all contribution remark, if user want to see specific contribution, id contribution will be not null 
         public function ShowAllContributionRemark($idContribution=null){
             require_once('contribution.php');
             $db = $this->mysqli->con;
@@ -26,6 +27,7 @@
             return $query;
         }
 
+        //insert contribution remark to database
         public function InsertNewContributionRemark($idContribution, $actionTime, $remarkType, $remark){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
@@ -37,6 +39,19 @@
             $contribution->UpdateStatusContribution($idContribution, $contributionStatusId);
         }
         
+        //update contribution Remark data to db
+        public function UpdateContributionRemark($idContributionRemark, $actionTime, $remarkType, $remark){
+            $date = date('Y-m-d H:i:s');
+            $db = $this->mysqli->con;
+            $sql = "UPDATE contribution_remarks 
+            SET action_time = '$actionTime',
+            remark_type = '$remarkType', 
+            remark = '$remark',
+            last_modified_time = '$date'
+            WHERE id = $idContributionRemark";
+            $query = $db->query($sql) or die($db->error);
+        } //perlu update contribution status? kayaknya ngga karena kalo yang di edit/update bukan remark terbaru nanti status contribution bakal keganti
+
         //Delete Contribuion remark by id
         public function DeleteContributionRemark($id){
             $db = $this->mysqli->con;
@@ -44,14 +59,16 @@
             $query = $db->query($sql) or die($db->error);
         }
 
+        //Show all type of remark 
         public function ShowAllRemarkType($name=null, $remarkType=null){
             $db = $this->mysqli->con;
+            // data to get linked status for updating contribution status
             if($remarkType != null){
                 $sql = "SELECT linked_status FROM contribution_remark_types WHERE id = $remarkType";
                 $query = $db->query($sql) or die($db->error);
                 $singleRow = mysqli_fetch_assoc($query);
                 return $singleRow;
-            } else if($name != null){
+            } else if($name != null){ // to get id remark type for form
                 $sql = "SELECT id FROM contribution_remark_types WHERE remark_type_name = '$name'";
                 $query = $db->query($sql) or die($db->error);
                 $singleRow = mysqli_fetch_assoc($query);
@@ -64,6 +81,7 @@
             }
         }
 
+        // add new type of remark
         public function InsertNewRemarkType($remarkType, $linkedStatus){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;

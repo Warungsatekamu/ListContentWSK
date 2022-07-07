@@ -172,7 +172,57 @@
                       <th><?php echo $dataContributionRemarkList->action_time ?></th>
                       <th><?php echo $dataContributionRemarkList->remark ?></th>
                       <th>
-                        <a type="button" class="btn btn-light" href="">Edit</a>
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editRemark<?php echo $dataContributionRemarkList->id ?>">edit</button>
+
+                        <form method="post" >
+                          <!-- modal edit remark -->
+                          <div class="modal fade" id="editRemark<?php echo $dataContributionRemarkList->id ?>" tabindex="-1" aria-labelledby="editRemarkLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="editRemarkLabel">Edit Remark</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <input type="hidden" name="idRemark" class="form-control" id="idRemark" value="<?php echo $dataContributionRemarkList->id ?>"/>
+              
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="actionTime" class="form-label">Time</label>
+                                    <input type="datetime-local" name="actionTime" class="form-control" id="actionTime" value="<?php echo $dataContributionRemarkList->action_time ?>"/>
+                                  </div>
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="remarkType" class="form-label">Remark Type</label>
+                                    <select id="remarkType" name="remarkType" class="form-select">
+                                      <!-- get all status for list -->
+                                      <?php
+                                        $showType = $remarks->ShowAllRemarkType();
+                                        while($dataType = $showType->fetch_object()){
+                                          if($dataType->remark_type_name == $dataContributionRemarkList->remark_type_name){
+                                      ?>
+                                        <option selected><?php echo $dataType->remark_type_name ?></option>
+                                      <?php 
+                                          } else {
+                                      ?>
+                                        <option><?php echo $dataType->remark_type_name ?></option>
+                                      <?php
+                                          }}
+                                      ?>
+                                    </select>
+                                  </div>
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="remark" class="form-label">Remark</label>
+                                    <textarea class="form-control" name="remark" id="remark" rows="3"><?php echo $dataContributionRemarkList->remark ?></textarea>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <input type="submit" name="editRemark" class="btn btn-primary" value="Edit Remark"></input>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
                         <a href="hasil_karya.php?id=<?php echo $id ?>&deleteRemark=<?php echo $dataContributionRemarkList->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus remark ini?')">Delete</a>
                       </th>
                     </tr>
@@ -317,7 +367,7 @@
     </section>
     
     <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
-      <!-- modal remark -->
+      <!-- modal add remark -->
       <div class="modal fade" id="addRemark" tabindex="-1" aria-labelledby="AddNewRemark" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -357,9 +407,52 @@
         </div>
       </div>
     </form>
+
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal edit remark -->
+      <div class="modal fade" id="editRemark" tabindex="-1" aria-labelledby="AddNewRemark" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewRemark">Add New Remark</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="actionTime" class="form-label">Time</label>
+                <input type="datetime-local" name="actionTime" class="form-control" id="actionTime" required/>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="remarkType" class="form-label">Remark Type</label>
+                <select id="remarkType" name="remarkType" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showType = $remarks->ShowAllRemarkType();
+                    while($dataType = $showType->fetch_object()){
+                  ?>
+                    <option><?php echo $dataType->remark_type_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="remark" class="form-label">Remark</label>
+                <textarea class="form-control" name="remark" id="remark" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewRemark" class="btn btn-primary" value="Add Remark"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
   </body>
   <?php
-  if(@$_POST['submitNewRemark']){ //if button add new remark triggered
+    if(@$_POST['submitNewRemark']){ //if button add new remark triggered
       $actionTime = $connection->con->real_escape_string($_POST['actionTime']);
       $remarkType = $connection->con->real_escape_string($_POST['remarkType']);
       $remarkTypeid = $remarks->ShowAllRemarkType($remarkType,null);
@@ -367,6 +460,16 @@
       $remark = $connection->con->real_escape_string($_POST['remark']);
       $remarks->InsertNewContributionRemark($id, $actionTime, $remarkType, $remark); //insert to db remark_types
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
+    } else if(@$_POST['editRemark']){
+      $idUpdateRemark = $connection->con->real_escape_string($_POST['idRemark']);
+      $actionTime = $connection->con->real_escape_string($_POST['actionTime']);
+      $remarkType = $connection->con->real_escape_string($_POST['remarkType']);
+      $remarkTypeid = $remarks->ShowAllRemarkType($remarkType,null);
+      $remarkType = $remarkTypeid['id'];
+      $remark = $connection->con->real_escape_string($_POST['remark']);
+      $remarks->UpdateContributionRemark($idUpdateRemark, $actionTime, $remarkType, $remark); //insert to db remark_types
+      echo '<meta content="0" http-equiv="refresh">'; //refresh page
     }
+
   ?>
 </html>
