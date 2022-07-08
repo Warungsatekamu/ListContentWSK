@@ -34,7 +34,7 @@
                     <label for="username" class="sr-only"></label>
                     <input type="text" name = "username" id="username" class="form-control" placeholder="Username" value="" required autofocus />
                     <label for="password" class="sr-only"></label>
-                    <input type="password" id="password" placeholder="Password" class="form-control" />
+                    <input type="password" name = "password" id="password" placeholder="Password" class="form-control" />
                     <div class="checkbox">
                         <label> <input type="checkbox" name="remember-me" value = "1"/> Remember me </label>
                     </div>
