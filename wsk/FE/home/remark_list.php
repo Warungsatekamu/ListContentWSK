@@ -43,7 +43,7 @@
         </div>
         <div class="row">
           <div class="col-lg-12">
-            <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+            <table id="dtBasicExample" class="table table-bordered table-sm" cellspacing="0" width="100%">
               <thead>
                 <tr>
                   <th class="th-sm">Contributions
@@ -65,11 +65,11 @@
                   while($data = $show->fetch_object()){
                 ?>
                   <tr>
-                    <td><?php echo $data->title ?></td>
+                    <td><a href="hasil_karya.php?id=<?php echo $data->contribution?>"><?php echo $data->title ?></href=></td>
                     <td><?php echo $data->action_time ?></td>
                     <td><?php echo $data->remark_type_name ?></td>
                     <td><?php echo $data->remark ?></td>
-                    <td><?php echo $data->created_by ?></td>
+                    <td><?php echo $data->nick_name ?></td>
                   </tr>
                 <?php
                     $no++;

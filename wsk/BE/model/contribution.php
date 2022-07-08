@@ -1,4 +1,5 @@
 <?php
+    
     class Contribution{
         private $mysqli;
 
@@ -8,7 +9,7 @@
 
         public function ShowAllContributions($id=null, $contributor=null){
             $db = $this->mysqli->con;
-            $sql = "SELECT contributions.id, contributions.title, contributions.received_date, contributions.message, contributions.content, contributions.language, contribution_receive_channels.channel_name, contribution_types.contribution_type_name, contacts.full_name, contributions.edit_link_url, contribution_source_types.contribution_source_type_name, contribution_statuses.contribution_status_name, contributions.published_link_url FROM contributions 
+            $sql = "SELECT contributions.id, contributions.title, contributions.received_date, contributions.message, contributions.content, contributions.language, contribution_receive_channels.channel_name, contribution_types.contribution_type_name, contacts.full_name, contributions.edit_link_url, contribution_source_types.contribution_source_type_name, contribution_statuses.contribution_status_name, contributions.published_link_url, contributions.content_link FROM contributions 
             LEFT JOIN contribution_types on contributions.type = contribution_types.id 
             LEFT JOIN contacts ON contributions.contributor=contacts.id 
             LEFT JOIN contribution_receive_channels ON contributions.received_via=contribution_receive_channels.id
@@ -71,16 +72,17 @@
                 $query = $db->query($sql) or die($db->error);
                 $singleRow = mysqli_fetch_assoc($query);
                 return $singleRow;
+            } else{
+                $query = $db->query($sql) or die($db->error);
+                return $query;
             }
-            $query = $db->query($sql) or die($db->error);
-            return $query;
         }
 
         //insert new contribution to db
-        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '$language', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '1', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
             $query = $db->query($sql) or die($db->error);
         }
 
@@ -102,6 +104,17 @@
             contribution_status = '$contributionStatus',
             edit_link_url = '$editLink',
             published_link_url = '$publishedLink',
+            last_modified_time = '$date'
+            WHERE id = $id";
+            $query = $db->query($sql) or die($db->error);
+        }
+
+        //update contribution status after get remarked
+        public function UpdateStatusContribution($id, $contributionStatus){
+            $date = date('Y-m-d H:i:s');
+            $db = $this->mysqli->con;
+            $sql = "UPDATE contributions 
+            SET contribution_status = '$contributionStatus',
             last_modified_time = '$date'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);

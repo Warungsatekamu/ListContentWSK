@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,7 +56,12 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#contact mb-3">Log Out</a>
+            <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;">pierresebastian@30gmail.com</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href = 'logout/logout.php' class="nav-link" href="#contact mb-3">Log Out</a>
           </li>
         </ul>
       </div>
