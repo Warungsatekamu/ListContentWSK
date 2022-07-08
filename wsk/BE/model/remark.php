@@ -12,7 +12,7 @@
         public function ShowAllContributionRemark($idContribution=null){
             require_once('contribution.php');
             $db = $this->mysqli->con;
-            $sql = "SELECT contribution_remarks.id, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, contacts.nick_name FROM contribution_remarks 
+            $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, contacts.nick_name FROM contribution_remarks 
             LEFT JOIN contributions ON contribution_remarks.contribution = contributions.id 
             LEFT JOIN contribution_remark_types ON contribution_remarks.remark_type=contribution_remark_types.id
             LEFT JOIN contacts ON contribution_remarks.created_by=contacts.id";

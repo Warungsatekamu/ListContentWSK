@@ -4,11 +4,13 @@
   include('navbar.php');
   include('../../BE/model/contribution.php'); 
   include('../../BE/model/remark.php'); 
+  include('../../BE/model/attributeModel.php'); 
   
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
   $remarks = new ContributionRemark($connection);
+  $attributes = new Atribute($connection);
   
   //if get delete command, delete record where id = $idContributionRemark
   if(isset($_GET['deleteRemark'])){
@@ -291,18 +293,22 @@
                       </th>  
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <th>Owner
-                      </th>
-                      <th>WarungSaTeKaMu
-                      </th>
-                      <th>
-                      </th>
-                      <th>button edit dan delete wkwk
-                      </th>    
-                    </tr>
-                  </tbody>
+                  <?php
+                    $noOfContributionRemark=0;
+                    $showContributionAttributeList = $attributes->ShowAllAttribute(null,$id,null);
+                    while($dataContributionAttributeList = $showContributionAttributeList->fetch_object()){
+                  ?>
+                    <tbody>
+                      <tr>
+                        <td><?php echo $dataContributionAttributeList->attribute_type_name ?></td>
+                        <td><?php echo $dataContributionAttributeList->attribute_generic_value_name ?></td>
+                        <td><?php echo $dataContributionAttributeList->attribute_value ?></td>
+                        <td><a href="" type="button" class="btn btn-light">Edit</a>
+                        <a href="" type="button" class="btn btn-danger">Delete</a>
+                        </td>    
+                      </tr>
+                    </tbody>
+                  <?php } ?>
                   <!-- <tfoot>
                     <tr>
                       <th>Name
