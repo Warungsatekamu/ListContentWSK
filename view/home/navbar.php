@@ -21,7 +21,7 @@
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <!--Navbar-->
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
     <div class="container">
       <a class="navbar-brand fw-bold" href="contribution_list.php">YMIDB</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,9 @@
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;"><?php echo $_SESSION['name']; ?></a>
+            <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;">
+              <!-- <?php //echo $_SESSION['name']; ?> -->
+            </a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -68,9 +70,9 @@
         </ul>
       </div>
     </div>
-  </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
-        <div class="container">
+  </nav>
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+      <div class="container">
         <a class="navbar-brand fw-bold" href="contribution_list.php">YMIDB</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -110,7 +112,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;"><?php echo $_SESSION['name']; ?></a>
+                <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;"><?php// echo $_SESSION['name']; ?></a>
             </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -119,8 +121,6 @@
             </li>
             </ul>
         </div>
-        </div>
-    </nav>
-
-
+      </div>
+    </nav> -->
 </body>

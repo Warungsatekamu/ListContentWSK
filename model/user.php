@@ -11,7 +11,7 @@
         //get contact data for contact list
         public function ShowUser($username, $password){
             $db = new mysqli("localhost", "root", "", "db_wsk");
-            $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+            $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
 			$query = $db->query($sql) or die($db->error);
 			$cek = false;
 			while($row = mysqli_fetch_array($query)){
