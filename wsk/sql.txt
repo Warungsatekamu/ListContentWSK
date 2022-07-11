@@ -1,6 +1,0 @@
-for table contribution:
-ALTER TABLE `contributions` ADD `content_link` varchar(1000) NOT NULL AFTER `content`;
-
-
-for table user:
-CREATE TABLE `db_wsk`.`user` ( `id` INT(11) NOT NULL PRIMARY KEY, `username` VARCHAR(255), `nama` VARCHAR(255), `password` VARCHAR(255), `level` INT(1));
