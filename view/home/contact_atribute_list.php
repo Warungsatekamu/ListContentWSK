@@ -1,5 +1,12 @@
 <?php
+  require_once('../../configuration/db_connection.php');
+  require_once('../../model/database.php');
   include('navbar.php');
+  include('../../model/attributeModel.php');
+
+  $connection = new Database($host,$user,$pass,$dbName);
+  $attributes = new Atribute($connection);
+
 ?>
 
 <!DOCTYPE html>
@@ -45,14 +52,20 @@
                   <th class="th-sm">Value</th>
                 </tr>
               </thead>
-              <!-- <tbody>
-                <tr>
-                  <th>Owner</th>
-                  <th>WarungSaTeKaMu</th>
-                  <th></th>
-                  <th>button edit dan delete wkwk</th>
-                </tr>
-              </tbody> -->
+              <tbody>
+              <?php
+                $no=0;
+                $showAttributeContactList = $attributes->ShowAllAttribute(null,null,"contact");
+                while($dataAttributeContactList = $showAttributeContactList->fetch_object()){
+              ?>
+                  <tr>
+                    <td><a href="detail_contact.php?id=<?php echo $dataAttributeContactList->data_id?>"><?php echo $dataAttributeContactList->full_name ?></td>
+                    <td><?php echo $dataAttributeContactList->attribute_type_name ?></td>
+                    <td><?php echo $dataAttributeContactList->attribute_generic_value_name ?></td>
+                    <td><?php echo $dataAttributeContactList->attribute_value ?></td>
+                  </tr>
+                <?php } ?>
+              </tbody>
               <!-- <tfoot>
                 <tr>
                   <th>Name
