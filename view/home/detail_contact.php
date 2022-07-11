@@ -4,12 +4,14 @@
   include('navbar.php');
   include('../../model/contact.php');
   include('../../model/contribution.php');
+  include('../../model/attributeModel.php');
 
   //get id contact that we want to see
   $id = $_GET['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
   $contributions = new Contribution($connection);
+  $attributes = new Atribute($connection);
 ?>
 
 <!DOCTYPE html>
@@ -143,17 +145,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th>Owner
-                        </th>
-                        <th>WarungSaTeKaMu
-                        </th>
-                        <th>
-                        </th>
-                        <th>button edit dan delete wkwk
-                        </th>
-                        
-                      </tr>
+                      <?php
+                        $noOfContributionAttribute=0;
+                        $showContactAttributeList = $attributes->ShowAllAttribute($id,null,null);
+                        while($dataContactAttributeList = $showContactAttributeList->fetch_object()){
+                      ?>
+                          <tr>
+                            <td><?php echo $dataContactAttributeList->attribute_type_name ?></td>
+                            <td><?php echo $dataContactAttributeList->attribute_generic_value_name ?></td>
+                            <td><?php echo $dataContactAttributeList->attribute_value ?></td>
+                            <td><a href="" type="button" class="btn btn-light">Edit</a>
+                            <a href="" type="button" class="btn btn-danger">Delete</a>
+                            </td>    
+                          </tr>
+                      <?php $noOfContributionAttribute++; } ?>
                     </tbody>
                     <!-- <tfoot>
                       <tr>
@@ -174,7 +179,7 @@
                   </table>
                 </div>
               </div>
-              </div>
+          </div>
           <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Contributions</h2></div>
@@ -284,4 +289,3 @@
     </section>
   </body>
 </html>
-
