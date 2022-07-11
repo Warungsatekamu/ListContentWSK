@@ -1,0 +1,22 @@
+.jumbotron {
+  padding-top: 6rem;
+  background-color: #ffffff;
+}
+
+#projects {
+  background-color: #ffffff;
+}
+
+section {
+  padding-top: 5rem;
+}
+#dropdown {
+  margin-right: 5px;
+  margin-left: 1px;
+}
+#add {
+  padding: 0;
+}
+.body {
+  background-color: #ffffff;
+}

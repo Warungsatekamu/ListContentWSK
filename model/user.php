@@ -9,9 +9,9 @@
         
         
         //get contact data for contact list
-        public function ShowUser($username){
+        public function ShowUser($username, $password){
             $db = new mysqli("localhost", "root", "", "db_wsk");
-            $sql = "SELECT * FROM user WHERE username = '$username'";
+            $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
 			$query = $db->query($sql) or die($db->error);
 			$cek = false;
 			while($row = mysqli_fetch_array($query)){
@@ -23,9 +23,11 @@
 				$this->level = $row['level'];
 			}
 			if($cek){
-				echo "<script>alert('Login Success!');document.location = '../../FE/home/contribution_list.php';</script>";
+				session_start();
+				$_SESSION['name'] = $this->name;
+				echo "<script>alert('Login Success!');document.location = '../view/home/contribution_list.php?';</script>";
 			}else{
-				echo "<script>alert('Wrong username / password');document.location = '../../FE/login/login.php';</script>";
+				echo "<script>alert('Wrong username / password');document.location = '../../login/login.php';</script>";
 			}
         }
     }

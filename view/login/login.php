@@ -1,5 +1,5 @@
 <?php
-	foreach(glob("../../BE/model/*.php") as $filename){
+	foreach(glob("../../model/*.php") as $filename){
 		include $filename;
 	}
 	session_start();
@@ -7,7 +7,7 @@
 		$_SESSION['login'] = $_COOKIE['login'];
 	}
 	if(isset($_SESSION['login'])){
-		header('Location: ../home/contribution_list.php');
+		header('Location: home/contribution_list.php');
 	}else{
 ?>
 
@@ -29,12 +29,12 @@
     </head>
     <body style="padding: 5rem 0;;">
             <div class="text-center mt-5">
-                <form style="max-width:480px; margin: auto;" method = "POST" action = "../../BE/controller/run.php" enctype = "multipart/form-data">
+                <form style="max-width:480px; margin: auto;" method = "POST" action = "../../controller/run.php" enctype = "multipart/form-data">
                     <h1 class=>YMIDB</h1>
                     <label for="username" class="sr-only"></label>
                     <input type="text" name = "username" id="username" class="form-control" placeholder="Username" value="" required autofocus />
                     <label for="password" class="sr-only"></label>
-                    <input type="password" id="password" placeholder="Password" class="form-control" />
+                    <input type="password" name = "password" id="password" placeholder="Password" class="form-control" />
                     <div class="checkbox">
                         <label> <input type="checkbox" name="remember-me" value = "1"/> Remember me </label>
                     </div>
