@@ -1,9 +1,9 @@
 <?php
-    require_once('../../BE/configuration/db_connection.php');
-    require_once('../../BE/model/database.php');
+    require_once('../../configuration/db_connection.php');
+    require_once('../../model/database.php');
     include('navbar.php');
-    include('../../BE/model/remark.php');
-    include('../../BE/model/contribution.php');
+    include('../../model/remark.php');
+    include('../../model/contribution.php');
   
     $connection = new Database($host,$user,$pass,$dbName);
     $remarks = new ContributionRemark($connection);
