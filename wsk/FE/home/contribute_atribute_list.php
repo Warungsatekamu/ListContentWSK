@@ -1,5 +1,12 @@
 <?php
+  require_once('../../BE/configuration/db_connection.php');
+  require_once('../../BE/model/database.php');
   include('navbar.php');
+  include('../../BE/model/attributeModel.php');
+
+  $connection = new Database($host,$user,$pass,$dbName);
+  $attributes = new Atribute($connection);
+
 ?>
 
 <!DOCTYPE html>
@@ -45,14 +52,21 @@
                   <th class="th-sm">Value</th>
                 </tr>
               </thead>
-              <!-- <tbody>
-                <tr>
-                  <th>Owner</th>
-                  <th>WarungSaTeKaMu</th>
-                  <th></th>
-                  <th>button edit dan delete wkwk</th>
-                </tr>
-              </tbody> -->
+              <tbody>
+                <?php
+                    $no=0;
+                    $showAttributeContributionList = $attributes->ShowAllAttribute(null,null,"contribution");
+                    while($dataAttributeContributionList = $showAttributeContributionList->fetch_object()){
+                  ?>
+                    <tr>
+                      <td><a href="hasil_karya.php?id=<?php echo $dataAttributeContributionList->data_id?>"><?php echo $dataAttributeContributionList->title ?></td>
+                      <td><a href="detail_contact.php?id=<?php echo $dataAttributeContributionList->contributor?>"><?php echo $dataAttributeContributionList->full_name ?></td>
+                      <td><?php echo $dataAttributeContributionList->attribute_type_name ?></td>
+                      <td><?php echo $dataAttributeContributionList->attribute_generic_value_name ?></td>
+                      <td><?php echo $dataAttributeContributionList->attribute_value ?></td>
+                    </tr>
+                  <?php } ?>
+              </tbody>
               <!-- <tfoot>
                 <tr>
                   <th>Name
