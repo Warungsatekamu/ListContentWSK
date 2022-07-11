@@ -43,7 +43,7 @@
             <a class="nav-link" href="remark_list.php">Remarks</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Attributes </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="contact_atribute_list.php">Contact</a></li>
               <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>

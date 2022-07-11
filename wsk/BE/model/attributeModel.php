@@ -51,53 +51,51 @@
             return $query;
         }
 
-        public function ShowAllAttributeContact(){
+
+        public function ShowAllAttributeType($attributeFor=null, $type = null){
             $db = $this->mysqli->con;
-            $sql = "SELECT attributes.data_id, contacts.full_name, attribute_types.attribute_type_name, attribute_generic_values.attribute_generic_value_name, attributes.attribute_value FROM attributes
-            LEFT JOIN contacts ON attributes.data_id=contacts.id 
-            LEFT JOIN attribute_types on attributes.attribute_type = attribute_types.id 
-            LEFT JOIN attribute_generic_values ON attributes.attribute_generic_value=attribute_generic_values.id
-            ";
-            // if($id != null){
-            //     $sql .= " WHERE contributions.id = $id";
-            // } else if($contributor != null){
-            //     $sql .= " WHERE contributions.contributor = $contributor";
-            // }
-            $sql .= " WHERE attributes.attribute_for='contact' ORDER BY contacts.full_name ASC";
-            $query = $db->query($sql) or die($db->error);
-            return $query;
+            $sql ="SELECT id, attribute_type_name from attribute_types";
+            if($type != null){
+                $sql .= " WHERE attribute_type_name = '$type'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
+            }else{
+                $sql .= " WHERE attribute_for = '$attributeFor' ORDER BY attribute_type_name ASC";
+                $query = $db->query($sql) or die($db->error);
+                return $query;
+            }
         }
 
-        public function ShowAllAttributeContribution(){
+        public function ShowAllAttributeCategory($category = null){
             $db = $this->mysqli->con;
-            $sql = "SELECT attributes.data_id, contributions.title, contributions.contributor, contacts.full_name, attribute_types.attribute_type_name, attribute_generic_values.attribute_generic_value_name, attributes.attribute_value FROM attributes
-            LEFT JOIN contributions ON attributes.data_id=contributions.id 
-            LEFT JOIN contacts ON contributions.contributor=contacts.id 
-            LEFT JOIN attribute_types on attributes.attribute_type = attribute_types.id 
-            LEFT JOIN attribute_generic_values ON attributes.attribute_generic_value=attribute_generic_values.id
-            ";
-            // if($id != null){
-            //     $sql .= " WHERE contributions.id = $id";
-            // } else if($contributor != null){
-            //     $sql .= " WHERE contributions.contributor = $contributor";
-            // }
-            $sql .= " WHERE attributes.attribute_for='contribution'";
-            $query = $db->query($sql) or die($db->error);
-            return $query;
+            $sql ="SELECT id, attribute_generic_value_name from attribute_generic_values";
+            if($category != null){
+                $sql .= " WHERE attribute_generic_value_name = '$category'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
+            }else{
+                $sql .= " ORDER BY attribute_generic_value_name ASC";
+                $query = $db->query($sql) or die($db->error);
+                return $query;
+            }
         }
 
-        // public function ShowAllContributionType($type = null){
-        //     $db = $this->mysqli->con;
-        //     $sql ="SELECT id, contribution_type_name from contribution_types";
-        //     if($type != null){
-        //         $sql .= " WHERE contribution_type_name = '$type'";
-        //         $query = $db->query($sql) or die($db->error);
-        //         $singleRow = mysqli_fetch_assoc($query);
-        //         return $singleRow;
-        //     }
-        //     $query = $db->query($sql) or die($db->error);
-        //     return $query;
-        // }
+        public function ShowAllAttributeCategoryType($categoryType = null){
+            $db = $this->mysqli->con;
+            $sql ="SELECT id, attribute_generic_value_type_name from attribute_generic_value_types";
+            if($category != null){
+                $sql .= " WHERE attribute_generic_value_type_name = '$categoryType'";
+                $query = $db->query($sql) or die($db->error);
+                $singleRow = mysqli_fetch_assoc($query);
+                return $singleRow;
+            }else{
+                $sql .= " ORDER BY attribute_generic_value_type_name ASC";
+                $query = $db->query($sql) or die($db->error);
+                return $query;
+            }
+        }
 
         // public function ShowAllReceiveType($type = null){
         //     $db = $this->mysqli->con;

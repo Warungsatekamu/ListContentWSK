@@ -252,8 +252,8 @@
           </div>
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">  
             <div class="row itembox">
-              <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
-              <button id="add" class="btn btn-primary col-2" style="margin-left: 70px; margin-bottom: 20px;" type="button" >add attributes</button>
+              <div class="col-lg-8"><h2>Attributes</h2></div>
+              <button type="button" class="btn btn-primary col-2" style="height:5%" data-bs-toggle="modal" data-bs-target="#addAttribute">Attribute</button>
             </div>
                   
             <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -415,47 +415,124 @@
     </form>
 
     <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
-      <!-- modal edit remark -->
-      <div class="modal fade" id="editRemark" tabindex="-1" aria-labelledby="AddNewRemark" aria-hidden="true">
+      <!-- modal add attribute -->
+      <div class="modal fade" id="addAttribute" tabindex="-1" aria-labelledby="AddNewAttribute" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="AddNewRemark">Add New Remark</h5>
+              <h5 class="modal-title" id="AddNewAttribute">Add New Attribute</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
-                <label for="actionTime" class="form-label">Time</label>
-                <input type="datetime-local" name="actionTime" class="form-control" id="actionTime" required/>
-              </div>
-              <div class="mx-auto mb-3" style="width: 460px">
-                <label for="remarkType" class="form-label">Remark Type</label>
-                <select id="remarkType" name="remarkType" class="form-select">
+                <label for="attributeType" class="form-label">Attribute Type</label>
+                <select id="attributeType" name="attributeType" class="form-select">
                   <!-- get all status for list -->
                   <?php
-                    $showType = $remarks->ShowAllRemarkType();
-                    while($dataType = $showType->fetch_object()){
+                    $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
+                    while($dataAttributeType = $showAttributeType->fetch_object()){
                   ?>
-                    <option><?php echo $dataType->remark_type_name ?></option>
+                    <option><?php echo $dataAttributeType->attribute_type_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+                <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
+                  Add New Attribute Type
+                </a>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="attribuetCategory" class="form-label">Attribute Category</label>
+                <select id="attribuetCategory" name="attribuetCategory" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showAttributeCategory = $attributes->ShowAllAttributeCategory();
+                    while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
+                  ?>
+                    <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
                   <?php
                     }
                   ?>
                 </select>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
-                <label for="remark" class="form-label">Remark</label>
-                <textarea class="form-control" name="remark" id="remark" rows="3"></textarea>
+                <label for="remark" class="form-label">Attribute Value</label>
+                <textarea class="form-control" name="attributeValue" id="attributeValue" rows="3"></textarea>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <input type="submit" name="submitNewRemark" class="btn btn-primary" value="Add Remark"></input>
+              <input type="submit" name="submitNewAttribute" class="btn btn-primary" value="Add New Attribute"></input>
             </div>
           </div>
         </div>
       </div>
     </form>
 
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add attribute type-->
+      <div class="modal fade" id="addAttributeType" tabindex="-1" aria-labelledby="AddNewAttributeType" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewAttributeType">Add New Attribute Type</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3">
+                <label for="attributeTypeName" class="form-label">Attribute Type Name</label>
+                <input type="text" name="attributeTypeName" class="form-control" id="attributeTypeName" required/>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="attributeCategoryType" class="form-label">Attribute Category Type</label>
+                <select id="attributeCategoryType" name="attributeCategoryType" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showAttributeCategoryType = $attributes->ShowAllAttributeCategoryType();
+                    while($dataAttributeCategoryType = $showAttributeCategoryType->fetch_object()){
+                  ?>
+                    <option><?php echo $dataAttributeCategoryType->attribute_generic_value_type_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+                <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeGenericValueType">
+                  Add new attribute generic value type
+                </a>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewAttributeType" class="btn btn-primary" value="Add new attribute type"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add attribute -->
+      <div class="modal fade" id="addAttributeGenericValueType" tabindex="-1" aria-labelledby="AddNewAttributenericValueType" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewAttributenericValueType">Add New Attribute Generic Value Type</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3">
+                <label for="attributeCategoryTypeName" class="form-label">Attribute Category Type Name</label>
+                <input type="text" name="attributeCategoryTypeName" class="form-control" id="attributeCategoryTypeName" required/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewAttributeGenericValueType" class="btn btn-primary" value="Add new attribute generic value type"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
   </body>
   <?php
     if(@$_POST['submitNewRemark']){ //if button add new remark triggered
