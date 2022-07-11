@@ -23,9 +23,11 @@
 				$this->level = $row['level'];
 			}
 			if($cek){
-				echo "<script>alert('Login Success!');document.location = '../../FE/home/contribution_list.php?name=" . $this->name . "';</script>";
+				session_start();
+				$_SESSION['name'] = $this->name;
+				echo "<script>alert('Login Success!');document.location = '../view/home/contribution_list.php?';</script>";
 			}else{
-				echo "<script>alert('Wrong username / password');document.location = '../../FE/login/login.php';</script>";
+				echo "<script>alert('Wrong username / password');document.location = '../../login/login.php';</script>";
 			}
         }
     }
