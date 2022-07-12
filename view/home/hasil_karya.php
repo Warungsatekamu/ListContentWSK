@@ -16,6 +16,9 @@
   if(isset($_GET['deleteRemark'])){
     $idContributionRemark = $_GET['deleteRemark'];
     $remarks->DeleteContributionRemark($idContributionRemark);
+  } else if(isset($_GET['deleteAttribute'])){
+    $idContributionAttribute = $_GET['deleteAttribute'];
+    $attributes->DeleteAttribute($idContributionAttribute);
   }
 ?>
 
@@ -293,22 +296,86 @@
                       </th>  
                     </tr>
                   </thead>
+                  <tbody>
                   <?php
                     $noOfContributionRemark=0;
                     $showContributionAttributeList = $attributes->ShowAllAttribute(null,$id,null);
                     while($dataContributionAttributeList = $showContributionAttributeList->fetch_object()){
                   ?>
-                    <tbody>
                       <tr>
                         <td><?php echo $dataContributionAttributeList->attribute_type_name ?></td>
                         <td><?php echo $dataContributionAttributeList->attribute_generic_value_name ?></td>
                         <td><?php echo $dataContributionAttributeList->attribute_value ?></td>
-                        <td><a href="" type="button" class="btn btn-light">Edit</a>
-                        <a href="" type="button" class="btn btn-danger">Delete</a>
+                        <td>
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editAttribute<?php echo $dataContributionAttributeList->id ?>">edit</button>
+
+                        <form method="post" >
+                          <!-- modal edit remark -->
+                          <div class="modal fade" id="editAttribute<?php echo $dataContributionAttributeList->id ?>" tabindex="-1" aria-labelledby="editAttributeLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="AddNewAttribute">Add New Attribute</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <input type="hidden" name="idAttribute" class="form-control" id="idAttribute" value="<?php echo $dataContributionAttributeList->id ?>"/>
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="attributeTypeEdit" class="form-label">Attribute Type</label>
+                                    <select id="attributeTypeEdit" name="attributeTypeEdit" class="form-select">
+                                      <!-- get all status for list -->
+                                      <?php
+                                        $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
+                                        while($dataAttributeType = $showAttributeType->fetch_object()){
+                                          if($dataAttributeType->attribute_type_name == $dataContributionAttributeList->attribute_type_name){
+                                      ?>
+                                        <option selected><?php echo $dataAttributeType->attribute_type_name ?></option>
+                                      <?php } else {?>
+                                        <option><?php echo $dataAttributeType->attribute_type_name ?></option>
+                                      <?php
+                                        }}
+                                      ?>
+                                    </select>
+                                    <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
+                                      Add New Attribute Type
+                                    </a>
+                                  </div>
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="attributeCategoryEdit" class="form-label">Attribute Category</label>
+                                    <select id="attributeCategoryEdit" name="attributeCategoryEdit" class="form-select">
+                                      <!-- get all status for list -->
+                                      <?php
+                                        $showAttributeCategory = $attributes->ShowAllAttributeCategory();
+                                        while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
+                                          if($dataAttributeCategory->attribute_generic_value_name == $dataContributionAttributeList->attribute_generic_value_name){
+                                      ?>
+                                        <option selected><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
+                                      <?php } else {?>
+                                        <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
+                                      <?php
+                                        }}
+                                      ?>
+                                    </select>
+                                  </div>
+                                  <div class="mx-auto mb-3" style="width: 460px">
+                                    <label for="remark" class="form-label">Attribute Value</label>
+                                    <textarea class="form-control" name="attributeValueEdit" id="attributeValueEdit" rows="3"><?php echo $dataContributionAttributeList->attribute_value ?></textarea>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <input type="submit" name="submitEditAttribute" class="btn btn-primary" value="Edit Attribute"></input>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+
+                        <a href="hasil_karya.php?id=<?php echo $id ?>&deleteAttribute=<?php echo $dataContributionAttributeList->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus attribute ini?')">Delete</a>
                         </td>    
                       </tr>
-                    </tbody>
-                  <?php } ?>
+                      <?php } ?>
+                  </tbody>
                   <!-- <tfoot>
                     <tr>
                       <th>Name
@@ -442,8 +509,8 @@
                 </a>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
-                <label for="attribuetCategory" class="form-label">Attribute Category</label>
-                <select id="attribuetCategory" name="attribuetCategory" class="form-select">
+                <label for="attributeCategory" class="form-label">Attribute Category</label>
+                <select id="attributeCategory" name="attributeCategory" class="form-select">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeCategory = $attributes->ShowAllAttributeCategory();
@@ -551,6 +618,38 @@
       $remarkType = $remarkTypeid['id'];
       $remark = $connection->con->real_escape_string($_POST['remark']);
       $remarks->UpdateContributionRemark($idUpdateRemark, $actionTime, $remarkType, $remark); //insert to db remark_types
+      echo '<meta content="0" http-equiv="refresh">'; //refresh page
+    } else if(@$_POST['submitNewAttribute']){
+      $attributeType = $connection->con->real_escape_string($_POST['attributeType']);
+      $attributeTypeid = $attributes->ShowAllAttributeType(null, $attributeType);
+      $attributeType = $attributeTypeid['id'];
+      $attributeCategory = $connection->con->real_escape_string($_POST['attributeCategory']);
+      $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
+      $attributeCategory = $attributeCategoryid['id'];
+      $attributeValue = $connection->con->real_escape_string($_POST['attributeValue']);
+      $attributes->InsertNewAttribute("contribution", $id, $attributeType, $attributeCategory, $attributeValue);
+      echo '<meta content="0" http-equiv="refresh">'; //refresh page
+    } else if(@$_POST['submitNewAttributeType']){
+      $attributeTypeName = $connection->con->real_escape_string($_POST['attributeTypeName']);
+      $attributeCategoryType = $connection->con->real_escape_string($_POST['attributeCategoryType']);
+      $attributeCategoryTypeid = $attributes->ShowAllAttributeCategoryType($attributeCategoryType);
+      $attributeCategoryType = $attributeCategoryTypeid['id'];
+      $attributes->InsertNewAttributeType($attributeTypeName, "contribution", $attributeCategoryType);
+      echo '<meta content="0" http-equiv="refresh">'; //refresh page
+    } else if(@$_POST['submitNewAttributeGenericValueType']){
+      $attributeCategoryTypeName = $connection->con->real_escape_string($_POST['attributeCategoryTypeName']);
+      $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName);
+      echo '<meta content="0" http-equiv="refresh">'; //refresh page
+    } else if(@$_POST['submitEditAttribute']){
+      $idUpdateAttribute = $connection->con->real_escape_string($_POST['idAttribute']);
+      $attributeType = $connection->con->real_escape_string($_POST['attributeTypeEdit']);
+      $attributeTypeid = $attributes->ShowAllAttributeType(null, $attributeType);
+      $attributeType = $attributeTypeid['id'];
+      $attributeCategory = $connection->con->real_escape_string($_POST['attributeCategoryEdit']);
+      $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
+      $attributeCategory = $attributeCategoryid['id'];
+      $attributeValue = $connection->con->real_escape_string($_POST['attributeValueEdit']);
+      $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue);
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     }
 

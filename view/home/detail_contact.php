@@ -12,6 +12,11 @@
   $contacts = new Contact($connection);
   $contributions = new Contribution($connection);
   $attributes = new Atribute($connection);
+
+  if(isset($_GET['deleteAttribute'])){
+    $idContactAttribute = $_GET['deleteAttribute'];
+    $attributes->DeleteAttribute($idContactAttribute);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +109,7 @@
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab"><section class="section">
               <div class="row itembox">
                 <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
-                <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">add attributes</button>
+                <button type="button" class="btn btn-primary col-2" style="height:5%" data-bs-toggle="modal" data-bs-target="#addAttributeContact">add attributes</button>
               </div>
               
               <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -154,8 +159,73 @@
                             <td><?php echo $dataContactAttributeList->attribute_type_name ?></td>
                             <td><?php echo $dataContactAttributeList->attribute_generic_value_name ?></td>
                             <td><?php echo $dataContactAttributeList->attribute_value ?></td>
-                            <td><a href="" type="button" class="btn btn-light">Edit</a>
-                            <a href="" type="button" class="btn btn-danger">Delete</a>
+                            <td>
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editAttribute<?php echo $dataContactAttributeList->id ?>">edit</button>
+
+                            <form method="post" >
+                              <!-- modal edit remark -->
+                              <div class="modal fade" id="editAttribute<?php echo $dataContactAttributeList->id ?>" tabindex="-1" aria-labelledby="editAttributeLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="AddNewAttribute">Add New Attribute</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <input type="hidden" name="idAttribute" class="form-control" id="idAttribute" value="<?php echo $dataContactAttributeList->id ?>"/>
+                                      <div class="mx-auto mb-3" style="width: 460px">
+                                        <label for="attributeTypeEdit" class="form-label">Attribute Type</label>
+                                        <select id="attributeTypeEdit" name="attributeTypeEdit" class="form-select">
+                                          <!-- get all status for list -->
+                                          <?php
+                                            $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
+                                            while($dataAttributeType = $showAttributeType->fetch_object()){
+                                              if($dataAttributeType->attribute_type_name == $dataContactAttributeList->attribute_type_name){
+                                          ?>
+                                            <option selected><?php echo $dataAttributeType->attribute_type_name ?></option>
+                                          <?php } else {?>
+                                            <option><?php echo $dataAttributeType->attribute_type_name ?></option>
+                                          <?php
+                                            }}
+                                          ?>
+                                        </select>
+                                        <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
+                                          Add New Attribute Type
+                                        </a>
+                                      </div>
+                                      <div class="mx-auto mb-3" style="width: 460px">
+                                        <label for="attributeCategoryEdit" class="form-label">Attribute Category</label>
+                                        <select id="attributeCategoryEdit" name="attributeCategoryEdit" class="form-select">
+                                          <!-- get all status for list -->
+                                          <?php
+                                            $showAttributeCategory = $attributes->ShowAllAttributeCategory();
+                                            while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
+                                              if($dataAttributeCategory->attribute_generic_value_name == $dataContactAttributeList->attribute_generic_value_name){
+                                          ?>
+                                            <option selected><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
+                                          <?php } else {?>
+                                            <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
+                                          <?php
+                                            }}
+                                          ?>
+                                        </select>
+                                      </div>
+                                      <div class="mx-auto mb-3" style="width: 460px">
+                                        <label for="remark" class="form-label">Attribute Value</label>
+                                        <textarea class="form-control" name="attributeValueEdit" id="attributeValueEdit" rows="3"><?php echo $dataContactAttributeList->attribute_value ?></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <input type="submit" name="submitEditAttribute" class="btn btn-primary" value="Edit Attribute"></input>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+
+                            <a href="detail_contact.php?id=<?php echo $id ?>&deleteAttribute=<?php echo $dataContactAttributeList->id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus attribute ini?')">Delete</a>
+
                             </td>    
                           </tr>
                       <?php $noOfContributionAttribute++; } ?>
@@ -288,4 +358,161 @@
       </div>
     </section>
   </body>
+
+  <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add attribute -->
+      <div class="modal fade" id="addAttributeContact" tabindex="-1" aria-labelledby="AddNewAttribute" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewAttribute">Add New Attribute</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="attributeType" class="form-label">Attribute Type</label>
+                <select id="attributeType" name="attributeType" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showAttributeType = $attributes->ShowAllAttributeType("contact", null);
+                    while($dataAttributeType = $showAttributeType->fetch_object()){
+                  ?>
+                    <option><?php echo $dataAttributeType->attribute_type_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+                <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
+                  Add New Attribute Type
+                </a>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="attributeCategory" class="form-label">Attribute Category</label>
+                <select id="attributeCategory" name="attributeCategory" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showAttributeCategory = $attributes->ShowAllAttributeCategory();
+                    while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
+                  ?>
+                    <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="remark" class="form-label">Attribute Value</label>
+                <textarea class="form-control" name="attributeValue" id="attributeValue" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewAttribute" class="btn btn-primary" value="Add New Attribute"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add attribute type-->
+      <div class="modal fade" id="addAttributeType" tabindex="-1" aria-labelledby="AddNewAttributeType" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewAttributeType">Add New Attribute Type</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3">
+                <label for="attributeTypeName" class="form-label">Attribute Type Name</label>
+                <input type="text" name="attributeTypeName" class="form-control" id="attributeTypeName" required/>
+              </div>
+              <div class="mx-auto mb-3" style="width: 460px">
+                <label for="attributeCategoryType" class="form-label">Attribute Category Type</label>
+                <select id="attributeCategoryType" name="attributeCategoryType" class="form-select">
+                  <!-- get all status for list -->
+                  <?php
+                    $showAttributeCategoryType = $attributes->ShowAllAttributeCategoryType();
+                    while($dataAttributeCategoryType = $showAttributeCategoryType->fetch_object()){
+                  ?>
+                    <option><?php echo $dataAttributeCategoryType->attribute_generic_value_type_name ?></option>
+                  <?php
+                    }
+                  ?>
+                </select>
+                <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeGenericValueType">
+                  Add new attribute generic value type
+                </a>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewAttributeType" class="btn btn-primary" value="Add new attribute type"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form method="post" class="mx-auto mb-3" style="width: 800px" enctype="multipart/form-data">
+      <!-- modal add attribute -->
+      <div class="modal fade" id="addAttributeGenericValueType" tabindex="-1" aria-labelledby="AddNewAttributenericValueType" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="AddNewAttributenericValueType">Add New Attribute Generic Value Type</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mx-auto mb-3">
+                <label for="attributeCategoryTypeName" class="form-label">Attribute Category Type Name</label>
+                <input type="text" name="attributeCategoryTypeName" class="form-control" id="attributeCategoryTypeName" required/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" name="submitNewAttributeGenericValueType" class="btn btn-primary" value="Add new attribute generic value type"></input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 </html>
+
+<?php 
+  if(@$_POST['submitNewAttribute']){
+    $attributeType = $connection->con->real_escape_string($_POST['attributeType']);
+    $attributeTypeid = $attributes->ShowAllAttributeType(null, $attributeType);
+    $attributeType = $attributeTypeid['id'];
+    $attributeCategory = $connection->con->real_escape_string($_POST['attributeCategory']);
+    $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
+    $attributeCategory = $attributeCategoryid['id'];
+    $attributeValue = $connection->con->real_escape_string($_POST['attributeValue']);
+    $attributes->InsertNewAttribute("contact", $id, $attributeType, $attributeCategory, $attributeValue);
+    echo '<meta content="0" http-equiv="refresh">'; //refresh page
+  } else if(@$_POST['submitNewAttributeType']){
+    $attributeTypeName = $connection->con->real_escape_string($_POST['attributeTypeName']);
+    $attributeCategoryType = $connection->con->real_escape_string($_POST['attributeCategoryType']);
+    $attributeCategoryTypeid = $attributes->ShowAllAttributeCategoryType($attributeCategoryType);
+    $attributeCategoryType = $attributeCategoryTypeid['id'];
+    $attributes->InsertNewAttributeType($attributeTypeName, "contact", $attributeCategoryType);
+    echo '<meta content="0" http-equiv="refresh">'; //refresh page
+  } else if(@$_POST['submitNewAttributeGenericValueType']){
+    $attributeCategoryTypeName = $connection->con->real_escape_string($_POST['attributeCategoryTypeName']);
+    $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName);
+    echo '<meta content="0" http-equiv="refresh">'; //refresh page
+  } else if(@$_POST['submitEditAttribute']){
+    $idUpdateAttribute = $connection->con->real_escape_string($_POST['idAttribute']);
+    $attributeType = $connection->con->real_escape_string($_POST['attributeTypeEdit']);
+    $attributeTypeid = $attributes->ShowAllAttributeType(null, $attributeType);
+    $attributeType = $attributeTypeid['id'];
+    $attributeCategory = $connection->con->real_escape_string($_POST['attributeCategoryEdit']);
+    $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
+    $attributeCategory = $attributeCategoryid['id'];
+    $attributeValue = $connection->con->real_escape_string($_POST['attributeValueEdit']);
+    $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue);
+    echo '<meta content="0" http-equiv="refresh">'; //refresh page
+  }
+
+?>
