@@ -63,8 +63,8 @@
                     <td>nama</td>
                     <td>level</td>
                     <td align="center">
-                        <a type="button" class="btn btn-primary" href="edit_admin.php?id=<?php echo $data->id?>"><i class='far fa-edit'></i>edit</a>
-                        <a href="superAdmin.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
+                        <a type="button" class="btn btn-primary" href="edit_admin.php"><i class='far fa-edit'></i>edit</a>
+                        <a href="list-users.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
                     </td>
                     </tr>
                 </tbody>
