@@ -103,17 +103,18 @@
                         </div>
                         <div class="mx-auto mb-3" style="width: 460px">
                             <label for="linkedStatus" class="form-label">Status For This Remark</label>
-                            <select id="linkedStatus" class="form-select" name="linkedStatus">
-                            <!-- get all status for list -->
-                            <?php
-                                $showStatusList = $contribution->ShowAllContributionStatus();
-                                while($dataStatus = $showStatusList->fetch_object()){
-                            ?>
-                                    <option><?php echo $dataStatus->contribution_status_name ?></option>
-                            <?php
-                                }
-                            ?>
-                            </select>
+                            <input class="form-control" list="linkedStatusOption" id="linkedStatus" name="linkedStatus">
+                            <datalist id="linkedStatusOption">
+                                <!-- get all status for list -->
+                                <?php
+                                    $showStatusList = $contribution->ShowAllContributionStatus();
+                                    while($dataStatus = $showStatusList->fetch_object()){
+                                ?>
+                                        <option><?php echo $dataStatus->contribution_status_name ?></option>
+                                <?php
+                                    }
+                                ?>
+                            </datalist>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

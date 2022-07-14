@@ -104,14 +104,19 @@
                       <th class="th-sm">Content</th>
                       <th class="th-sm"><?php echo $data->content?></th>
                     </tr>
-                    <tr>
-                      <th class="th-sm">Content Link</th>
-                      <th class="th-sm"><a href = "<?php echo $data->content_link?>" target = "_blank">Link</a></th>
-                    </tr>
-                    <tr>
+                    <?php if ($data->content_link != ""){?>
+                      <tr>
+                        <th class="th-sm">Content Link</th>
+                        <th class="th-sm"><a href = "<?php echo $data->content_link?>" target = "_blank">Link</a></th>
+                      </tr>
+                    <?php } ?>
+
+                    <!-- untuk bahasa contribution jika diperlukan karena perjanjian diawal semua bahasa menggunakan bahasa indonesia -->
+                    <!-- <tr>
                       <th class="th-sm">Language</th>
                       <th class="th-sm"><?php echo $data->language?></th>
-                    </tr>
+                    </tr> -->
+
                     <tr>
                       <th class="th-sm">Received Date</th>
                       <th class="th-sm"><?php echo $data->received_date?></th>
@@ -197,22 +202,18 @@
                                   </div>
                                   <div class="mx-auto mb-3" style="width: 460px">
                                     <label for="remarkType" class="form-label">Remark Type</label>
-                                    <select id="remarkType" name="remarkType" class="form-select">
+                                    <input class="form-control" value="<?php echo $dataContributionRemarkList->remark_type_name ?>" list="remarkTypeOption" id="remarkType" name="remarkType">
+                                    <datalist id="remarkTypeOption">
                                       <!-- get all status for list -->
                                       <?php
                                         $showType = $remarks->ShowAllRemarkType();
                                         while($dataType = $showType->fetch_object()){
-                                          if($dataType->remark_type_name == $dataContributionRemarkList->remark_type_name){
-                                      ?>
-                                        <option selected><?php echo $dataType->remark_type_name ?></option>
-                                      <?php 
-                                          } else {
                                       ?>
                                         <option><?php echo $dataType->remark_type_name ?></option>
                                       <?php
-                                          }}
+                                        }
                                       ?>
-                                    </select>
+                                    </datalist>
                                   </div>
                                   <div class="mx-auto mb-3" style="width: 460px">
                                     <label for="remark" class="form-label">Remark</label>
@@ -310,7 +311,7 @@
                         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#editAttribute<?php echo $dataContributionAttributeList->id ?>">edit</button>
 
                         <form method="post" >
-                          <!-- modal edit remark -->
+                          <!-- modal edit attribute -->
                           <div class="modal fade" id="editAttribute<?php echo $dataContributionAttributeList->id ?>" tabindex="-1" aria-labelledby="editAttributeLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
@@ -322,40 +323,36 @@
                                   <input type="hidden" name="idAttribute" class="form-control" id="idAttribute" value="<?php echo $dataContributionAttributeList->id ?>"/>
                                   <div class="mx-auto mb-3" style="width: 460px">
                                     <label for="attributeTypeEdit" class="form-label">Attribute Type</label>
-                                    <select id="attributeTypeEdit" name="attributeTypeEdit" class="form-select">
+                                    <input class="form-control" value="<?php echo $dataContributionAttributeList->attribute_type_name ?>" list="attributeTypeEditOption" id="attributeTypeEdit" name="attributeTypeEdit">
+                                    <datalist id="attributeTypeEditOption">
                                       <!-- get all status for list -->
                                       <?php
                                         $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
                                         while($dataAttributeType = $showAttributeType->fetch_object()){
-                                          if($dataAttributeType->attribute_type_name == $dataContributionAttributeList->attribute_type_name){
                                       ?>
-                                        <option selected><?php echo $dataAttributeType->attribute_type_name ?></option>
-                                      <?php } else {?>
                                         <option><?php echo $dataAttributeType->attribute_type_name ?></option>
                                       <?php
-                                        }}
+                                        }
                                       ?>
-                                    </select>
+                                    </datalist>
                                     <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
                                       Add New Attribute Type
                                     </a>
                                   </div>
                                   <div class="mx-auto mb-3" style="width: 460px">
                                     <label for="attributeCategoryEdit" class="form-label">Attribute Category</label>
-                                    <select id="attributeCategoryEdit" name="attributeCategoryEdit" class="form-select">
+                                    <input class="form-control" value="<?php echo $dataContributionAttributeList->attribute_generic_value_name ?>" list="attributeCategoryEditOption" id="attributeCategoryEdit" name="attributeCategoryEdit">
+                                    <datalist id="attributeCategoryEditOption">
                                       <!-- get all status for list -->
                                       <?php
                                         $showAttributeCategory = $attributes->ShowAllAttributeCategory();
                                         while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
-                                          if($dataAttributeCategory->attribute_generic_value_name == $dataContributionAttributeList->attribute_generic_value_name){
                                       ?>
-                                        <option selected><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
-                                      <?php } else {?>
                                         <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
                                       <?php
-                                        }}
+                                        }
                                       ?>
-                                    </select>
+                                    </datalist>
                                   </div>
                                   <div class="mx-auto mb-3" style="width: 460px">
                                     <label for="remark" class="form-label">Attribute Value</label>
@@ -455,7 +452,8 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remarkType" class="form-label">Remark Type</label>
-                <select id="remarkType" name="remarkType" class="form-select">
+                <input class="form-control" list="remarkTypeOption" id="remarkType" name="remarkType">
+                <datalist id="remarkTypeOption">
                   <!-- get all status for list -->
                   <?php
                     $showType = $remarks->ShowAllRemarkType();
@@ -465,7 +463,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remark" class="form-label">Remark</label>
@@ -493,7 +491,8 @@
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeType" class="form-label">Attribute Type</label>
-                <select id="attributeType" name="attributeType" class="form-select">
+                <input class="form-control" list="attributeTypeOption" id="attributeType" name="attributeType">
+                <datalist id="attributeTypeOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
@@ -503,14 +502,15 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
                 <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
                   Add New Attribute Type
                 </a>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeCategory" class="form-label">Attribute Category</label>
-                <select id="attributeCategory" name="attributeCategory" class="form-select">
+                <input class="form-control" list="attributeCategoryOption" id="attributeCategory" name="attributeCategory">
+                <datalist id="attributeCategoryOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeCategory = $attributes->ShowAllAttributeCategory();
@@ -520,7 +520,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remark" class="form-label">Attribute Value</label>
@@ -552,7 +552,8 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeCategoryType" class="form-label">Attribute Category Type</label>
-                <select id="attributeCategoryType" name="attributeCategoryType" class="form-select">
+                <input class="form-control" list="attributeCategoryTypeOption" id="attributeCategoryType" name="attributeCategoryType">
+                <datalist id="attributeCategoryTypeOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeCategoryType = $attributes->ShowAllAttributeCategoryType();
@@ -562,7 +563,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
                 <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeGenericValueType">
                   Add new attribute generic value type
                 </a>

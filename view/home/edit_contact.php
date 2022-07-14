@@ -30,24 +30,24 @@
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="gender" class="form-label">Gender</label>
-        <?php
-          $genderPicked = $dataSelected->gender;
-        ?>
-        <select id="gender" class="form-select" name="gender" value=$value>
-        <?php
-          if($genderPicked == "M"){
-        ?>  
-          <option selected>Male</option>
-          <option>Female</option>
-        <?php
-          } else {
-        ?>  
+        
+          <input class="form-control"  
+            <?php
+              if($dataSelected->gender == "M"){
+            ?> 
+              value ="Male" 
+            <?php
+              } else {
+            ?>  
+              value ="Female" 
+            <?php 
+              }
+            ?>
+          list="genderOption" id="gender" name="gender">
+        <datalist id="genderOption">
           <option>Male</option>
-          <option selected>Female</option>
-        <?php 
-          }
-        ?>
-        </select>
+          <option>Female</option>
+        </datalist>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="email" class="form-label">Email address</label>
@@ -63,34 +63,28 @@
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="phone" class="form-label">Phone</label>
-        <input type="number" name="phone" class="form-control" id="phone" value="<?php echo $dataSelected->phone?>"/>
+        <input type="tel" name="phone" class="form-control" id="phone" value="<?php echo $dataSelected->phone?>"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="address" class="form-label">Address</label>
         <input type="text" name="address" class="form-control" id="address" value="<?php echo $dataSelected->address?>"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">City</label>
-          <select id="disabledSelect" name="city" class="form-select">
-            <?php
-              $citySelected = $dataSelected->city_name;
+        <label for="city" class="form-label">City</label>
+        <input class="form-control"  value ="<?php echo $dataSelected->city_name ?>" list="cityOption" id="city" name="city">
+        <datalist id="cityOption">
+          <?php
               $show = $citydb->ShowAllCityName();
               while($data = $show->fetch_object()){
-                if($data->city_name == $citySelected){
             ?>
-                  <option selected><?php echo $data->city_name ?></option>
+                <option><?php echo $data->city_name ?></option>
             <?php
-                } else {
-            ?>
-                  <option><?php echo $data->city_name ?></option>
-            <?php
-                }
               }
             ?>
-          </select>
-          <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Add New City
-          </a> 
+        </datalist>
+        <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add New City
+        </a> 
           
         </div>
       </div>
