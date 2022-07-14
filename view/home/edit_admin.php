@@ -29,8 +29,9 @@
         </div>
         <!-- pass and conf -->
         <div class="mx-auto mb-3" style="width: 800px">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">Update Password</label>
             <input type="password" name="password" class="form-control" id="password" required/>
+            <i class="bi bi-eye-slash" id="password"></i>
         </div>
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -63,5 +64,5 @@
         <input type="submit" name="submitNewAdmin" class="btn btn-primary">
 
     </body>
-
+    
     </html>

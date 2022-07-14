@@ -3,7 +3,7 @@
   require_once('../../configuration/db_connection.php');
   require_once('../../model/database.php');
   include('../../model/contact.php');
-  include('../../model/city.php');
+  include('../../model/user.php');
 
 
   
@@ -30,23 +30,25 @@
         <!-- pass and conf -->
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="password" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control" id="password" required/>
+            <input type="text" name="password" class="form-control" id="password" value = "<?php echo randomPassword(); ?>" required/>
         </div>
-        <div class="mx-auto mb-3" style="width: 800px">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" required/>
-        </div>
+        <?php
+            function randomPassword() {
+                $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+                $pass = array(); //remember to declare $pass as an array
+                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+                for ($i = 0; $i < 12; $i++) {
+                    $n = rand(0, $alphaLength);
+                    $pass[] = $alphabet[$n];
+                }
+                return implode($pass); //turn the array into a string
+            }
+        ?>
         <!-- level (dropdown)-->
-        <div class="mx-auto mb-3" style="width: 800px">
-            <label for="gender" class="form-label">Level</label>
-            <select id="gender" class="form-select" name="gender">
-            <option>Super Admin</option>
-            <option>Admin</option>
-            </select>
-        </div>
+        
 
         <input type="submit" name="submitNewAdmin" class="btn btn-primary">
 
     </body>
 
-    </html>
+</html>
