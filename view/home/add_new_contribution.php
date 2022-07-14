@@ -10,6 +10,12 @@
   $contacts = new Contact($connection);
   $contribution = new Contribution($connection);
   $citydb = new City($connection);
+  $contributorName = null;
+  if(isset($_GET['contributor'])){
+    $idContributor = $_GET['contributor'];
+    $contributor = $contacts->ShowContact($idContributor,null)->fetch_object();
+    $contributorName = $contributor->full_name;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +29,14 @@
 
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="contributor" class="form-label">Contributor</label>
-        <select id="contributor" name="contributor" class="form-select" required>
+
+        <input class="form-control" 
+          <?php if($contributor != null){?>
+            value="<?php echo $contributorName?>"
+          <?php } ?>
+        list="contributorOption" id="contributor" name="contributor" required>
+        
+        <datalist id="contributorOption">
           <?php
             $showContactList = $contacts->ShowContact();
             while($dataContactList = $showContactList->fetch_object()){
@@ -32,27 +45,28 @@
           <?php
             }
           ?>
-        </select>
+        </datalist>
         
         <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Add New Contributor
         </a>
-        
-        <br><br>
+        <br>
+      </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="title" class="form-label">Title</label>
         <input type="text" class="form-control" name="title" id="title" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="type" class="form-label">Type</label>
-        <select id="type" name="type" class="form-select" required>
+        <input class="form-control" list="typeOption" id="type" name="type">
+        <datalist id="typeOption">
           <?php
             $showContributionTypeLists = $contribution->ShowAllContributionType();
             while($dataContributionTypeLists = $showContributionTypeLists->fetch_object()){
           ?>
           <option><?php echo $dataContributionTypeLists->contribution_type_name ?></option>
           <?php } ?>
-        </select>
+        </datalist>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="message" class="form-label">Message</label>
@@ -63,49 +77,52 @@
         <textarea class="form-control" name="content" id="content" rows="3" required></textarea>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="contentLink" class="form-label">Content Link URL</label>
-        <input type="text" class="form-control" name="contentLink" id="contentLink" />
-      </div>
-      <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedDate" class="form-label">Received Date</label>
         <input type="datetime-local" name="receivedDate" class="form-control" id="receivedDate" required/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="receivedType" class="form-label">Received Type</label>
-        <select id="receivedType" name="receivedType" class="form-select" required>
+        <input class="form-control" list="receivedTypeOption" id="receivedType" name="receivedType">
+        <datalist id="receivedTypeOption">
           <?php
             $showReceivedType = $contribution->ShowAllReceiveType();
             while($dataReceivedType = $showReceivedType->fetch_object()){
-          ?>
+              ?>
           <option><?php echo $dataReceivedType->channel_name ?></option>
           <?php } ?>
-        </select>
+        </datalist>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="sourceType" class="form-label">Contribution Source Type</label>
-        <select id="sourceType" name="sourceType" class="form-select">
+        <input class="form-control" list="sourceTypeOption" id="sourceType" name="sourceType">
+        <datalist id="sourceTypeOption">
           <?php
             $showSourceType = $contribution->ShowAllContributionSourceType();
             while($dataSourceType = $showSourceType->fetch_object()){
-          ?>
+              ?>
           <option><?php echo $dataSourceType->contribution_source_type_name ?></option>
           <?php } ?>
-        </select>
+        </datalist>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="contributionStatus" class="form-label">Contribution Status</label>
-        <select id="contributionStatus" name="contributionStatus" class="form-select">
+        <input class="form-control" list="statusOption" id="contributionStatus" name="contributionStatus">
+        <datalist id="statusOption">
           <?php
             $showContributionStatus = $contribution->ShowAllContributionStatus();
             while($dataContributionStatus = $showContributionStatus->fetch_object()){
           ?>
-          <option><?php echo $dataContributionStatus->contribution_status_name ?></option>
+            <option><?php echo $dataContributionStatus->contribution_status_name ?></option>
           <?php } ?>
-        </select>
+        </datalist>
+      </div>
+      <div class="mx-auto mb-3" style="width: 800px">
+        <label for="contentLink" class="form-label">Content Link URL</label>
+        <input type="text" class="form-control" name="contentLink" id="contentLink" />
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="editLink" class="form-label">Edit Link URL</label>
-        <input type="text" class="form-control" name="editLink" id="editLink" required/>
+        <input type="text" class="form-control" name="editLink" id="editLink"/>
       </div>
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="publishedLink" class="form-label">Published Link URL</label>
@@ -133,11 +150,12 @@
                   <input type="text" name="nickname" class="form-control" id="nickname" />
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
-                  <label for="gender" class="form-label">Gender</label>
-                  <select id="gender" class="form-select" name="gender">
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
+                <label for="gender" class="form-label">Gender</label>
+                <input class="form-control" list="genderOption" id="gender" name="gender">
+                <datalist id="genderOption">
+                  <option>Male</option>
+                  <option>Female</option>
+                </datalist>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="email" class="form-label">Email address</label>
@@ -149,7 +167,8 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="city" class="form-label">City</label>
-                <select id="city" class="form-select" name="city">
+                <input class="form-control" list="cityOption" id="city" name="city">
+                <datalist id="cityOption">
                   <!-- get all city name for list -->
                   <?php
                     $show = $citydb->ShowAllCityName();
@@ -159,7 +178,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
                 <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addNewCity">
                   Add New City
                 </a> 

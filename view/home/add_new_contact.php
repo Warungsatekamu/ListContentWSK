@@ -33,10 +33,11 @@
       <!-- gender (dropdown)-->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="gender" class="form-label">Gender</label>
-        <select id="gender" class="form-select" name="gender">
+        <input class="form-control" list="genderOption" id="gender" name="gender">
+        <datalist id="genderOption">
           <option>Male</option>
           <option>Female</option>
-        </select>
+        </datalist>
       </div>
       <!-- email -->
       <div class="mx-auto mb-3" style="width: 800px">
@@ -56,7 +57,7 @@
       <!-- phone -->
       <div class="mx-auto mb-3" style="width: 800px">
         <label for="phone" class="form-label">Phone</label>
-        <input type="number" name="phone" class="form-control" id="phone"/>
+        <input type="tel" name="phone" class="form-control" id="phone"/>
       </div>
       <!-- address -->
       <div class="mx-auto mb-3" style="width: 800px">
@@ -65,25 +66,23 @@
       </div>
       <!-- city (data from database) -->
       <div class="mx-auto mb-3" style="width: 800px">
-        <label for="disabledSelect" class="form-label">City</label>
-          <select id="disabledSelect" name="city" class="form-select">
-            <!-- get all city name for list -->
-              <option></option>
-            <?php
-              $show = $citydb->ShowAllCityName();
-              while($data = $show->fetch_object()){
-            ?>
-                <option><?php echo $data->city_name ?></option>
-            <?php
-              }
-            ?>
-          </select>
-          <!-- button for add new city modal -->
-          <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Add New City
-          </a> 
-          
-        </div>
+        <label for="city" class="form-label">City</label>
+        <input class="form-control" list="cityOption" id="city" name="city">
+        <datalist id="cityOption">
+          <!-- get all city name for list -->
+          <?php
+            $show = $citydb->ShowAllCityName();
+            while($data = $show->fetch_object()){
+          ?>
+            <option><?php echo $data->city_name ?></option>
+          <?php
+            }
+          ?>
+        </datalist>
+        <!-- button for add new city modal -->
+        <a type="button" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Add New City
+        </a>
       </div>
       
       <input type="submit" name="submitNewContact" class="btn btn-primary">

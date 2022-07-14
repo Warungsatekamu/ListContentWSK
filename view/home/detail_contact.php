@@ -175,40 +175,36 @@
                                       <input type="hidden" name="idAttribute" class="form-control" id="idAttribute" value="<?php echo $dataContactAttributeList->id ?>"/>
                                       <div class="mx-auto mb-3" style="width: 460px">
                                         <label for="attributeTypeEdit" class="form-label">Attribute Type</label>
-                                        <select id="attributeTypeEdit" name="attributeTypeEdit" class="form-select">
+                                        <input class="form-control" value="<?php echo $dataContactAttributeList->attribute_type_name ?>" list="attributeTypeEditOption" id="attributeTypeEdit" name="attributeTypeEdit">
+                                        <datalist id="attributeTypeEditOption">
                                           <!-- get all status for list -->
                                           <?php
                                             $showAttributeType = $attributes->ShowAllAttributeType("contribution", null);
                                             while($dataAttributeType = $showAttributeType->fetch_object()){
-                                              if($dataAttributeType->attribute_type_name == $dataContactAttributeList->attribute_type_name){
                                           ?>
-                                            <option selected><?php echo $dataAttributeType->attribute_type_name ?></option>
-                                          <?php } else {?>
                                             <option><?php echo $dataAttributeType->attribute_type_name ?></option>
                                           <?php
-                                            }}
+                                            }
                                           ?>
-                                        </select>
+                                        </datalist>
                                         <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
                                           Add New Attribute Type
                                         </a>
                                       </div>
                                       <div class="mx-auto mb-3" style="width: 460px">
                                         <label for="attributeCategoryEdit" class="form-label">Attribute Category</label>
-                                        <select id="attributeCategoryEdit" name="attributeCategoryEdit" class="form-select">
+                                        <input class="form-control"  value ="<?php echo $dataContactAttributeList->attribute_generic_value_name ?>" list="attributeCategoryEditOption" id="attributeCategoryEdit" name="attributeCategoryEdit">
+                                        <datalist id="attributeCategoryEditOption">
                                           <!-- get all status for list -->
                                           <?php
                                             $showAttributeCategory = $attributes->ShowAllAttributeCategory();
                                             while($dataAttributeCategory = $showAttributeCategory->fetch_object()){
-                                              if($dataAttributeCategory->attribute_generic_value_name == $dataContactAttributeList->attribute_generic_value_name){
                                           ?>
-                                            <option selected><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
-                                          <?php } else {?>
                                             <option><?php echo $dataAttributeCategory->attribute_generic_value_name ?></option>
                                           <?php
-                                            }}
+                                            }
                                           ?>
-                                        </select>
+                                        </datalist>
                                       </div>
                                       <div class="mx-auto mb-3" style="width: 460px">
                                         <label for="remark" class="form-label">Attribute Value</label>
@@ -253,7 +249,7 @@
           <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Contributions</h2></div>
-              <button id="add" class="btn btn-primary col-3" style="height:5%" type="button">add Contributions</button>
+              <a class="btn btn-primary col-3" href="add_new_contribution.php?contributor=<?php echo $id ?>" style = "height:5%">add Contributions</a>
             </div>
             
             <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -371,7 +367,8 @@
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeType" class="form-label">Attribute Type</label>
-                <select id="attributeType" name="attributeType" class="form-select">
+                <input class="form-control" list="attributeTypeOption" id="attributeType" name="attributeType">
+                <datalist id="attributeTypeOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeType = $attributes->ShowAllAttributeType("contact", null);
@@ -381,14 +378,15 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
                 <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeType">
                   Add New Attribute Type
                 </a>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeCategory" class="form-label">Attribute Category</label>
-                <select id="attributeCategory" name="attributeCategory" class="form-select">
+                <input class="form-control" list="attributeCategoryOption" id="attributeCategory" name="attributeCategory">
+                <datalist id="attributeCategoryOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeCategory = $attributes->ShowAllAttributeCategory();
@@ -398,7 +396,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remark" class="form-label">Attribute Value</label>
@@ -430,7 +428,8 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeCategoryType" class="form-label">Attribute Category Type</label>
-                <select id="attributeCategoryType" name="attributeCategoryType" class="form-select">
+                <input class="form-control" list="attributeCategoryTypeOption" id="attributeCategoryType" name="attributeCategoryType">
+                <datalist id="attributeCategoryTypeOption">
                   <!-- get all status for list -->
                   <?php
                     $showAttributeCategoryType = $attributes->ShowAllAttributeCategoryType();
@@ -440,7 +439,7 @@
                   <?php
                     }
                   ?>
-                </select>
+                </datalist>
                 <a type="button" href="" data-bs-toggle="modal" data-bs-target="#addAttributeGenericValueType">
                   Add new attribute generic value type
                 </a>
