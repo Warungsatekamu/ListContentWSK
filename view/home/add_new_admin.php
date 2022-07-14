@@ -5,7 +5,9 @@
   include('../../model/contact.php');
   include('../../model/user.php');
 
-
+  $connection = new Database($host,$user,$pass,$dbName);
+  $users = new User($connection);
+  
   
 ?>
 
@@ -50,5 +52,14 @@
         <input type="submit" name="submitNewAdmin" class="btn btn-primary">
 
     </body>
+    <?php
+        if(@$_POST['submitNewAdmin']){ //if button triggered
+            $username=$connection->con->real_escape_string($_POST['username']);
+            $nama=$connection->con->real_escape_string($_POST['nama']);
+            $password=$connection->con->real_escape_string($_POST['password']);
 
+            //insert to db 
+            $users->InsertNewUser($username, $nama, $password);
+        }
+    ?>
 </html>
