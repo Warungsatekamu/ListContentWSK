@@ -112,7 +112,7 @@
             </ul>
             <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;"><?php// echo $_SESSION['name']; ?></a>
+                <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;"><?php echo $_SESSION['name']; ?></a>
             </li>
             </ul>
             <ul class="navbar-nav ms-auto">
