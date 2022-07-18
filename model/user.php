@@ -18,7 +18,6 @@
 			$query = $db->query($sql) or die($db->error);
 			$cek = false;
 			while($row = mysqli_fetch_array($query)){
-				
 				if(password_verify($password, $row['password'])){
 					$cek = true;
 					$this->password = $row['password'];
