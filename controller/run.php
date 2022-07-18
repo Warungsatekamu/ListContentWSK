@@ -1,17 +1,19 @@
 <?php
-	foreach(glob("../model/*.php") as $filename){
-		include $filename;
-	}
 	
 	class run{
-		public function getUser($username, $password){
-			$this->user = new User();
+		public function GetUser($username, $password){
+			require("../configuration/db_connection.php");
+			require("../model/user.php");
+			require("../model/database.php");
+			$connection = new Database($host,$user,$pass,$dbName);
+			$users = new User($connection);
 			
-			$this->user->ShowUser($username, $password);
+			$users->AuthenticationUser($username, $password);
 		}
 	}
+
 	$var = new run();
-	$var->getUser($_POST['username'] , md5($_POST['password']));
+	$var->GetUser($_POST['username'] , $_POST['password']);
 	
 	//CONTROLLER UNTUK MENDEFINE CLASS MELAKUKAN RUN UNTUK CLASS LAIN
 ?>

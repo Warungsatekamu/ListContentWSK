@@ -35,9 +35,6 @@
                     <input type="text" name = "username" id="username" class="form-control" placeholder="Username" value="" required autofocus />
                     <label for="password" class="sr-only"></label>
                     <input type="password" name = "password" id="password" placeholder="Password" class="form-control" />
-                    <div class="checkbox">
-                        <label> <input type="checkbox" name="remember-me" value = "1"/> Remember me </label>
-                    </div>
                     <div class="mt-3">
                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                     </div>

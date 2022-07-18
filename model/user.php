@@ -7,21 +7,26 @@
 		private $password;
 		private $level;
         
-		
+        function __construct($con){
+            $this->mysqli = $con;
+        }
         
         //get contact data for contact list
-        public function ShowUser($username, $password){
-            $db = new mysqli("localhost", "root", "", "db_wsk");
-            $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+        public function AuthenticationUser($username, $password){
+            $sql = "SELECT * FROM users WHERE username = '$username'";
+			$db = $this->mysqli->con;
 			$query = $db->query($sql) or die($db->error);
 			$cek = false;
 			while($row = mysqli_fetch_array($query)){
-				$cek = true;
-				$this->id = $row['id'];
-				$this->username = $row['username'];
-				$this->name = $row['nama'];
-				$this->password = $row['password'];
-				$this->level = $row['level'];
+				
+				if(password_verify($password, $row['password'])){
+					$cek = true;
+					$this->password = $row['password'];
+					$this->id = $row['id'];
+					$this->username = $row['username'];
+					$this->name = $row['nama'];
+					$this->level = $row['level'];
+				}
 			}
 			if($cek){
 				session_start();
@@ -31,12 +36,25 @@
 				echo "<script>alert('Wrong username / password');document.location = '../view/login/login.php?';</script>";
 			}
         }
+
 		public function InsertNewUser($username, $nama, $password){
-            $date = date('Y-m-d H:i:s');
+			$passHash = password_hash($password, PASSWORD_DEFAULT) ;
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO users VALUES ('', '$username', '$nama', '$password')";
+            $sql = "INSERT INTO users VALUES ('', '$username', '$nama', '$passHash', '2')";
             $query = $db->query($sql) or die($db->error);
         }
+
+		public function randomPassword() {
+			$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+			$pass = array(); //remember to declare $pass as an array
+			$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+			for ($i = 0; $i < 12; $i++) {
+				$n = rand(0, $alphaLength);
+				$pass[] = $alphabet[$n];
+			}
+			return implode($pass); //turn the array into a string
+		}
     }
 	//TAMBAHAN VARIABLE (4-8), PERUBAHAN KODINGAN MENGAMBIL DATA DARI DATABASE (17-23), PENAMBAHAN LOGIKA IF UNTUK MELEMPAR KE NEXT PAGE (25-28)
+
 ?>

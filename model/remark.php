@@ -7,10 +7,9 @@
         function __construct($con){
             $this->mysqli = $con;
         }
-
+        
         //Get data from DB to show all contribution remark, if user want to see specific contribution, id contribution will be not null 
         public function ShowAllContributionRemark($idContribution=null){
-            require_once('contribution.php');
             $db = $this->mysqli->con;
             $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, contacts.nick_name FROM contribution_remarks 
             LEFT JOIN contributions ON contribution_remarks.contribution = contributions.id 
@@ -26,9 +25,10 @@
             $query = $db->query($sql) or die($db->error);
             return $query;
         }
-
+        
         //insert contribution remark to database
         public function InsertNewContributionRemark($idContribution, $actionTime, $remarkType, $remark){
+            require_once('contribution.php');
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "INSERT INTO contribution_remarks VALUES ('', '$idContribution', '$remarkType', '$remark', '$actionTime', 'active', '$date', '', '$date', '')";
