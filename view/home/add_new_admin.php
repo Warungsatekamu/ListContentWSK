@@ -27,24 +27,16 @@
         <!-- name -->
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" id="nama"/>
+            <input type="text" name="nama" class="form-control" id="nama" required/>
         </div>
+
         <!-- pass and conf -->
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="password" class="form-label">Password</label>
-            <input type="text" name="password" class="form-control" id="password" value = "<?php echo randomPassword(); ?>" required/>
+            <input type="text" name="password" class="form-control" id="password" value = "<?php echo $users->randomPassword(); ?>" required/>
         </div>
         <?php
-            function randomPassword() {
-                $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-                $pass = array(); //remember to declare $pass as an array
-                $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-                for ($i = 0; $i < 12; $i++) {
-                    $n = rand(0, $alphaLength);
-                    $pass[] = $alphabet[$n];
-                }
-                return implode($pass); //turn the array into a string
-            }
+            
         ?>
         <!-- level (dropdown)-->
         
