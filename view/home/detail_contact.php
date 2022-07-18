@@ -109,7 +109,7 @@
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab"><section class="section">
               <div class="row itembox">
                 <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
-                <button type="button" class="btn btn-primary col-2" style="height:5%" data-bs-toggle="modal" data-bs-target="#addAttributeContact">add attributes</button>
+                <button type="button" class="btn btn-primary col-3" style="margin-left: 60px; height:5%" data-bs-toggle="modal" data-bs-target="#addAttributeContact">add attributes</button>
               </div>
               
               <!-- <h2 class="align-baseline">Contribution List</h2>
@@ -247,9 +247,10 @@
               </div>
           </div>
           <div class="tab-pane fade" id="contributions" role="tabpanel" aria-labelledby="contributions-tab">
+            <br>
             <div class="row itembox">
               <div class="col-12 col-md-8 col-lg-8"><h2>Contributions</h2></div>
-              <a class="btn btn-primary col-3" href="add_new_contribution.php?contributor=<?php echo $id ?>" style = "height:5%">add Contributions</a>
+              <a class="btn btn-primary col-3" href="add_new_contribution.php?contributor=<?php echo $id ?>" style = "margin-left: 60px; height:5%">add Contributions</a>
             </div>
             
             <!-- <h2 class="align-baseline">Contribution List</h2>

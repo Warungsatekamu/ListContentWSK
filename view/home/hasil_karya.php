@@ -256,8 +256,8 @@
           </div>
           <div class="tab-pane fade" id="attributes" role="tabpanel" aria-labelledby="attributes-tab">  
             <div class="row itembox">
-              <div class="col-lg-8"><h2>Attributes</h2></div>
-              <button type="button" class="btn btn-primary col-2" style="height:5%" data-bs-toggle="modal" data-bs-target="#addAttribute">Attribute</button>
+              <div class="col-12 col-md-8 col-lg-8"><h2>Attributes</h2></div>
+              <button type="button" class="btn btn-primary col-3" style="margin-left:60px ;height:5%" data-bs-toggle="modal" data-bs-target="#addAttribute">Attribute</button>
             </div>
                   
             <!-- <h2 class="align-baseline">Contribution List</h2>
