@@ -79,15 +79,15 @@
         }
 
         //insert new contribution to db
-        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+        public function InsertNewContribution($contributor, $title, $type, $message, $content, $contentLink, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contributions VALUES ('', '', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '1', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contributions (contribution_code, contributor, title, type, message, content, content_link, language, received_date, received_via, contribution_source_type, contribution_status, edit_link_url, published_title, published_date, published_link_url, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('', '$contributor', '$title', '$type', '$message', '$content', '$contentLink', '1', '$receivedDate', '$receivedVia', '$contributionSourceType', '$contributionStatus', '$editLink', '', '', '$publishedLink', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 
         //update contact data to db
-        public function UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink){
+        public function UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedVia, $contributionSourceType, $contributionStatus, $editLink, $publishedLink, $editor){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "UPDATE contributions 
@@ -104,18 +104,20 @@
             contribution_status = '$contributionStatus',
             edit_link_url = '$editLink',
             published_link_url = '$publishedLink',
-            last_modified_time = '$date'
+            last_modified_time = '$date',
+            last_modified_by = '$editor'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);
         }
 
         //update contribution status after get remarked
-        public function UpdateStatusContribution($id, $contributionStatus){
+        public function UpdateStatusContribution($id, $contributionStatus, $editor){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "UPDATE contributions 
             SET contribution_status = '$contributionStatus',
-            last_modified_time = '$date'
+            last_modified_time = '$date',
+            last_modified_by = '$editor'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);
         }

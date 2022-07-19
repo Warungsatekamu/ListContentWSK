@@ -30,7 +30,10 @@
 			if($cek){
 				session_start();
 				$_SESSION['name'] = $this->name;
-				echo "<script>alert('Login Success!');document.location = '../view/home/contribution_list.php?';</script>";
+				$_SESSION['id'] = $this->id;
+				$_SESSION['level'] = $this->level;
+
+				echo '<meta content="0; url=../view/home/contribution_list.php" http-equiv="refresh">';;
 			}else{
 				echo "<script>alert('Wrong username / password');document.location = '../view/login/login.php?';</script>";
 			}
@@ -39,7 +42,7 @@
 		public function InsertNewUser($username, $nama, $password){
 			$passHash = password_hash($password, PASSWORD_DEFAULT) ;
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO users VALUES ('', '$username', '$nama', '$passHash', '2')";
+            $sql = "INSERT INTO users (username, nama, password, level) VALUES ('$username', '$nama', '$passHash', '1')";
             $query = $db->query($sql) or die($db->error);
         }
 

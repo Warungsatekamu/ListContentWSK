@@ -7,6 +7,7 @@
   include('../../model/attributeModel.php'); 
   
   $id = $_GET['id'];
+  $loginUser = $_SESSION['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contributions = new Contribution($connection);
   $remarks = new ContributionRemark($connection);
@@ -452,7 +453,7 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remarkType" class="form-label">Remark Type</label>
-                <input class="form-control" list="remarkTypeOption" id="remarkType" name="remarkType">
+                <input class="form-control" list="remarkTypeOption" id="remarkType" name="remarkType" required>
                 <datalist id="remarkTypeOption">
                   <!-- get all status for list -->
                   <?php
@@ -491,7 +492,7 @@
             <div class="modal-body">
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeType" class="form-label">Attribute Type</label>
-                <input class="form-control" list="attributeTypeOption" id="attributeType" name="attributeType">
+                <input class="form-control" list="attributeTypeOption" id="attributeType" name="attributeType" required>
                 <datalist id="attributeTypeOption">
                   <!-- get all status for list -->
                   <?php
@@ -509,7 +510,7 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="attributeCategory" class="form-label">Attribute Category</label>
-                <input class="form-control" list="attributeCategoryOption" id="attributeCategory" name="attributeCategory">
+                <input class="form-control" list="attributeCategoryOption" id="attributeCategory" name="attributeCategory" required>
                 <datalist id="attributeCategoryOption">
                   <!-- get all status for list -->
                   <?php
@@ -524,7 +525,7 @@
               </div>
               <div class="mx-auto mb-3" style="width: 460px">
                 <label for="remark" class="form-label">Attribute Value</label>
-                <textarea class="form-control" name="attributeValue" id="attributeValue" rows="3"></textarea>
+                <textarea class="form-control" name="attributeValue" id="attributeValue" rows="3" ></textarea>
               </div>
             </div>
             <div class="modal-footer">
@@ -609,7 +610,7 @@
       $remarkTypeid = $remarks->ShowAllRemarkType($remarkType,null);
       $remarkType = $remarkTypeid['id'];
       $remark = $connection->con->real_escape_string($_POST['remark']);
-      $remarks->InsertNewContributionRemark($id, $actionTime, $remarkType, $remark); //insert to db remark_types
+      $remarks->InsertNewContributionRemark($id, $actionTime, $remarkType, $remark, $loginUser); //insert to db remark_types
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     } else if(@$_POST['editRemark']){
       $idUpdateRemark = $connection->con->real_escape_string($_POST['idRemark']);
@@ -618,7 +619,7 @@
       $remarkTypeid = $remarks->ShowAllRemarkType($remarkType,null);
       $remarkType = $remarkTypeid['id'];
       $remark = $connection->con->real_escape_string($_POST['remark']);
-      $remarks->UpdateContributionRemark($idUpdateRemark, $actionTime, $remarkType, $remark); //insert to db remark_types
+      $remarks->UpdateContributionRemark($idUpdateRemark, $actionTime, $remarkType, $remark, $loginUser); //insert to db remark_types
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     } else if(@$_POST['submitNewAttribute']){
       $attributeType = $connection->con->real_escape_string($_POST['attributeType']);
@@ -628,18 +629,18 @@
       $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
       $attributeCategory = $attributeCategoryid['id'];
       $attributeValue = $connection->con->real_escape_string($_POST['attributeValue']);
-      $attributes->InsertNewAttribute("contribution", $id, $attributeType, $attributeCategory, $attributeValue);
+      $attributes->InsertNewAttribute("contribution", $id, $attributeType, $attributeCategory, $attributeValue, $loginUser);
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     } else if(@$_POST['submitNewAttributeType']){
       $attributeTypeName = $connection->con->real_escape_string($_POST['attributeTypeName']);
       $attributeCategoryType = $connection->con->real_escape_string($_POST['attributeCategoryType']);
       $attributeCategoryTypeid = $attributes->ShowAllAttributeCategoryType($attributeCategoryType);
       $attributeCategoryType = $attributeCategoryTypeid['id'];
-      $attributes->InsertNewAttributeType($attributeTypeName, "contribution", $attributeCategoryType);
+      $attributes->InsertNewAttributeType($attributeTypeName, "contribution", $attributeCategoryType, $loginUser);
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     } else if(@$_POST['submitNewAttributeGenericValueType']){
       $attributeCategoryTypeName = $connection->con->real_escape_string($_POST['attributeCategoryTypeName']);
-      $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName);
+      $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName, $loginUser);
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     } else if(@$_POST['submitEditAttribute']){
       $idUpdateAttribute = $connection->con->real_escape_string($_POST['idAttribute']);
@@ -650,7 +651,7 @@
       $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
       $attributeCategory = $attributeCategoryid['id'];
       $attributeValue = $connection->con->real_escape_string($_POST['attributeValueEdit']);
-      $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue);
+      $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue, $loginUser);
       echo '<meta content="0" http-equiv="refresh">'; //refresh page
     }
 

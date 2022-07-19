@@ -8,7 +8,7 @@
     $connection = new Database($host,$user,$pass,$dbName);
     $remarks = new ContributionRemark($connection);
     $contribution = new Contribution($connection);
-    
+    $loginUser = $_SESSION['id'];
     if(isset($_GET['delete'])){
         $idRemark = $_GET['delete'];
         $remarks->DeleteRemarkType($idRemark);
@@ -131,7 +131,7 @@
             $linkedStatus = $connection->con->real_escape_string($_POST['linkedStatus']);
             $linkedStatusid = $contribution->ShowAllContributionStatus($linkedStatus);
             $linkedStatus = $linkedStatusid['id'];
-            $remarks->InsertNewRemarkType($remarkType, $linkedStatus); //insert to db remark_types
+            $remarks->InsertNewRemarkType($remarkType, $linkedStatus, $loginUser); //insert to db remark_types
             echo '<meta content="0" http-equiv="refresh">'; //refresh page
         }
     ?>

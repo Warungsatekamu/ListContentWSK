@@ -33,7 +33,7 @@
       <!-- <button id="add" class="btn btn-primary col-3" type="button">Add New Contribution</button> -->
     </div>
     <hr />
-    <div id="dtBasicExample_filter" class="dataTables_filter" style = "">
+    <div id="dtBasicExample_filter" class="dataTables_filter">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         Month
       </button>

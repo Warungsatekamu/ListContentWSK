@@ -12,7 +12,7 @@
   $contacts = new Contact($connection);
   $contributions = new Contribution($connection);
   $attributes = new Atribute($connection);
-
+  $loginUser = $_SESSION['id'];
   if(isset($_GET['deleteAttribute'])){
     $idContactAttribute = $_GET['deleteAttribute'];
     $attributes->DeleteAttribute($idContactAttribute);
@@ -489,18 +489,18 @@
     $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
     $attributeCategory = $attributeCategoryid['id'];
     $attributeValue = $connection->con->real_escape_string($_POST['attributeValue']);
-    $attributes->InsertNewAttribute("contact", $id, $attributeType, $attributeCategory, $attributeValue);
+    $attributes->InsertNewAttribute("contact", $id, $attributeType, $attributeCategory, $attributeValue, $loginUser);
     echo '<meta content="0" http-equiv="refresh">'; //refresh page
   } else if(@$_POST['submitNewAttributeType']){
     $attributeTypeName = $connection->con->real_escape_string($_POST['attributeTypeName']);
     $attributeCategoryType = $connection->con->real_escape_string($_POST['attributeCategoryType']);
     $attributeCategoryTypeid = $attributes->ShowAllAttributeCategoryType($attributeCategoryType);
     $attributeCategoryType = $attributeCategoryTypeid['id'];
-    $attributes->InsertNewAttributeType($attributeTypeName, "contact", $attributeCategoryType);
+    $attributes->InsertNewAttributeType($attributeTypeName, "contact", $attributeCategoryType, $loginUser);
     echo '<meta content="0" http-equiv="refresh">'; //refresh page
   } else if(@$_POST['submitNewAttributeGenericValueType']){
     $attributeCategoryTypeName = $connection->con->real_escape_string($_POST['attributeCategoryTypeName']);
-    $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName);
+    $attributes->InsertNewAttributeGenericValueType($attributeCategoryTypeName, $loginUser);
     echo '<meta content="0" http-equiv="refresh">'; //refresh page
   } else if(@$_POST['submitEditAttribute']){
     $idUpdateAttribute = $connection->con->real_escape_string($_POST['idAttribute']);
@@ -511,7 +511,7 @@
     $attributeCategoryid = $attributes->ShowAllAttributeCategory($attributeCategory);
     $attributeCategory = $attributeCategoryid['id'];
     $attributeValue = $connection->con->real_escape_string($_POST['attributeValueEdit']);
-    $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue);
+    $attributes->UpdateAttribute($idUpdateAttribute, $attributeType, $attributeCategory, $attributeValue, $loginUser);
     echo '<meta content="0" http-equiv="refresh">'; //refresh page
   }
 

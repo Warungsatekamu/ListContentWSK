@@ -25,15 +25,15 @@
         }
 
         //insert new contact to db
-        public function InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city){
+        public function InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contacts VALUES ('', '$full_name', '$nick_name', '$gender', '$email', '$birthdate', '$bio', '$phone', '$address', '$city', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contacts (full_name, nick_name, gender, email, birthdate, bio, phone, address, city, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$full_name', '$nick_name', '$gender', '$email', '$birthdate', '$bio', '$phone', '$address', '$city', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 
         //update contact data to db
-        public function UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city){
+        public function UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city, $editor){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "UPDATE contacts 
@@ -46,6 +46,7 @@
             phone = '$phone',
             address = '$address',
             last_modified_time = '$date',
+            last_modified_by = '$editor',
             city = '$city'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);

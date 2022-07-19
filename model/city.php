@@ -14,10 +14,10 @@
         }
         
         //insert new city to db
-        public function InsertNewCity($cityName, $province){
+        public function InsertNewCity($cityName, $province, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO cities VALUES ('', '$cityName', '$province', 'Indonesia', 'active' , '$date', '', '$date', '')";
+            $sql = "INSERT INTO cities (city_name. province, country, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$cityName', '$province', 'Indonesia', 'active' , '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 

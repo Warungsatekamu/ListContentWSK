@@ -6,6 +6,7 @@
   include('../../model/city.php');
 
   $id = $_GET['id'];
+  $loginUser = $_SESSION['id'];
   $connection = new Database($host,$user,$pass,$dbName);
   $contacts = new Contact($connection);
   $citydb = new City($connection);
@@ -140,7 +141,7 @@
         $city = $cityid['id'];
 
         //insert to db 
-        $contacts->UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
+        $contacts->UpdateContact($id, $full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city, $loginUser);
         //redirect to contact list
         echo '<meta content="0; url=contact_list.php" http-equiv="refresh">';
         
@@ -164,7 +165,7 @@
             echo '<meta content="0" http-equiv="refresh">';
             break;
           case "0":
-            $citydb->InsertNewCity($cityName, $province);
+            $citydb->InsertNewCity($cityName, $province, $loginUser);
             echo '<meta content="0" http-equiv="refresh">';
             break;
         }

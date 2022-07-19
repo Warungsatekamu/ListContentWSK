@@ -69,7 +69,7 @@
                     <td><?php echo $data->action_time ?></td>
                     <td><?php echo $data->remark_type_name ?></td>
                     <td><?php echo $data->remark ?></td>
-                    <td><?php echo $data->nick_name ?></td>
+                    <td><?php echo $data->nama ?></td>
                   </tr>
                 <?php
                     $no++;

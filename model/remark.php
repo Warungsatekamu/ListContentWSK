@@ -11,10 +11,11 @@
         //Get data from DB to show all contribution remark, if user want to see specific contribution, id contribution will be not null 
         public function ShowAllContributionRemark($idContribution=null){
             $db = $this->mysqli->con;
-            $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, contacts.nick_name FROM contribution_remarks 
+            $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, users.nama  FROM contribution_remarks 
             LEFT JOIN contributions ON contribution_remarks.contribution = contributions.id 
             LEFT JOIN contribution_remark_types ON contribution_remarks.remark_type=contribution_remark_types.id
-            LEFT JOIN contacts ON contribution_remarks.created_by=contacts.id";
+            LEFT JOIN users ON contribution_remarks.created_by=users.id
+            ";
             if($idContribution != null){
                 $sql .= " WHERE contribution = '$idContribution'";
                 $sql .= " ORDER BY action_time ASC";
@@ -27,27 +28,28 @@
         }
         
         //insert contribution remark to database
-        public function InsertNewContributionRemark($idContribution, $actionTime, $remarkType, $remark){
+        public function InsertNewContributionRemark($idContribution, $actionTime, $remarkType, $remark, $createdBy){
             require_once('contribution.php');
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contribution_remarks VALUES ('', '$idContribution', '$remarkType', '$remark', '$actionTime', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contribution_remarks (contribution, remark_type, remark, action_time, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$idContribution', '$remarkType', '$remark', '$actionTime', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
             $contributionStatus = $this->ShowAllRemarkType(null, $remarkType);
             $contributionStatusId=$contributionStatus['linked_status']; 
             $contribution = new Contribution($this->mysqli);
-            $contribution->UpdateStatusContribution($idContribution, $contributionStatusId);
+            $contribution->UpdateStatusContribution($idContribution, $contributionStatusId, $createdBy);
         }
         
         //update contribution Remark data to db
-        public function UpdateContributionRemark($idContributionRemark, $actionTime, $remarkType, $remark){
+        public function UpdateContributionRemark($idContributionRemark, $actionTime, $remarkType, $remark, $editor){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "UPDATE contribution_remarks 
             SET action_time = '$actionTime',
             remark_type = '$remarkType', 
             remark = '$remark',
-            last_modified_time = '$date'
+            last_modified_time = '$date',
+            last_modified_by = '$editor'
             WHERE id = $idContributionRemark";
             $query = $db->query($sql) or die($db->error);
         } //perlu update contribution status? kayaknya ngga karena kalo yang di edit/update bukan remark terbaru nanti status contribution bakal keganti
@@ -82,10 +84,10 @@
         }
 
         // add new type of remark
-        public function InsertNewRemarkType($remarkType, $linkedStatus){
+        public function InsertNewRemarkType($remarkType, $linkedStatus, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO contribution_remark_types VALUES ('', '$remarkType', '$linkedStatus', '', '', '', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO contribution_remark_types (remark_type_name, linked_status, email_template, email_template_en, email_template_ch, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$remarkType', '$linkedStatus', '', '', '', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 

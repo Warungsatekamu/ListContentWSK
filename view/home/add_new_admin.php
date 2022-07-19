@@ -7,8 +7,6 @@
 
   $connection = new Database($host,$user,$pass,$dbName);
   $users = new User($connection);
-  
-  
 ?>
 
 <!DOCTYPE html>
