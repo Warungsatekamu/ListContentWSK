@@ -31,7 +31,8 @@
         <!-- pass and conf -->
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="password" class="form-label">Password</label>
-            <input type="text" name="password" class="form-control" id="password" value = "<?php echo $users->randomPassword(); ?>" required/>
+            <input type="text" name="password" class="form-control" id="password" required/>
+            <button onclick="randomPasswordPopup()">Generate Password</button>
         </div>
         <?php
             
@@ -52,4 +53,11 @@
             $users->InsertNewUser($username, $nama, $password);
         }
     ?>
-</html>
+    <script>
+        function randomPasswordPopup() {
+            var randomPass = "<?php echo $users->randomPassword()?>" ;
+            if (confirm("don't forget to copy generated password: " + randomPass)) {
+                document.getElementById('password').value = randomPass;
+            }
+        }
+    </script>
