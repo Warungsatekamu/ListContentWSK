@@ -93,52 +93,42 @@
         }
 
         //insert new attribute to db
-        public function InsertNewAttribute($attributeFor, $dataId, $attributeType, $attributeGenericValue, $attributeValue){
+        public function InsertNewAttribute($attributeFor, $dataId, $attributeType, $attributeGenericValue, $attributeValue, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO attributes VALUES ('', '$attributeFor', '$dataId', '$attributeType', '$attributeGenericValue', '$attributeValue','active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO attributes (attribute_for, data_id, attribute_type, attribute_generic_value, attribute_value, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$attributeFor', '$dataId', '$attributeType', '$attributeGenericValue', '$attributeValue','active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 
         //insert new attribute type to db
-        public function InsertNewAttributeType($attributeTypeName, $attributeFor, $attributeGenericValueType){
+        public function InsertNewAttributeType($attributeTypeName, $attributeFor, $attributeGenericValueType, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO attribute_types VALUES ('', '$attributeTypeName', '$attributeFor', '$attributeGenericValueType', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO attribute_types (attribute_type_name, attribute_for, attribute_generic_value_type, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$attributeTypeName', '$attributeFor', '$attributeGenericValueType', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 
         //insert new attribute type to db
-        public function InsertNewAttributeGenericValueType($attributeGenericValueTypeName){
+        public function InsertNewAttributeGenericValueType($attributeGenericValueTypeName, $createdBy){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO attribute_generic_value_types VALUES ('', '$attributeGenericValueTypeName', 'active', '$date', '', '$date', '')";
+            $sql = "INSERT INTO attribute_generic_value_types (attribute_generic_value_type_name, status, created_time, created_by, last_modified_time, last_modified_by) VALUES ('$attributeGenericValueTypeName', 'active', '$date', '$createdBy', '$date', '$createdBy')";
             $query = $db->query($sql) or die($db->error);
         }
 
         //update contact data to db
-        public function UpdateAttribute($id, $attributeType, $attributeGenericValue, $attributeValue){
+        public function UpdateAttribute($id, $attributeType, $attributeGenericValue, $attributeValue, $editor){
             $date = date('Y-m-d H:i:s');
             $db = $this->mysqli->con;
             $sql = "UPDATE attributes 
             SET attribute_type = '$attributeType',
             attribute_generic_value = '$attributeGenericValue', 
             attribute_value = '$attributeValue', 
-            last_modified_time = '$date'
+            last_modified_time = '$date',
+            last_modified_by = '$editor'
             WHERE id = $id";
             $query = $db->query($sql) or die($db->error);
         }
-
-        // //update contribution status after get remarked
-        // public function UpdateStatusContribution($id, $contributionStatus){
-        //     $date = date('Y-m-d H:i:s');
-        //     $db = $this->mysqli->con;
-        //     $sql = "UPDATE contributions 
-        //     SET contribution_status = '$contributionStatus',
-        //     last_modified_time = '$date'
-        //     WHERE id = $id";
-        //     $query = $db->query($sql) or die($db->error);
-        // }
 
         //Delete contribution by id from hasil karya page
         public function DeleteAttribute($id){

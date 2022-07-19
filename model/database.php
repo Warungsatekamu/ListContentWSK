@@ -14,7 +14,7 @@ class Database{
         $this->pass = $pass;
         $this->dbName = $dbName;
         
-        $this->con = new mysqli($this->host, $this->user, $this->pass, $this->dbName) or die (mysqli_error());
+        $this->con = new mysqli($this->host, $this->user, $this->pass, $this->dbName) or die ($this->con->connect_error);
         if($this->con == false){
             return false;
         } else {

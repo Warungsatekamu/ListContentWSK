@@ -20,57 +20,6 @@
 
 <body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-  <!--Navbar-->
-  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="contribution_list.php">YMIDB</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="add_new_contribution.php">Add New Contributions</a></li>
-              <li><a class="dropdown-item" href="add_new_contact.php">Add New Contact</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact_list.php">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contribution_list.php">Contributions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="remark_list.php">Remarks</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="contact_atribute_list.php">Contact</a></li>
-              <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="report.php">Reports</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#contact mb-3" style = "margin-left:60px;">
-              <!-- <?php //echo $_SESSION['name']; ?> -->
-            <!-- </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a href = 'logout/logout.php' class="nav-link" href="#contact mb-3">Log Out</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav> --> 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
       <div class="container">
         <a class="navbar-brand fw-bold" href="contribution_list.php">YMIDB</a>
@@ -80,16 +29,20 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="add_new_contribution.php">Add New Contributions</a></li>
                 <li><a class="dropdown-item" href="add_new_contact.php">Add New Contact</a></li>
-                <li><a class="dropdown-item" href="add_new_admin.php">Add New Admin</a></li>
-                </ul>
+                <?php if($_SESSION['level'] == 1) {?>
+                  <li><a class="dropdown-item" href="add_new_admin.php">Add New Admin</a></li>
+                <?php } ?>
+              </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="list_users.php">List User</a>
-            </li>
+            <?php if($_SESSION['level'] == 1) {?>
+              <li class="nav-item">
+                  <a class="nav-link" href="list_users.php">List User</a>
+              </li>
+            <?php } ?>
             <li class="nav-item">
                 <a class="nav-link" href="contact_list.php">Contact</a>
             </li>

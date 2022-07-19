@@ -11,6 +11,7 @@
   $contacts = new Contact($connection);
   $contribution = new Contribution($connection);
   $citydb = new City($connection);
+  $loginUser = $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -249,7 +250,7 @@
         $publishedLink = $connection->con->real_escape_string($_POST['publishedLink']);
         
         //insert to db 
-        $contribution->UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink);
+        $contribution->UpdateContribution($id, $contributor, $title, $type, $message, $content, $contentLink, $language, $receivedDate, $receivedType, $sourceType, $contributionStatus, $editLink, $publishedLink, $loginUser);
 
         //redirect to contact_list.php
         echo '<meta content="0, url=contribution_list.php" http-equiv="refresh">';
@@ -272,7 +273,7 @@
         $city = $cityid['id'];
 
         //insert to db 
-        $contacts->InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city);
+        $contacts->InsertNewContact($full_name, $nick_name, $gender, $email, $bio, $birthdate, $phone, $address, $city, $loginUser);
 
         //redirect to contact_list.php
         echo '<meta content="0" http-equiv="refresh">';
@@ -297,7 +298,7 @@
             echo '<meta content="0" http-equiv="refresh">'; //refreshing the page
             break;
           case "0": // if there isn't same data
-            $citydb->InsertNewCity($cityName, $province); //insert to db cities
+            $citydb->InsertNewCity($cityName, $province, $loginUser); //insert to db cities
             echo '<meta content="0" http-equiv="refresh">'; //refresh page
             break;
         }
