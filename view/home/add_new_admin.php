@@ -32,7 +32,7 @@
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="password" class="form-label">Password</label>
             <input type="text" name="password" class="form-control" id="password" required/>
-            <button onclick="randomPasswordPopup()">Generate Password</button>
+            <button type="button" onclick="randomPasswordPopup()">Generate Password</button>
         </div>
         <?php
             
@@ -43,6 +43,7 @@
         <input type="submit" name="submitNewAdmin" class="btn btn-primary">
 
     </body>
+</html>
     <?php
         if(@$_POST['submitNewAdmin']){ //if button triggered
             $username=$connection->con->real_escape_string($_POST['username']);
@@ -55,7 +56,7 @@
     ?>
     <script>
         function randomPasswordPopup() {
-            var randomPass = "<?php echo $users->randomPassword()?>" ;
+            randomPass = "<?php echo $users->randomPassword()?>" ;
             if (confirm("don't forget to copy generated password: " + randomPass)) {
                 document.getElementById('password').value = randomPass;
             }
