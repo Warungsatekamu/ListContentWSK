@@ -42,7 +42,7 @@
 		public function InsertNewUser($username, $nama, $password){
 			$passHash = password_hash($password, PASSWORD_DEFAULT) ;
             $db = $this->mysqli->con;
-            $sql = "INSERT INTO users (username, nama, password, level) VALUES ('$username', '$nama', '$passHash', '1')";
+            $sql = "INSERT INTO users (username, nama, password, level) VALUES ('$username', '$nama', '$passHash', '2')";
             $query = $db->query($sql) or die($db->error);
         }
 
