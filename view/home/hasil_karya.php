@@ -422,15 +422,13 @@
             </div>
           </div> -->
           <div class="tab-pane fade" id="edit" role="tabpanel" aria-labelledby="edit-tab">
-            <div class="row">
+            <!-- <div class="row"> -->
               <!-- <div class="col-5"><h2>Edit</h2></div> -->
-              <div class="col-5"><a class="btn btn-primary" style = "margin-top: 20px; margin-bottom: 20px;" href="#" role="button">Start Edit</a></div>
-              <br>
-            </div>
-            <div class="row justify-content-center">
-              <div class="col-12">
-                <iframe class="embed-responsive-item" src="<?php echo $data->edit_link_url?>"></iframe>
-              </div>
+              <!-- <div class="col-5"><a class="btn btn-primary" style = "margin-top: 20px; margin-bottom: 20px;" href="#" role="button">Start Edit</a></div> -->
+              <!-- <br> -->
+            <!-- </div> --> 
+            <div class="embed-responsive justify-content-center">
+              <iframe style="width: 1400px" class="embed-responsive-item" src="<?php echo $data->edit_link_url?>"></iframe>
             </div>
           </div>
         </div>

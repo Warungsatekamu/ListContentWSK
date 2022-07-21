@@ -7,7 +7,8 @@
 		$_SESSION['login'] = $_COOKIE['login'];
 	}
 	if(isset($_SESSION['login'])){
-		header('Location: home/contribution_list.php');
+		header('Location: ../home/contribution_list.php');
+        exit;
 	}else{
 ?>
 
