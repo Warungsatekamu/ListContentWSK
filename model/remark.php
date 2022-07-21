@@ -11,7 +11,7 @@
         //Get data from DB to show all contribution remark, if user want to see specific contribution, id contribution will be not null 
         public function ShowAllContributionRemark($idContribution=null){
             $db = $this->mysqli->con;
-            $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, users.nama  FROM contribution_remarks 
+            $sql = "SELECT contribution_remarks.id, contribution_remarks.contribution, contributions.title, contribution_remark_types.remark_type_name, contribution_remarks.action_time, contribution_remarks.remark, users.name  FROM contribution_remarks 
             LEFT JOIN contributions ON contribution_remarks.contribution = contributions.id 
             LEFT JOIN contribution_remark_types ON contribution_remarks.remark_type=contribution_remark_types.id
             LEFT JOIN users ON contribution_remarks.created_by=users.id

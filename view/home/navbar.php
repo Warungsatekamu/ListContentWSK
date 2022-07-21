@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 	session_start();
-  if(! isset($_SESSION['id'])){
+  if(!isset($_SESSION['login'])){
     header('LOCATION: ../login/login.php');
     exit;
   }
@@ -32,40 +32,44 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="add_new_contribution.php">Add New Contributions</a></li>
-                <li><a class="dropdown-item" href="add_new_contact.php">Add New Contact</a></li>
-                <?php if($_SESSION['level'] == 1) {?>
-                  <li><a class="dropdown-item" href="add_new_admin.php">Add New Admin</a></li>
-                <?php } ?>
-              </ul>
-            </li>
-            <?php if($_SESSION['level'] == 1) {?>
-              <li class="nav-item">
-                  <a class="nav-link" href="list_users.php">List User</a>
-              </li>
-            <?php } ?>
-            <li class="nav-item">
-                <a class="nav-link" href="contact_list.php">Contact</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="contribution_list.php">Contributions</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="remark_list.php">Remarks</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Add </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="contact_atribute_list.php">Contact</a></li>
-                <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>
+                  <li><a class="dropdown-item" href="add_new_contribution.php">Add New Contributions</a></li>
+                  <li><a class="dropdown-item" href="add_new_contact.php">Add New Contact</a></li>
+                  <?php if($_SESSION['level'] == 1) {?>
+                    <li><a class="dropdown-item" href="add_new_admin.php">Add New Admin</a></li>
+                  <?php } ?>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="report.php">Reports</a>
-            </li>
+              </li>
+              <?php if($_SESSION['level'] == 1) {?>
+                <li class="nav-item">
+                    <a class="nav-link" href="list_users.php">List User</a>
+                </li>
+              <?php } ?>
+              <li class="nav-item">
+                  <a class="nav-link" href="contact_list.php">Contact</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="contribution_list.php">Contributions</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="remark_list.php">Remarks</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Atributes </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="contact_atribute_list.php">Contact</a></li>
+                  <li><a class="dropdown-item" href="contribute_atribute_list.php">Contributions</a></li>
+                  </ul>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Reports and Analytics </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="report.php">Reports</a></li>
+                  <li><a class="dropdown-item" href="Analytics.php">Analytics</a></li>
+                  </ul>
+              </li>
             </ul>
             <ul class="navbar-nav ms-auto">
             <li class="nav-item">
