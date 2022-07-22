@@ -5,7 +5,7 @@
 
     $connection = new Database($host,$user,$pass,$dbName);
     $users = new User($connection);
-    $result = $users->CheckTable();
+    $users->CheckTable();
 
     session_start();
     if(!isset($_SESSION['login'])){

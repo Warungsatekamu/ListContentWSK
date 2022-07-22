@@ -44,7 +44,7 @@
               </li>
               <?php if($_SESSION['level'] == 1) {?>
                 <li class="nav-item">
-                    <a class="nav-link" href="list_users.php">List User</a>
+                    <a class="nav-link" href="user_list.php">List User</a>
                 </li>
               <?php } ?>
               <li class="nav-item">

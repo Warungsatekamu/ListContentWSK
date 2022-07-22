@@ -428,7 +428,7 @@
               <!-- <br> -->
             <!-- </div> --> 
             <div class="embed-responsive justify-content-center">
-              <iframe style="width: 1400px" class="embed-responsive-item" src="<?php echo $data->edit_link_url?>"></iframe>
+              <iframe class="embed-responsive-item" src="<?php echo $data->edit_link_url?>"></iframe>
             </div>
           </div>
         </div>

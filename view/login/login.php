@@ -36,6 +36,7 @@
                     <input type="text" name = "username" id="username" class="form-control" placeholder="Username" value="" required autofocus />
                     <label for="password" class="sr-only"></label>
                     <input type="password" name = "password" id="password" placeholder="Password" class="form-control" />
+                    <input type="checkbox" onclick="ShowPassword()">Show Password
                     <div class="mt-3">
                         <button class="btn btn-lg btn-primary btn-block">Login</button>
                     </div>
@@ -43,6 +44,17 @@
             </div>
         </body>
 </html>
+<script>
+    function ShowPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+
 <?php 
     }   
 	//IF ERROR HAPUS, TAMBAHAN INCLUDE DI PALING ATAS, TAMBAHAN PARAMETER FORM (32) UNTUK LEMPAR KE FUNCTION

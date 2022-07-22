@@ -22,6 +22,7 @@
                 <!-- Step 2: Load the library. -->
 
                 <script>
+                    //var berowser = require("webextension-polyfill");
                     (function(w,d,s,g,js,fjs){
                     g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(cb){this.q.push(cb)}};
                     js=d.createElement(s);fjs=d.getElementsByTagName(s)[0];
@@ -34,7 +35,7 @@
 
                         // Step 3: Authorize the user. 
 
-                        var CLIENT_ID = "751566388607-bg490gkmhkiuotu1t0j62il6fv39glaa.apps.googleusercontent.com";
+                        var CLIENT_ID = "751566388607-thoeknosegk4ci6g0qtjs8btvd2f21o7.apps.googleusercontent.com";
 
                         gapi.analytics.auth.authorize({
                             container: 'auth-button',
