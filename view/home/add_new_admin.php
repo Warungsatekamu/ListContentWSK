@@ -31,7 +31,8 @@
         <!-- pass and conf -->
         <div class="mx-auto mb-3" style="width: 800px">
             <label for="password" class="form-label">Password</label>
-            <input type="text" name="password" class="form-control" id="password" required/>
+            <input type="password" name="password" class="form-control" id="password" required/>
+            <input type="checkbox" onclick="ShowPassword()">Show Password <br>
             <button type="button" onclick="randomPasswordPopup()">Generate Password</button>
         </div>
         <?php
@@ -52,9 +53,18 @@
 
             //insert to db 
             $users->InsertNewUser($username, $nama, $password);
+            echo '<meta content="0, url=user_list.php" http-equiv="refresh">';
         }
     ?>
     <script>
+        function ShowPassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
         function randomPasswordPopup() {
             randomPass = "<?php echo $users->randomPassword()?>" ;
             if (confirm("don't forget to copy generated password: " + randomPass)) {

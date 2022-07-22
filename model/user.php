@@ -76,7 +76,7 @@
 			$password = "admin";
 			$pwHash = password_hash($password,PASSWORD_DEFAULT);
 			$db = $this->mysqli->con;
-			$sql = "CREATE TABLE db_wsk.users ( id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), name VARCHAR(255), password VARCHAR(255), level INT(1))";
+			$sql = "CREATE TABLE users ( id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), name VARCHAR(255), password VARCHAR(255), level INT(1))";
 			$query = $db->query($sql) or die($db->error);
 			$sql2 = "INSERT INTO users (username, name, password, level) VALUES ('admin', 'admin' , '$pwHash', '1')";
 			$query = $db->query($sql2) or die($db->error);
@@ -88,8 +88,16 @@
 			$query = $db->query($sql) or die($db->error);
 			return $query;
 		}
+		public function ShowUsers(){
+            $db = $this->mysqli->con;
+            $sql = "SELECT username, name, level FROM users";
+            
+            $query = $db->query($sql) or die($db->error);
+            return $query;
+        }
     }
 
 	//TAMBAHAN VARIABLE (4-8), PERUBAHAN KODINGAN MENGAMBIL DATA DARI DATABASE (17-23), PENAMBAHAN LOGIKA IF UNTUK MELEMPAR KE NEXT PAGE (25-28)
 
+	
 ?>

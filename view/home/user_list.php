@@ -2,8 +2,10 @@
     require_once('../../configuration/db_connection.php');
     require_once('../../model/database.php');
     include('navbar.php');
-    include('../../model/contribution.php');
     include('../../model/user.php');
+
+    $connection = new Database($host,$user,$pass,$dbName);
+    $users = new User($connection);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,33 +59,24 @@
                 </tr>
                 </thead>
                 <tbody>
+                    <?php
+                        $no=0;
+                        $showUsersList = $users->ShowUsers();
+                        while($dataUsersList = $showUsersList->fetch_object()){
+                            ?>
                 
-                    <tr>
-                    <td>username</td>
-                    <td>nama</td>
-                    <td>level</td>
-                    <td align="center">
-                        <a type="button" class="btn btn-primary" href="edit_admin.php"><i class='far fa-edit'></i>edit</a>
-                        <a href="list-users.php?delete=<?php echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a>
-                    </td>
-                    </tr>
+                        <tr>
+                            <td><?php echo $dataUsersList->username ?></td>
+                            <td><?php echo $dataUsersList->name ?></td>
+                            <td><?php echo $dataUsersList->level ?></td>
+                    
+                        </tr>
+                    <?php } ?>
+                    <!-- <td align="center"> -->
+                        <!-- /<a type="button" class="btn btn-primary" href="edit_admin.php"><i class='far fa-edit'></i>edit</a> -->
+                        <!-- <a href="list-users.php?delete=<?php //echo $id ?>" type="button" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Delete</a> -->
+                    <!-- </td> -->
                 </tbody>
-                <!-- <tfoot>
-                <tr>
-                    <th>Name
-                    </th>
-                    <th>Position
-                    </th>
-                    <th>Office
-                    </th>
-                    <th>Age
-                    </th>
-                    <th>Start date
-                    </th>
-                    <th>Salary
-                    </th>
-                </tr>
-                </tfoot> -->
             </table>
             </div>
         </div>
